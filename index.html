@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THOOTB — THink Out Of The Box</title>
+<meta name="description" content="THOOTB is the world's first computationally-validated post-scarcity economic framework. Four-pool architecture, CHI indicator, three-phase scientific validation. Open source. CC BY 4.0.">
+<meta name="keywords" content="THOOTB, post-scarcity economics, four-pool architecture, CHI, Circularity Harmony Index, anti-accumulation, Chin Sook Ling, open source economics">
+<meta name="author" content="Chin Sook Ling (Tuzi)">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://chinsookling.github.io/THOOTB/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chinsookling.github.io/THOOTB/">
+<meta property="og:title" content="THOOTB — THink Out Of The Box | Post-Scarcity Economics Validated">
+<meta property="og:description" content="First scientifically validated post-scarcity economic system. Four-pool architecture with CHI indicator. Six-AI collaborative audit. Open source CC BY 4.0.">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ResearchProject",
+  "name": "THOOTB",
+  "alternateName": "THink Out Of The Box",
+  "url": "https://chinsookling.github.io/THOOTB/",
+  "description": "A computationally-validated post-scarcity economic framework with four-pool architecture and CHI indicator.",
+  "dateCreated": "2019-01-01",
+  "dateModified": "2025-12-01",
+  "author": { "@type": "Person", "name": "Chin Sook Ling", "alternateName": "Tuzi" },
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": ["post-scarcity economics","four-pool architecture","CHI","anti-accumulation","Monte Carlo","agent-based model","Sobol sensitivity"],
+  "isAccessibleForFree": true
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --d: #f43f5e;   /* D-Pool rose */
+    --r: #10b981;   /* R-Pool emerald */
+    --fg: #3b82f6;  /* FG-Pool blue */
+    --g: #f59e0b;   /* G-Pool amber */
+    --dark: #0f172a;
+    --darker: #020617;
+    --card: #1e293b;
+    --border: #334155;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--darker);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(2,6,23,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo { font-size: 1.2rem; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-badge { background: var(--accent); color: #000; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 90vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(56,189,248,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 20% 80%, rgba(244,63,94,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(16,185,129,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(56,189,248,0.12);
+    border: 1px solid rgba(56,189,248,0.3);
+    color: var(--accent);
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+    padding: 6px 16px; border-radius: 20px;
+    margin-bottom: 1.5rem; text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700; line-height: 1.1;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--accent) 0%, #818cf8 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub { font-size: 1.15rem; color: var(--muted); max-width: 600px; margin: 0 auto 2.5rem; }
+  .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .btn-primary {
+    background: var(--accent); color: #000;
+    font-weight: 700; font-size: 0.9rem;
+    padding: 0.75rem 1.75rem; border-radius: 8px;
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary {
+    background: transparent; color: var(--text);
+    font-weight: 500; font-size: 0.9rem;
+    padding: 0.75rem 1.75rem; border-radius: 8px;
+    border: 1px solid var(--border);
+    text-decoration: none; transition: border-color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); }
+
+  /* ── POOL CARDS HERO ── */
+  .pool-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1rem; max-width: 900px; margin: 3rem auto 0; width: 100%;
+  }
+  .pool-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem 1rem; text-align: center;
+  }
+  .pool-card .pool-dot { width: 36px; height: 36px; border-radius: 50%; margin: 0 auto 0.6rem; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; }
+  .pool-card .pool-name { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; }
+  .pool-card .pool-desc { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; }
+  .d-color { background: rgba(244,63,94,0.15); color: var(--d); }
+  .r-color { background: rgba(16,185,129,0.15); color: var(--r); }
+  .fg-color { background: rgba(59,130,246,0.15); color: var(--fg); }
+  .g-color { background: rgba(245,158,11,0.15); color: var(--g); }
+
+  /* ── SECTION HEADER ── */
+  .section-header { text-align: center; margin-bottom: 3rem; }
+  .section-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.75rem; display: block;
+  }
+  .section-header h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; color: var(--text); margin-bottom: 0.75rem; }
+  .section-header p { color: var(--muted); max-width: 560px; margin: 0 auto; }
+
+  /* ── CARD GRID ── */
+  .card-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .card-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem;
+  }
+  .card-accent-d { border-top: 3px solid var(--d); }
+  .card-accent-r { border-top: 3px solid var(--r); }
+  .card-accent-fg { border-top: 3px solid var(--fg); }
+  .card-accent-g { border-top: 3px solid var(--g); }
+  .card-accent-blue { border-top: 3px solid var(--accent); }
+
+  .card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .card p { font-size: 0.875rem; color: var(--muted); }
+  .card .tag {
+    display: inline-block;
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em;
+    padding: 3px 10px; border-radius: 20px;
+    margin-bottom: 0.75rem; text-transform: uppercase;
+  }
+  .tag-d { background: rgba(244,63,94,0.15); color: var(--d); }
+  .tag-r { background: rgba(16,185,129,0.15); color: var(--r); }
+  .tag-fg { background: rgba(59,130,246,0.15); color: var(--fg); }
+  .tag-g { background: rgba(245,158,11,0.15); color: var(--g); }
+  .tag-blue { background: rgba(56,189,248,0.15); color: var(--accent); }
+  .tag-purple { background: rgba(129,140,248,0.15); color: #818cf8; }
+
+  /* ── STATS ── */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .stat-box {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem; text-align: center;
+  }
+  .stat-num { font-size: 2rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; }
+  .stat-sub { font-size: 0.65rem; color: var(--muted); margin-top: 0.2rem; font-family: 'JetBrains Mono', monospace; }
+
+  /* ── PHASE TIMELINE ── */
+  .phase-timeline { display: flex; flex-direction: column; gap: 1.5rem; }
+  .phase-item { display: grid; grid-template-columns: 80px 1fr; gap: 1.5rem; align-items: start; }
+  .phase-num {
+    width: 60px; height: 60px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; font-weight: 700; font-family: 'JetBrains Mono', monospace;
+    flex-shrink: 0;
+  }
+  .phase-body { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; }
+  .phase-body h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .phase-body .phase-meta { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.75rem; font-family: 'JetBrains Mono', monospace; }
+  .phase-results { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .phase-tag {
+    font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── SOBOL TABLE ── */
+  .sobol-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .sobol-table th { text-align: left; padding: 0.6rem 1rem; color: var(--muted); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+  .sobol-table td { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(51,65,85,0.5); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+  .sobol-table tr:last-child td { border-bottom: none; }
+  .bar-wrap { height: 6px; background: var(--border); border-radius: 3px; width: 120px; }
+  .bar-fill { height: 100%; border-radius: 3px; }
+
+  /* ── AI AUDIT ── */
+  .ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .ai-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem;
+  }
+  .ai-card .ai-name { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .ai-card .ai-role { font-size: 0.72rem; color: var(--muted); }
+
+  /* ── PRINCIPLES ── */
+  .principles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .principle-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem;
+    display: flex; gap: 1rem;
+  }
+  .principle-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+  .principle-title { font-size: 0.9rem; font-weight: 700; }
+  .principle-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+
+  /* ── RED LINES ── */
+  .redlines-table { width: 100%; border-collapse: collapse; }
+  .redlines-table th { padding: 0.6rem 1rem; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); text-align: left; }
+  .redlines-table td { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(51,65,85,0.4); font-size: 0.875rem; }
+  .redlines-table tr:last-child td { border-bottom: none; }
+  .yes-cell { color: #4ade80; font-weight: 600; }
+  .no-cell { color: #f87171; font-weight: 600; }
+
+  /* ── CHI SECTION ── */
+  .chi-thresholds { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .chi-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem; text-align: center;
+  }
+  .chi-value { font-size: 1.5rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .chi-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
+  .chi-status { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; margin-top: 0.5rem; padding: 3px 10px; border-radius: 20px; display: inline-block; }
+
+  /* ── FORMULA BOX ── */
+  .formula-box {
+    background: #020617; border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem; color: #4ade80;
+    overflow-x: auto;
+  }
+  .formula-comment { color: var(--muted); }
+
+  /* ── BOOKS GRID ── */
+  .books-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .book-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem;
+  }
+  .book-num { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem; }
+  .book-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .book-desc { font-size: 0.72rem; color: var(--muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark); border-top: 1px solid var(--border);
+    padding: 3rem 2rem; text-align: center;
+  }
+  .footer-logo { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem; }
+  .footer-tagline { color: var(--muted); font-size: 0.875rem; margin-bottom: 1.5rem; }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+  .footer-copy { font-size: 0.75rem; color: var(--muted); }
+  .license-badge {
+    display: inline-block;
+    background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.2);
+    color: var(--accent); font-size: 0.7rem; font-weight: 600;
+    padding: 4px 12px; border-radius: 20px; margin-bottom: 1rem;
+  }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    .pool-strip { grid-template-columns: repeat(2, 1fr); }
+    .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .ai-grid { grid-template-columns: 1fr; }
+    .chi-thresholds { grid-template-columns: repeat(2, 1fr); }
+    .books-grid { grid-template-columns: repeat(2, 1fr); }
+    .principles-grid { grid-template-columns: 1fr; }
+    .phase-item { grid-template-columns: 50px 1fr; gap: 1rem; }
+    .sobol-table .bar-wrap { width: 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">THOOTB</a>
+  <ul class="nav-links">
+    <li><a href="#what">What is THOOTB</a></li>
+    <li><a href="#four-pools">Four Pools</a></li>
+    <li><a href="#chi">CHI</a></li>
+    <li><a href="#validation">Validation</a></li>
+    <li><a href="#principles">Principles</a></li>
+    <li><a href="#books">Books</a></li>
+    <li><a href="https://github.com/ChinSookLing/THOOTB" target="_blank"><span class="nav-badge">GitHub</span></a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-eyebrow">Open Source · CC BY 4.0 · Since 2019</span>
+  <div style="font-size:0.75rem; color:var(--muted); margin-bottom:0.5rem; font-family:'JetBrains Mono',monospace;">
+    Pronunciation: <span style="color:var(--accent); font-weight:600;">/θuːb/</span> &nbsp;·&nbsp; "THooth" — TH like in "think", then close lips on the B
+  </div>
+  <h1><span>TH</span>ink Out Of<br>The <span>Box</span></h1>
+  <p class="hero-sub">The world's first computationally-validated post-scarcity economic framework. Four-pool architecture. Six-AI collaborative audit. Scientifically reproducible.</p>
+  <div class="hero-buttons">
+    <a class="btn-primary" href="#validation">See Validation Results</a>
+    <a class="btn-secondary" href="https://github.com/ChinSookLing/THOOTB" target="_blank">View on GitHub →</a>
+  </div>
+
+  <div class="pool-strip">
+    <div class="pool-card">
+      <div class="pool-dot d-color">D</div>
+      <div class="pool-name" style="color:var(--d)">D-Pool</div>
+      <div class="pool-desc">Daily Distribution<br>Anti-accumulation</div>
+    </div>
+    <div class="pool-card">
+      <div class="pool-dot r-color">R</div>
+      <div class="pool-name" style="color:var(--r)">R-Pool</div>
+      <div class="pool-desc">Resource Pool<br>Circular tracking</div>
+    </div>
+    <div class="pool-card">
+      <div class="pool-dot fg-color">FG</div>
+      <div class="pool-name" style="color:var(--fg)">FG-Pool</div>
+      <div class="pool-desc">Foreign Exchange<br>Air-lock mechanism</div>
+    </div>
+    <div class="pool-card">
+      <div class="pool-dot g-color">G</div>
+      <div class="pool-name" style="color:var(--g)">G-Pool</div>
+      <div class="pool-desc">Global Reserve<br>Strategic buffer</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- WHAT IS THOOTB -->
+<section id="what">
+  <div class="section-header">
+    <span class="section-label">What is THOOTB</span>
+    <h2>Think Out Of The Box</h2>
+    <p>A post-scarcity economic system that replaces accumulation with circulation, competition with contribution, and scarcity with abundance — mathematically and computationally verified.</p>
+  </div>
+
+  <div class="card-grid-3">
+    <div class="card card-accent-blue">
+      <span class="tag tag-blue">Philosophy</span>
+      <h3>Anti-Accumulation by Design</h3>
+      <p>TH currency resets at midnight. No savings, no hoarding, no wealth concentration. Every citizen receives TH 1,000 daily regardless of age, role, or contribution.</p>
+    </div>
+    <div class="card card-accent-blue">
+      <span class="tag tag-blue">Architecture</span>
+      <h3>Four-Pool Conservation</h3>
+      <p>All resource flows obey strict material conservation across four pools. No hidden subsidies, no virtual resources. Every unit is traceable and auditable.</p>
+    </div>
+    <div class="card card-accent-blue">
+      <span class="tag tag-blue">Science</span>
+      <h3>Threshold Stability</h3>
+      <p>System self-repairs when CHI ≥ 0.70 and Production ≥ 40%. Below threshold, collapse is rapid and irreversible — a key finding from three-phase validation.</p>
+    </div>
+    <div class="card card-accent-blue">
+      <span class="tag tag-blue">Governance</span>
+      <h3>Three-Department Audit</h3>
+      <p>TRD (record only) → TAD (analysis only) → TIAD (recommend only). Separation of powers prevents any single department from controlling the economy.</p>
+    </div>
+    <div class="card card-accent-blue">
+      <span class="tag tag-blue">Scope</span>
+      <h3>Earth → Mars → Beyond</h3>
+      <p>Designed for communities of 1,000 to planetary civilization. CHI threshold scales: ≥ 0.70 for Earth minimum, ≥ 0.80 recommended for Mars colonies.</p>
+    </div>
+    <div class="card card-accent-blue">
+      <span class="tag tag-blue">Method</span>
+      <h3>Six-AI Collaborative Audit</h3>
+      <p>Claude, DeepSeek, Copilot, Gemini, Grok, ChatGPT form a layered audit chain: code → formula → governance → behavior → risk → human understanding.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FOUR POOLS -->
+<section id="four-pools">
+  <div class="section-header">
+    <span class="section-label">Architecture</span>
+    <h2>The Four-Pool System</h2>
+    <p>Each pool serves a distinct function. Together they enforce material conservation — the fundamental accounting identity of THOOTB.</p>
+  </div>
+
+  <div class="formula-box" style="margin-bottom:2rem;">
+    <span class="formula-comment"># Conservation Identity (Book 2)</span><br>
+    D-Pool Net = R-Pool + FG-Pool(TH) + G-Pool<br><br>
+    <span class="formula-comment"># R-Pool Update Formula</span><br>
+    R(t+1) = R(t) − C(t) + C(t)·CHI + P(t) + I(t) − E(t)<br><br>
+    <span class="formula-comment"># Trade Accounting</span><br>
+    surplus → G-Pool (70%) + FG-Pool (30%)<br>
+    deficit → FG-Pool only  <span class="formula-comment"># no G-Pool drawdown</span>
+  </div>
+
+  <div class="card-grid-2">
+    <div class="card card-accent-d">
+      <span class="tag tag-d">D-Pool · Daily Distribution</span>
+      <h3 style="color:var(--d)">Daily Spending Pool</h3>
+      <p>Every citizen receives TH 1,000 at 00:00. Unspent balance returns at 23:59. The pool reissues fresh allocation next morning. Accumulation is architecturally impossible.</p>
+      <div style="margin-top:1rem; font-size:0.78rem; color:var(--muted); font-family:'JetBrains Mono',monospace;">
+        Daily issue: TH 1,000/citizen<br>
+        Reset: midnight daily<br>
+        Circulation rate: 100%
+      </div>
+    </div>
+    <div class="card card-accent-r">
+      <span class="tag tag-r">R-Pool · Resource Pool</span>
+      <h3 style="color:var(--r)">Material Resource Tracker</h3>
+      <p>Tracks all physical resources flowing through the zone. Imports replenish stock; exports reduce it. CHI determines how much consumed material re-enters the pool through recycling.</p>
+      <div style="margin-top:1rem; font-size:0.78rem; color:var(--muted); font-family:'JetBrains Mono',monospace;">
+        Buffer target: 3–6 months<br>
+        Driven by: CHI + Production<br>
+        Critical threshold: R &gt; 0
+      </div>
+    </div>
+    <div class="card card-accent-fg">
+      <span class="tag tag-fg">FG-Pool · Foreign Exchange</span>
+      <h3 style="color:var(--fg)">Air-Lock Mechanism</h3>
+      <p>Isolates the internal TH economy from external USD shocks. Trade surpluses flow 30% here; deficits draw exclusively from FG-Pool. Identified as the system's most vulnerable pool.</p>
+      <div style="margin-top:1rem; font-size:0.78rem; color:var(--muted); font-family:'JetBrains Mono',monospace;">
+        Holds: USD (FC)<br>
+        Risk: highest vulnerability<br>
+        Warning: &lt; 3 months imports
+      </div>
+    </div>
+    <div class="card card-accent-g">
+      <span class="tag tag-g">G-Pool · Global Reserve</span>
+      <h3 style="color:var(--g)">Strategic Long-Term Buffer</h3>
+      <p>Receives 70% of trade surpluses. Funds government operations, public goods, and crisis response. In 100K validation: 260+ months capacity (21+ years reserve).</p>
+      <div style="margin-top:1rem; font-size:0.78rem; color:var(--muted); font-family:'JetBrains Mono',monospace;">
+        Surplus allocation: 70%<br>
+        Book 3 result: +1.54% growth<br>
+        Reserve: 260+ months
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CHI -->
+<section id="chi">
+  <div class="section-header">
+    <span class="section-label">Core Indicator</span>
+    <h2>CHI — Circularity Harmony Index</h2>
+    <p>The single most important system health indicator. CHI measures how efficiently the zone recycles consumed materials back into the resource pool.</p>
+  </div>
+
+  <div class="formula-box" style="margin-bottom:2rem;">
+    <span class="formula-comment"># CHI Formula (Book 4)</span><br>
+    CHI = recycled / (recycled + landfilled + incinerated)<br><br>
+    <span class="formula-comment"># Barrel Principle (木桶原理)</span><br>
+    actual_recycled = min(citizen_potential, system_capacity)<br>
+    <span class="formula-comment"># citizen habit sets the floor; infrastructure sets the ceiling</span>
+  </div>
+
+  <div class="chi-thresholds" style="margin-bottom:2rem;">
+    <div class="chi-card">
+      <div class="chi-value" style="color:#f87171">&lt; 0.60</div>
+      <div class="chi-label">Crisis</div>
+      <span class="chi-status" style="background:rgba(248,113,113,0.15); color:#f87171">COLLAPSE RISK</span>
+    </div>
+    <div class="chi-card">
+      <div class="chi-value" style="color:#fbbf24">0.60–0.70</div>
+      <div class="chi-label">Warning</div>
+      <span class="chi-status" style="background:rgba(251,191,36,0.15); color:#fbbf24">INTERVENTION</span>
+    </div>
+    <div class="chi-card">
+      <div class="chi-value" style="color:#4ade80">≥ 0.70</div>
+      <div class="chi-label">Earth Minimum</div>
+      <span class="chi-status" style="background:rgba(74,222,128,0.15); color:#4ade80">SELF-REPAIR</span>
+    </div>
+    <div class="chi-card">
+      <div class="chi-value" style="color:var(--accent)">≥ 0.80</div>
+      <div class="chi-label">Mars Standard</div>
+      <span class="chi-status" style="background:rgba(56,189,248,0.15); color:var(--accent)">OPTIMAL</span>
+    </div>
+  </div>
+
+  <div class="card" style="background:rgba(16,185,129,0.05); border-color:rgba(16,185,129,0.2);">
+    <h3 style="color:var(--r); margin-bottom:0.75rem;">Key Finding from Phase 3 (Book 3)</h3>
+    <p style="font-size:0.875rem; color:var(--muted);">In Agent-Based Model mode with 10,000 heterogeneous citizens, CHI showed near-zero Sobol sensitivity (S₁ ≈ 0, ST ≈ 0.004). This is because individual <code style="background:var(--dark); padding:2px 6px; border-radius:4px; color:var(--r); font-family:'JetBrains Mono',monospace;">recycle_habit</code> variance became the binding constraint — citizens with low recycling behavior bottlenecked the entire system. <strong style="color:var(--text);">Policy implication: invest in citizen education before infrastructure.</strong></p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- VALIDATION -->
+<section id="validation">
+  <div class="section-header">
+    <span class="section-label">Book 3 · Scientific Validation</span>
+    <h2>Three-Phase Validation</h2>
+    <p>Book 3 v4.1 presents the complete computational validation chain: baseline stability → stress vulnerability → sensitivity pathways.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row" style="margin-bottom:3rem;">
+    <div class="stat-box">
+      <div class="stat-num" style="color:var(--r)">139%</div>
+      <div class="stat-label">R-Pool Annual Growth</div>
+      <div class="stat-sub">Phase 1 Baseline</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" style="color:#f87171">Day 13</div>
+      <div class="stat-label">Collapse (Extreme Test)</div>
+      <div class="stat-sub">CHI=40%, Prod=12%</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" style="color:var(--g)">33.3%</div>
+      <div class="stat-label">Survival Rate</div>
+      <div class="stat-sub">Phase 2 · 12 attacks</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" style="color:var(--accent)">11.4%</div>
+      <div class="stat-label">ABM Survival Rate</div>
+      <div class="stat-sub">Phase 3 · N=1,792</div>
+    </div>
+  </div>
+
+  <!-- Phase Timeline -->
+  <div class="phase-timeline">
+    <div class="phase-item">
+      <div>
+        <div class="phase-num" style="background:rgba(16,185,129,0.15); color:var(--r)">P1</div>
+      </div>
+      <div class="phase-body" style="border-top:3px solid var(--r)">
+        <h3>Phase 1 — Baseline Validation</h3>
+        <div class="phase-meta">10K citizens · 365 days · No attacks · CHI=70%, Production=40%</div>
+        <p style="font-size:0.875rem; color:var(--muted);">Establishes that THOOTB can sustain itself under reasonable parameters. R-Pool grew +139%, G-Pool stable, FG-Pool positive. Extreme test (CHI=40%, Prod=12%) collapsed on Day 13 — exactly matching Gemini's prediction.</p>
+        <div class="phase-results">
+          <span class="phase-tag" style="background:rgba(16,185,129,0.15); color:var(--r)">R-Pool +139%</span>
+          <span class="phase-tag" style="background:rgba(16,185,129,0.15); color:var(--r)">365 days stable</span>
+          <span class="phase-tag" style="background:rgba(248,113,113,0.15); color:#f87171">Extreme: Day 13 collapse</span>
+          <span class="phase-tag" style="background:rgba(56,189,248,0.15); color:var(--accent)">H1 confirmed ✓</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-item">
+      <div>
+        <div class="phase-num" style="background:rgba(245,158,11,0.15); color:var(--g)">P2</div>
+      </div>
+      <div class="phase-body" style="border-top:3px solid var(--g)">
+        <h3>Phase 2 — Stress Testing (12 Attacks)</h3>
+        <div class="phase-meta">12 attack scenarios + Sobol sampling N=50 · Day 90 attack start</div>
+        <p style="font-size:0.875rem; color:var(--muted);">Reveals system vulnerabilities under adversarial conditions. FG-Pool confirmed as the "fatal pool" — trade deficit attacks collapse it within days. 8 of 12 scenarios failed. Sobol sampling: 24% survival rate across 50 parameter combinations.</p>
+        <div class="phase-results">
+          <span class="phase-tag" style="background:rgba(248,113,113,0.15); color:#f87171">4/12 survived (33.3%)</span>
+          <span class="phase-tag" style="background:rgba(248,113,113,0.15); color:#f87171">FG-Pool = fatal pool</span>
+          <span class="phase-tag" style="background:rgba(245,158,11,0.15); color:var(--g)">Sobol 24% survival</span>
+          <span class="phase-tag" style="background:rgba(56,189,248,0.15); color:var(--accent)">H2 confirmed ✓</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-item">
+      <div>
+        <div class="phase-num" style="background:rgba(129,140,248,0.15); color:#818cf8">P3</div>
+      </div>
+      <div class="phase-body" style="border-top:3px solid #818cf8">
+        <h3>Phase 3 — Sensitivity Analysis (ABM + Sobol)</h3>
+        <div class="phase-meta">10K heterogeneous citizen agents · N=128 Sobol · Total 1,792 runs · 6 parameters</div>
+        <p style="font-size:0.875rem; color:var(--muted);">Identifies the minimum intervention pathways. EXPORT_RATE dominates system survival (S₁=0.345, ST=0.730). Interaction between EXPORT_RATE × import_dependency is the single largest second-order effect (S₂=0.496). CHI becomes irrelevant when citizen habits are the bottleneck.</p>
+        <div class="phase-results">
+          <span class="phase-tag" style="background:rgba(129,140,248,0.15); color:#818cf8">11.4% survival</span>
+          <span class="phase-tag" style="background:rgba(129,140,248,0.15); color:#818cf8">EXPORT_RATE dominates</span>
+          <span class="phase-tag" style="background:rgba(129,140,248,0.15); color:#818cf8">S₂[export×import]=0.496</span>
+          <span class="phase-tag" style="background:rgba(56,189,248,0.15); color:var(--accent)">H3–H5 confirmed ✓</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sobol Table -->
+  <div class="card" style="margin-top:2rem;">
+    <h3 style="margin-bottom:1.25rem;">Phase 3 Sobol Sensitivity Indices (R-Pool Growth)</h3>
+    <table class="sobol-table">
+      <thead>
+        <tr>
+          <th>Parameter</th>
+          <th>S₁ (direct)</th>
+          <th>ST (total)</th>
+          <th>ST visualization</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>EXPORT_RATE</td>
+          <td style="color:#4ade80">0.345</td>
+          <td style="color:#4ade80">0.730</td>
+          <td><div class="bar-wrap"><div class="bar-fill" style="width:100%; background:var(--r)"></div></div></td>
+          <td style="color:var(--r); font-size:0.75rem;">Primary driver</td>
+        </tr>
+        <tr>
+          <td>import_dependency</td>
+          <td>0.059</td>
+          <td>0.553</td>
+          <td><div class="bar-wrap"><div class="bar-fill" style="width:76%; background:var(--fg)"></div></div></td>
+          <td style="color:var(--fg); font-size:0.75rem;">Strong interaction</td>
+        </tr>
+        <tr>
+          <td>attack_prob</td>
+          <td>−0.005</td>
+          <td>0.036</td>
+          <td><div class="bar-wrap"><div class="bar-fill" style="width:5%; background:var(--muted)"></div></div></td>
+          <td style="color:var(--muted); font-size:0.75rem;">Minor</td>
+        </tr>
+        <tr>
+          <td>attack_amount</td>
+          <td>−0.016</td>
+          <td>0.010</td>
+          <td><div class="bar-wrap"><div class="bar-fill" style="width:1%; background:var(--muted)"></div></div></td>
+          <td style="color:var(--muted); font-size:0.75rem;">Minimal</td>
+        </tr>
+        <tr>
+          <td>CHI</td>
+          <td>−0.004</td>
+          <td>0.004</td>
+          <td><div class="bar-wrap"><div class="bar-fill" style="width:0.5%; background:var(--muted)"></div></div></td>
+          <td style="color:#f87171; font-size:0.75rem;">Bottlenecked by habit</td>
+        </tr>
+        <tr>
+          <td>disaster_prob</td>
+          <td>−0.008</td>
+          <td>0.004</td>
+          <td><div class="bar-wrap"><div class="bar-fill" style="width:0.5%; background:var(--muted)"></div></div></td>
+          <td style="color:var(--muted); font-size:0.75rem;">Minimal</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:1rem; padding:0.75rem; background:rgba(129,140,248,0.08); border-radius:8px; font-size:0.78rem; color:var(--muted);">
+      Key second-order interaction: <span style="color:#818cf8; font-family:'JetBrains Mono',monospace;">S₂[EXPORT_RATE × import_dependency] = 0.496</span> — the single largest interaction effect in the model.
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRINCIPLES -->
+<section id="principles">
+  <div class="section-header">
+    <span class="section-label">Core Framework</span>
+    <h2>Principles & Red Lines</h2>
+    <p>Four eternal core principles and six red lines that cannot be violated. Valid 2025–2200.</p>
+  </div>
+
+  <div class="principles-grid" style="margin-bottom:2rem;">
+    <div class="principle-card">
+      <div class="principle-icon">💡</div>
+      <div>
+        <div class="principle-title">THOOTB is an Idea</div>
+        <div class="principle-desc">Not an organization, party, or company. A framework that any community can adopt voluntarily.</div>
+      </div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">🌊</div>
+      <div>
+        <div class="principle-title">Simulates Natural Flow</div>
+        <div class="principle-desc">Context-adaptive, not mechanical. The system responds to real conditions, not preset commands.</div>
+      </div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">🎯</div>
+      <div>
+        <div class="principle-title">Built on Readiness</div>
+        <div class="principle-desc">Technical and mental preparation must precede implementation. No forced adoption.</div>
+      </div>
+    </div>
+    <div class="principle-card">
+      <div class="principle-icon">📝</div>
+      <div>
+        <div class="principle-title">Currency as Record Only</div>
+        <div class="principle-desc">TH cannot speculate or accumulate. It is a daily accounting unit, not a store of value.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Red Lines Table -->
+  <div class="card">
+    <h3 style="margin-bottom:1.25rem;">Six Red Lines — Non-negotiable Boundaries</h3>
+    <table class="redlines-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>THOOTB Requires</th>
+          <th>Strictly Prohibited</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Implementation</td>
+          <td class="yes-cell">✓ Voluntary adoption</td>
+          <td class="no-cell">✗ Forced participation</td>
+        </tr>
+        <tr>
+          <td>Power Structure</td>
+          <td class="yes-cell">✓ 3-Dept, 6-month rotation</td>
+          <td class="no-cell">✗ Lifetime positions</td>
+        </tr>
+        <tr>
+          <td>Data Use</td>
+          <td class="yes-cell">✓ Care and support</td>
+          <td class="no-cell">✗ Surveillance</td>
+        </tr>
+        <tr>
+          <td>Cultural Diversity</td>
+          <td class="yes-cell">✓ Respect all cultures</td>
+          <td class="no-cell">✗ Template-forcing</td>
+        </tr>
+        <tr>
+          <td>Conflict</td>
+          <td class="yes-cell">✓ Non-violence only</td>
+          <td class="no-cell">✗ Any form of violence</td>
+        </tr>
+        <tr>
+          <td>Intellectual Property</td>
+          <td class="yes-cell">✓ Open source</td>
+          <td class="no-cell">✗ Paid/proprietary lock-in</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- AI AUDIT -->
+<section id="ai-audit">
+  <div class="section-header">
+    <span class="section-label">Methodology</span>
+    <h2>Six-AI Collaborative Audit</h2>
+    <p>Each AI system contributes a distinct layer of verification, forming an independent chain from code correctness to human understanding.</p>
+  </div>
+
+  <div class="ai-grid">
+    <div class="ai-card" style="border-top:3px solid var(--accent)">
+      <div class="ai-name">Claude (Anthropic)</div>
+      <div class="ai-role" style="color:var(--accent)">Core Coding · Architecture · Narrative</div>
+      <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Implemented all three phases, formulas, and academic structure. Ensures reproducibility and paper-grade rigor.</p>
+    </div>
+    <div class="ai-card" style="border-top:3px solid #60a5fa">
+      <div class="ai-name">DeepSeek</div>
+      <div class="ai-role" style="color:#60a5fa">Bug Audit · Formula Verification</div>
+      <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Layer 1 code audit. Identified R-Pool conservation formula errors. Recommended N increase from 64→128 in Sobol sampling.</p>
+    </div>
+    <div class="ai-card" style="border-top:3px solid #a78bfa">
+      <div class="ai-name">Copilot (Microsoft)</div>
+      <div class="ai-role" style="color:#a78bfa">Governance Logic · Clause Consistency</div>
+      <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Audited all trade accounting rules. Confirmed no hidden subsidies. Suggested "Pool not Bank" framing in balance equation.</p>
+    </div>
+    <div class="ai-card" style="border-top:3px solid #34d399">
+      <div class="ai-name">Gemini (Google)</div>
+      <div class="ai-role" style="color:#34d399">Attack Scenarios · Boundary Testing</div>
+      <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Designed 12 stress-test attack scenarios. Predicted Day 13 collapse under extreme parameters — validated exactly by simulation.</p>
+    </div>
+    <div class="ai-card" style="border-top:3px solid #fb923c">
+      <div class="ai-name">Grok (xAI)</div>
+      <div class="ai-role" style="color:#fb923c">Non-Traditional Risk Analysis</div>
+      <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Identified heterogeneity amplification effects and non-linear collapse pathways not visible in aggregate models.</p>
+    </div>
+    <div class="ai-card" style="border-top:3px solid #f472b6">
+      <div class="ai-name">ChatGPT (OpenAI)</div>
+      <div class="ai-role" style="color:#f472b6">Teaching Summaries · Policy Recommendations</div>
+      <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Produced human-readable audit summaries for each phase. Translated technical findings into governance policy language.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BOOKS -->
+<section id="books">
+  <div class="section-header">
+    <span class="section-label">Publication Series</span>
+    <h2>The THOOTB Book Series</h2>
+    <p>A growing open-source library documenting THOOTB from concept to implementation. All books CC BY 4.0.</p>
+  </div>
+
+  <div class="books-grid">
+    <div class="book-card">
+      <div class="book-num">Book 1 · 2019</div>
+      <div class="book-title">Concept Introduction</div>
+      <div class="book-desc">The seed. 45 pages introducing the THOOTB idea and post-scarcity vision.</div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">Book 2</div>
+      <div class="book-title">Complete Blueprint</div>
+      <div class="book-desc">Technical spec. Authority definition of all pools, rules, and governance logic.</div>
+    </div>
+    <div class="book-card" style="border-color:rgba(56,189,248,0.3)">
+      <div class="book-num" style="color:var(--accent)">Book 3 · v4.1 ✦ Latest</div>
+      <div class="book-title" style="color:var(--accent)">Computational Validation</div>
+      <div class="book-desc">Three-phase simulation. Six-AI audit chain. Sobol sensitivity. The scientific foundation.</div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">Book 4</div>
+      <div class="book-title">CHI Monitoring Manual</div>
+      <div class="book-desc">13 civilization health indicators. Real-time monitoring framework for THOOTB zones.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem; text-align:center;">
+    <p style="color:var(--muted); font-size:0.875rem;">Books 5–13 cover accounting, simulation, governance, Mars adaptation, AI integration, and implementation guides.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- POLICY RECOMMENDATIONS -->
+<section id="policy">
+  <div class="section-header">
+    <span class="section-label">From Validation to Practice</span>
+    <h2>Minimum Intervention Pathways</h2>
+    <p>Phase 3 Sobol results define clear governance priorities. When resources are limited, this is the sequence.</p>
+  </div>
+
+  <div class="card-grid-3">
+    <div class="card card-accent-r">
+      <span class="tag tag-r">Priority 1 · Highest Leverage</span>
+      <h3>Maximize Export Rate</h3>
+      <p>EXPORT_RATE dominates survival (ST=0.730). Invest in productive capacity and trade partnerships before any other intervention.</p>
+    </div>
+    <div class="card card-accent-fg">
+      <span class="tag tag-fg">Priority 2</span>
+      <h3>Reduce Import Dependency</h3>
+      <p>import_dependency interacts strongly with export (S₂=0.496). Diversify supply chains and build local substitution capacity.</p>
+    </div>
+    <div class="card card-accent-g">
+      <span class="tag tag-g">Priority 3</span>
+      <h3>Citizen Education on Recycling</h3>
+      <p>recycle_habit bottlenecks CHI. Infrastructure alone cannot raise CHI if citizen behavior is the limiting factor.</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-blue">Early Warning · FG-Pool</span>
+      <h3>FG-Pool Pre-Alert</h3>
+      <p>Trigger yellow alert when FG-Pool falls below 3 months of import needs. Automatic non-essential import restrictions at 1 month.</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-blue">Monitoring · CHI</span>
+      <h3>CHI Governance Redline</h3>
+      <p>CHI ≥ 0.70 is the minimum for self-repair. Any zone below this must activate emergency recycling protocols immediately.</p>
+    </div>
+    <div class="card">
+      <span class="tag tag-blue">Structure · Power</span>
+      <h3>3-Department Separation</h3>
+      <p>TRD records, TAD analyzes, TIAD recommends. No department acts on another's domain. Human final authority required.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- OPEN SOURCE -->
+<section style="text-align:center; padding:4rem 2rem;">
+  <span class="section-label">Open Source</span>
+  <h2 style="font-size:clamp(1.75rem,3vw,2.5rem); margin-bottom:1rem;">Everything is Open</h2>
+  <p style="color:var(--muted); max-width:500px; margin:0 auto 2rem;">All code, books, simulation data, and audit reports are released under Creative Commons Attribution 4.0. One restriction only: the four core principles cannot be violated.</p>
+  <div class="license-badge">CC BY 4.0 — Free to use, share, and adapt with attribution</div>
+  <br><br>
+  <a class="btn-primary" href="https://github.com/ChinSookLing/THOOTB" target="_blank" style="margin-right:1rem;">View GitHub Repository</a>
+  <a class="btn-secondary" href="https://github.com/ChinSookLing/THOOTB_Book-3_Phase1_Baseline" target="_blank">Phase 1 Simulation Code</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">THOOTB</div>
+  <div class="footer-tagline">THink Out Of The Box</div>
+  <div class="license-badge">Open Source · CC BY 4.0</div>
+  <div class="footer-links">
+    <a href="#what">What is THOOTB</a>
+    <a href="#four-pools">Four Pools</a>
+    <a href="#chi">CHI</a>
+    <a href="#validation">Validation</a>
+    <a href="#principles">Principles</a>
+    <a href="#books">Books</a>
+    <a href="https://github.com/ChinSookLing" target="_blank">GitHub: ChinSookLing</a>
+  </div>
+  <div class="footer-copy">
+    Designed by Chin Sook Ling (Tuzi) · Six-AI Collaboration: Claude, DeepSeek, Copilot, Gemini, Grok, ChatGPT<br>
+    Originally conceived 2019 · Book 3 v4.1 published December 2025
+  </div>
+</footer>
+
+</body>
+</html>
