@@ -341,6 +341,7 @@
     <li><a href="#pilot">Pilot</a></li>
     <li><a href="#simulator">Simulator</a></li>
     <li><a href="#accounting">Accounting</a></li>
+    <li><a href="#audit">Audit</a></li>
     <li><a href="#principles">Principles</a></li>
     <li><a href="#books">Books</a></li>
     <li><a href="https://github.com/ChinSookLing/THOOTB" target="_blank"><span class="nav-badge">GitHub</span></a></li>
@@ -1981,6 +1982,234 @@
 
 <hr class="divider">
 
+<!-- AUDIT AND POWER -->
+<section id="audit">
+  <div class="section-header">
+    <span class="section-label">Book 11 · Audit and Power</span>
+    <h2>The Architecture of Un-corruptibility</h2>
+    <p>Self vs External | SOP vs Position — How do you design a system that even bad actors cannot break? Not by trusting good people, but by making corruption structurally impossible.</p>
+  </div>
+
+  <!-- Philosophy banner -->
+  <div class="card" style="background:linear-gradient(135deg,#0f172a,#1e293b);border-left:4px solid var(--accent);margin-bottom:1.5rem;">
+    <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;text-align:center;">
+      <div>
+        <div style="font-size:1.5rem;margin-bottom:0.25rem;">⚖️</div>
+        <div style="color:var(--accent);font-weight:700;font-size:0.9rem;">SOP, Not Position</div>
+        <div style="color:var(--muted);font-size:0.8rem;">Process drives decisions,<br>not titles</div>
+      </div>
+      <div>
+        <div style="font-size:1.5rem;margin-bottom:0.25rem;">🔍</div>
+        <div style="color:var(--accent);font-weight:700;font-size:0.9rem;">Price Is The Audit</div>
+        <div style="color:var(--muted);font-size:0.8rem;">Every citizen is<br>an auditor</div>
+      </div>
+      <div>
+        <div style="font-size:1.5rem;margin-bottom:0.25rem;">🚪</div>
+        <div style="color:var(--accent);font-weight:700;font-size:0.9rem;">Exit Over Everything</div>
+        <div style="color:var(--muted);font-size:0.8rem;">Exit right &gt; audit right<br>&gt; accountability right</div>
+      </div>
+      <div>
+        <div style="font-size:1.5rem;margin-bottom:0.25rem;">💣</div>
+        <div style="color:var(--accent);font-weight:700;font-size:0.9rem;">Self-Destruct Built In</div>
+        <div style="color:var(--muted);font-size:0.8rem;">A system must be<br>able to end itself</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core question -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <h3 style="color:var(--accent);margin-bottom:1rem;">Why Good Systems Become Monsters</h3>
+    <p style="color:var(--muted);margin-bottom:1rem;">Communism, religion, democracy — all began with noble intent. All became instruments of oppression. The common structure: <strong style="color:var(--text);">Good Intent → Organisation → Organisation Corrupts → Oppression.</strong></p>
+    <p style="color:var(--muted);">Book 11's answer: good intent is not a defence. The only defence is a structure where even corrupted actors cannot accumulate enough power to cause catastrophic harm. This is the architecture of un-corruptibility.</p>
+    <div style="margin-top:1.25rem;padding:1rem;background:#0f172a;border-radius:8px;border-left:3px solid #f59e0b;">
+      <p style="color:#f59e0b;font-size:0.85rem;margin:0;font-style:italic;">"True power is not the ability to decide right from wrong. True power is the ability to make mistakes non-fatal." — Book 11, Final Chapter</p>
+    </div>
+  </div>
+
+  <!-- 3T Immune System -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem;">
+    <div class="card" style="border-top:3px solid #10b981;">
+      <div style="font-size:1.25rem;margin-bottom:0.5rem;">📝</div>
+      <h4 style="color:#10b981;margin-bottom:0.5rem;">TRD — Transaction Record Dept</h4>
+      <p style="color:var(--muted);font-size:0.875rem;margin-bottom:0.75rem;"><strong style="color:var(--text);">Write Only.</strong> Records everything. Judges nothing. Physically isolated. Cannot read, modify, or delete — only append.</p>
+      <div style="background:#0f172a;border-radius:6px;padding:0.75rem;">
+        <p style="color:#10b981;font-size:0.75rem;margin:0;font-family:'JetBrains Mono',monospace;">Has: All raw records<br>Cannot: Analyse · Execute · Delete</p>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid #3b82f6;">
+      <div style="font-size:1.25rem;margin-bottom:0.5rem;">📊</div>
+      <h4 style="color:#3b82f6;margin-bottom:0.5rem;">TAD — Transaction Analysis Dept</h4>
+      <p style="color:var(--muted);font-size:0.875rem;margin-bottom:0.75rem;"><strong style="color:var(--text);">Read Aggregate Only.</strong> Sees patterns, not people. Detects anomalies statistically. Classifies: TECHNICAL / BEHAVIORAL / NOISE.</p>
+      <div style="background:#0f172a;border-radius:6px;padding:0.75rem;">
+        <p style="color:#3b82f6;font-size:0.75rem;margin:0;font-family:'JetBrains Mono',monospace;">Has: Statistical insight<br>Cannot: See individuals · Execute · Access raw data</p>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid #f43f5e;">
+      <div style="font-size:1.25rem;margin-bottom:0.5rem;">🔎</div>
+      <h4 style="color:#f43f5e;margin-bottom:0.5rem;">TIAD — Transaction Investigation &amp; Action Dept</h4>
+      <p style="color:var(--muted);font-size:0.875rem;margin-bottom:0.75rem;"><strong style="color:var(--text);">Authorisation Required.</strong> Can investigate behavioural anomalies only after TAD escalation. Recommends — does not execute independently.</p>
+      <div style="background:#0f172a;border-radius:6px;padding:0.75rem;">
+        <p style="color:#f43f5e;font-size:0.75rem;margin:0;font-family:'JetBrains Mono',monospace;">Has: Investigation rights (with auth)<br>Cannot: Self-initiate · Execute alone · Access TRD</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3T data flow -->
+  <div class="card" style="margin-bottom:1.5rem;background:#0f172a;">
+    <h4 style="color:var(--accent);margin-bottom:1rem;text-align:center;">3T Unidirectional Data Flow</h4>
+    <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0.5rem;font-size:0.85rem;">
+      <div style="background:#1e293b;border:1px solid #10b981;border-radius:8px;padding:0.5rem 1rem;color:#10b981;font-weight:600;">TRD<br><span style="font-size:0.7rem;color:var(--muted);">Write Only</span></div>
+      <div style="color:var(--accent);font-size:1.2rem;">→</div>
+      <div style="background:#1e293b;border:1px solid #3b82f6;border-radius:8px;padding:0.5rem 1rem;color:#3b82f6;font-weight:600;">TAD<br><span style="font-size:0.7rem;color:var(--muted);">Aggregate Only</span></div>
+      <div style="color:var(--accent);font-size:1.2rem;">→</div>
+      <div style="background:#1e293b;border:1px solid #f43f5e;border-radius:8px;padding:0.5rem 1rem;color:#f43f5e;font-weight:600;">TIAD<br><span style="font-size:0.7rem;color:var(--muted);">Auth Required</span></div>
+      <div style="color:var(--accent);font-size:1.2rem;">→</div>
+      <div style="background:#1e293b;border:1px solid var(--accent);border-radius:8px;padding:0.5rem 1rem;color:var(--accent);font-weight:600;">Governance<br><span style="font-size:0.7rem;color:var(--muted);">Decision</span></div>
+    </div>
+    <p style="color:var(--muted);font-size:0.8rem;text-align:center;margin-top:0.75rem;">No reverse control. No cross-permissions. Failure degrades gracefully — never becomes dangerous.</p>
+  </div>
+
+  <!-- SOP vs Position + Power Rotation -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-bottom:1.5rem;">
+    <div class="card">
+      <h4 style="color:var(--accent);margin-bottom:0.75rem;">SOP as Finite State Machine</h4>
+      <p style="color:var(--muted);font-size:0.875rem;margin-bottom:0.75rem;">Every operation is modelled as a deterministic FSM: given a current state and an input, the next state is always uniquely defined. No discretion. No "judgement calls". No exceptions without a time-limit and a permanent record.</p>
+      <div style="background:#0f172a;border-radius:6px;padding:0.75rem;font-size:0.78rem;color:#94a3b8;font-family:'JetBrains Mono',monospace;">
+        FSM = (S, I, O, δ, λ, s₀)<br>
+        δ(state, input) → next_state<br>
+        <span style="color:#f59e0b;">Audit = verify δ at every step</span>
+      </div>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--accent);margin-bottom:0.75rem;">6-Month Mandatory Rotation</h4>
+      <p style="color:var(--muted);font-size:0.875rem;margin-bottom:0.75rem;">All Governance roles rotate every 6 months, no exceptions, no re-appointment, 12-month cooldown. Based on the power-corruption model: C(t) = C₀ · e^(λt). At 6 months, corruption stays manageable (&lt;2×). Beyond 12 months it exceeds 3×.</p>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem;">
+        <span style="background:#0f172a;color:#10b981;padding:0.25rem 0.6rem;border-radius:4px;font-size:0.75rem;">3 months → too short</span>
+        <span style="background:#0f172a;color:var(--accent);padding:0.25rem 0.6rem;border-radius:4px;font-size:0.75rem;border:1px solid var(--accent);">6 months ✓ balanced</span>
+        <span style="background:#0f172a;color:#f43f5e;padding:0.25rem 0.6rem;border-radius:4px;font-size:0.75rem;">12 months → too risky</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Price as Audit + 6 Red Lines -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-bottom:1.5rem;">
+    <div class="card">
+      <h4 style="color:var(--accent);margin-bottom:0.75rem;">Price as Automatic Audit</h4>
+      <p style="color:var(--muted);font-size:0.875rem;margin-bottom:0.75rem;">The Cost Absorption Adjustment mechanism (from Book 10) is simultaneously THOOTB's most powerful audit tool. Operational anomalies — inefficiency, overspending, mismanagement — automatically surface as price changes visible to every citizen.</p>
+      <div style="background:#0f172a;border-radius:6px;padding:0.75rem;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">
+        <span style="color:#f59e0b;">Anomalous cost</span> → <span style="color:var(--accent);">negative diff</span><br>
+        → <span style="color:#f43f5e;">price rises next month</span><br>
+        → <span style="color:#10b981;">citizens notice → TAD triggered</span><br>
+        <span style="color:var(--muted);font-size:0.7rem;">Math cannot be bribed.</span>
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid #f43f5e;">
+      <h4 style="color:#f43f5e;margin-bottom:0.75rem;">Six Inviolable Red Lines</h4>
+      <p style="color:var(--muted);font-size:0.8rem;margin-bottom:0.75rem;">Cannot be overridden by any vote, emergency, or majority:</p>
+      <div style="display:flex;flex-direction:column;gap:0.35rem;">
+        <div style="font-size:0.8rem;color:var(--text);">🔴 Physical safety of every person</div>
+        <div style="font-size:0.8rem;color:var(--text);">🔴 Basic survival resources guaranteed</div>
+        <div style="font-size:0.8rem;color:var(--text);">🔴 Freedom to exit — unconditional</div>
+        <div style="font-size:0.8rem;color:var(--text);">🔴 Freedom of thought, belief, speech</div>
+        <div style="font-size:0.8rem;color:var(--text);">🔴 Privacy floor — no unlimited surveillance</div>
+        <div style="font-size:0.8rem;color:var(--text);">🔴 Due process — no rights stripped without procedure</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Self-Destruct Switch -->
+  <div class="card" style="border:1px solid #f43f5e;margin-bottom:1.5rem;">
+    <h4 style="color:#f43f5e;margin-bottom:0.75rem;">🔥 The Self-Destruct Switch</h4>
+    <p style="color:var(--muted);font-size:0.875rem;margin-bottom:1rem;">A system that cannot be shut down is a potential tyranny. THOOTB is designed to dissolve itself gracefully. Dissolution is not failure — it is the system fulfilling its ultimate promise: people over process.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
+      <div style="background:#0f172a;border-radius:6px;padding:0.75rem;border-left:2px solid #f59e0b;">
+        <div style="color:#f59e0b;font-size:0.78rem;font-weight:600;margin-bottom:0.25rem;">Auto-Trigger Conditions</div>
+        <div style="color:var(--muted);font-size:0.75rem;">CHI &lt; 0.30 for 3 months<br>RBI &lt; 1 month (immediate)<br>Exit rate &gt; 30%/year<br>Any Red Line breached</div>
+      </div>
+      <div style="background:#0f172a;border-radius:6px;padding:0.75rem;border-left:2px solid #3b82f6;">
+        <div style="color:#3b82f6;font-size:0.78rem;font-weight:600;margin-bottom:0.25rem;">Majority Vote Dissolution</div>
+        <div style="color:var(--muted);font-size:0.75rem;">10% citizen petition<br>triggers a full vote.<br>Simple majority (&gt;50%)<br>is sufficient to dissolve.</div>
+      </div>
+      <div style="background:#0f172a;border-radius:6px;padding:0.75rem;border-left:2px solid #10b981;">
+        <div style="color:#10b981;font-size:0.78rem;font-weight:600;margin-bottom:0.25rem;">30-Day Graceful Exit</div>
+        <div style="color:var(--muted);font-size:0.75rem;">Asset clearance · Data export<br>Citizen relocation support<br>Permanent archive of all records<br>No one is left behind.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Degraded Audit Levels -->
+  <div class="card" style="margin-bottom:1.5rem;">
+    <h4 style="color:var(--accent);margin-bottom:0.75rem;">Degraded Audit Modes — When Things Go Wrong</h4>
+    <p style="color:var(--muted);font-size:0.875rem;margin-bottom:1rem;">System failure is anticipated, not feared. Audit capability degrades gracefully through 5 levels — the minimum viable core always survives.</p>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;font-size:0.8rem;border-collapse:collapse;">
+        <thead>
+          <tr style="border-bottom:1px solid #334155;">
+            <th style="text-align:left;padding:0.5rem;color:var(--accent);">Level</th>
+            <th style="text-align:left;padding:0.5rem;color:var(--accent);">Condition</th>
+            <th style="text-align:left;padding:0.5rem;color:var(--accent);">Coverage</th>
+            <th style="text-align:left;padding:0.5rem;color:var(--accent);">Core Guarantee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1e293b;">
+            <td style="padding:0.5rem;color:#10b981;">L0 — Normal</td>
+            <td style="padding:0.5rem;color:var(--muted);">All 3T operational</td>
+            <td style="padding:0.5rem;color:var(--muted);">100% real-time</td>
+            <td style="padding:0.5rem;color:var(--muted);">Full audit suite</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1e293b;">
+            <td style="padding:0.5rem;color:#3b82f6;">L1 — Light</td>
+            <td style="padding:0.5rem;color:var(--muted);">1 dept down</td>
+            <td style="padding:0.5rem;color:var(--muted);">90% + AI assist</td>
+            <td style="padding:0.5rem;color:var(--muted);">Critical paths covered</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1e293b;">
+            <td style="padding:0.5rem;color:#f59e0b;">L2 — Moderate</td>
+            <td style="padding:0.5rem;color:var(--muted);">2 depts down</td>
+            <td style="padding:0.5rem;color:var(--muted);">70% D-Pool + G-Pool</td>
+            <td style="padding:0.5rem;color:var(--muted);">COP + AI maintain watch</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1e293b;">
+            <td style="padding:0.5rem;color:#f97316;">L3 — Heavy</td>
+            <td style="padding:0.5rem;color:var(--muted);">All 3T down</td>
+            <td style="padding:0.5rem;color:var(--muted);">Red lines only</td>
+            <td style="padding:0.5rem;color:var(--muted);">Citizens + external observers</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem;color:#f43f5e;">L4 — Minimum</td>
+            <td style="padding:0.5rem;color:var(--muted);">All systems failed</td>
+            <td style="padding:0.5rem;color:var(--muted);">Exit + life safety</td>
+            <td style="padding:0.5rem;color:var(--muted);">Human witness · Paper records</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:var(--muted);font-size:0.78rem;margin-top:0.75rem;">Minimum Viable Audit Core: exit right verification + life safety + red line monitoring. These require no technology — only human observation. As long as people can leave, the system cannot become a prison.</p>
+  </div>
+
+  <!-- COP + Annual Exercise -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-bottom:1.5rem;">
+    <div class="card">
+      <h4 style="color:var(--accent);margin-bottom:0.75rem;">COP — Citizen Oversight Panel</h4>
+      <p style="color:var(--muted);font-size:0.875rem;">Randomly selected citizens with direct read access to raw TRD data — bypassing all institutional interpretation. COP can be triggered independently of the 3T departments. It is the people's immune system.</p>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--accent);margin-bottom:0.75rem;">Annual "Assume Founder Goes Bad" Drill</h4>
+      <p style="color:var(--muted);font-size:0.875rem;">Once a year, the system simulates the Founder acting maliciously — without advance notice to other departments. Measures detection speed, response time, and citizen awareness. A Founder who resists this drill is itself a warning signal.</p>
+    </div>
+  </div>
+
+  <!-- Quote -->
+  <div class="card" style="background:linear-gradient(135deg,#0f172a,#1e293b);text-align:center;border-top:2px solid var(--accent);">
+    <p style="color:var(--accent);font-size:1rem;font-weight:600;margin-bottom:0.5rem;">"If this book is ever treated as a sacred text, please burn it immediately."</p>
+    <p style="color:var(--muted);font-size:0.85rem;">— Grok, contributing AI · Book 11 v1.0 · January 2026</p>
+  </div>
+
+</section>
+
+<hr class="divider">
+
 <!-- BOOKS -->
 <section id="books">
   <div class="section-header">
@@ -2043,8 +2272,14 @@
       <div class="book-desc">The technical specification of THOOTB's 4-Pool ledger. Accounting before power. Event-sourced, immutable, zero-profit. Care &amp; Support, not Surveillance &amp; Control. Prototype v2.0 in development.</div>
     </div>
 
+    <div class="book-card" style="border-top:3px solid var(--accent);">
+      <div class="book-num">Book 11 · v1.0</div>
+      <div class="book-title">Audit and Power: The Architecture of Un-corruptibility</div>
+      <div class="book-desc">Self vs External | SOP vs Position. The immune system of THOOTB. 3T departments (TRD/TAD/TIAD), price-as-audit, six red lines, self-destruct switch, and the iron law of power rotation. Co-authored with six AIs. January 2026.</div>
+    </div>
+
   <div style="margin-top:1.5rem; text-align:center;">
-    <p style="color:var(--muted); font-size:0.875rem;">Books 11–13 cover audit &amp; power, implementation guides, and SECRET operations.</p>
+    <p style="color:var(--muted); font-size:0.875rem;">Books 12–13 cover implementation guides and SECRET operations.</p>
   </div>
 </section>
 
@@ -2121,6 +2356,7 @@
     <a href="#pilot">Pilot</a>
     <a href="#simulator">Simulator</a>
     <a href="#accounting">Accounting</a>
+    <a href="#audit">Audit</a>
     <a href="#principles">Principles</a>
     <a href="#books">Books</a>
     <a href="https://github.com/ChinSookLing" target="_blank">GitHub: ChinSookLing</a>
