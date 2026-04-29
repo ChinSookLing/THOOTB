@@ -340,6 +340,7 @@
     <li><a href="#symphony">Symphony</a></li>
     <li><a href="#pilot">Pilot</a></li>
     <li><a href="#simulator">Simulator</a></li>
+    <li><a href="#accounting">Accounting</a></li>
     <li><a href="#principles">Principles</a></li>
     <li><a href="#books">Books</a></li>
     <li><a href="https://github.com/ChinSookLing/THOOTB" target="_blank"><span class="nav-badge">GitHub</span></a></li>
@@ -1810,6 +1811,176 @@
 
 <hr class="divider">
 
+<!-- ACCOUNTING SYSTEM (BOOK 10) -->
+<section id="accounting">
+  <div class="section-header">
+    <span class="section-label">Book 10 · THOOTB Zone Accounting System v1.1</span>
+    <h2>Accounting Before Power</h2>
+    <p>A Zone Accounting System built on one principle: records come before authority. No profit. No accumulation. Just honest flow.</p>
+  </div>
+
+  <!-- Philosophy banner -->
+  <div class="card" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border:1px solid var(--accent);margin-bottom:2rem;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;text-align:center;">
+      <div>
+        <div style="font-size:2rem;margin-bottom:0.5rem;">📒</div>
+        <div style="font-weight:700;color:var(--accent);margin-bottom:0.25rem;">Records First</div>
+        <div style="font-size:0.8rem;color:var(--muted);">What happened? Before who's in charge.</div>
+      </div>
+      <div style="border-left:1px solid #334155;border-right:1px solid #334155;padding:0 1rem;">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">⚖️</div>
+        <div style="font-weight:700;color:var(--accent);margin-bottom:0.25rem;">No Profit Motive</div>
+        <div style="font-size:0.8rem;color:var(--muted);">Organs don't run businesses. Pools don't accumulate.</div>
+      </div>
+      <div>
+        <div style="font-size:2rem;margin-bottom:0.5rem;">🕊️</div>
+        <div style="font-weight:700;color:var(--accent);margin-bottom:0.25rem;">Care, Not Control</div>
+        <div style="font-size:0.8rem;color:var(--muted);">The system exists so no one needs to panic.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4-Pool Ledger Architecture -->
+  <div class="section-header" style="margin-top:2.5rem;">
+    <h3 style="font-size:1.25rem;">The 4-Pool Ledger Architecture</h3>
+    <p>Each Pool is an organ — not an actor. Organs don't want more. They just do their job.</p>
+  </div>
+  <div class="card-grid-2" style="margin-bottom:2rem;">
+    <div class="card card-accent-d">
+      <span class="tag tag-d">D-Pool · Heart</span>
+      <h3>Daily Spending Allocation</h3>
+      <p>Pumps TH to all entities at <strong>12:00am</strong>, recovers unspent balance at <strong>23:59pm</strong>. Every day is a new heartbeat, a new account ID.</p>
+      <div style="margin-top:1rem;padding:0.75rem;background:#0f172a;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);">
+        Account: <span style="color:var(--d);">D + ZoneCode + YYMMDD</span><br>
+        e.g. <span style="color:var(--text);">DE0001260103</span>
+      </div>
+    </div>
+    <div class="card card-accent-r">
+      <span class="tag tag-r">R-Pool · Warehouse</span>
+      <h3>Resource Pool</h3>
+      <p>Stores and transfers resources. No markup. No profit. Entities buy from R-Pool at <strong>sincere cost</strong> — what it actually costs, nothing more.</p>
+      <div style="margin-top:1rem;padding:0.75rem;background:#0f172a;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);">
+        Bank (TH) · Stock<br>
+        <span style="color:var(--r);">Transfer only — no revenue</span>
+      </div>
+    </div>
+    <div class="card card-accent-fg">
+      <span class="tag tag-fg">FG-Pool · Lungs</span>
+      <h3>Foreign Gateway Pool</h3>
+      <p>The Zone's interface with the outside world. Handles imports and exports. Dual currency: <strong>TH</strong> (local) + <strong>FC</strong> (foreign). Buffer zone, not a profit centre.</p>
+      <div style="margin-top:1rem;padding:0.75rem;background:#0f172a;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);">
+        CPV-Import · CPA-Export<br>
+        <span style="color:var(--fg);">Custody states, not failures</span>
+      </div>
+    </div>
+    <div class="card card-accent-g">
+      <span class="tag tag-g">G-Pool · Kidneys</span>
+      <h3>Guarantee Pool</h3>
+      <p>The Zone's safety reserve. Collects Premiums. Releases funds only in emergencies — requiring human authorisation from at least 3 departments.</p>
+      <div style="margin-top:1rem;padding:0.75rem;background:#0f172a;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);">
+        Reserve · Premium · Emergency<br>
+        <span style="color:var(--g);">Only Pool with Revenue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Balance Equation -->
+  <div class="card" style="border:1px solid var(--accent);margin-bottom:2rem;text-align:center;">
+    <span class="tag tag-blue" style="margin-bottom:1rem;display:inline-block;">The Conservation Law of Civilization</span>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--accent);margin:1rem 0;">
+      D-Pool Net = R-Pool + FG-Pool (TH) + G-Pool
+    </div>
+    <p style="color:var(--muted);font-size:0.875rem;max-width:600px;margin:0 auto;">If left ≠ right, money has disappeared or appeared from nowhere — both are system bugs. The Balance Equation is THOOTB's conservation of energy law. Verified automatically at every daily reset.</p>
+  </div>
+
+  <!-- Two key design choices -->
+  <div class="card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <span class="tag tag-blue">Two-Database Design</span>
+      <h3>Entity Portal vs Console</h3>
+      <p>Every entity owns their own data — no one else can see it. The Console (Zone Founder's view) only sees <strong>Pool-level aggregates</strong>. Never individual transactions.</p>
+      <div style="margin-top:1rem;font-size:0.8rem;color:var(--muted);border-left:2px solid var(--accent);padding-left:0.75rem;">
+        Console = Observatory, not Control Panel.<br>
+        "Who ate what for lunch" is none of the system's business.
+      </div>
+    </div>
+    <div class="card">
+      <span class="tag tag-blue">Self-Audit Mechanism</span>
+      <h3>Cycle Cost Absorption</h3>
+      <p>There is no profit. Any surplus or deficit is absorbed back into stock cost — making goods cheaper or more expensive next cycle. <strong>Price is the audit report.</strong></p>
+      <div style="margin-top:1rem;font-size:0.8rem;color:var(--muted);border-left:2px solid var(--accent);padding-left:0.75rem;">
+        Overspend → prices rise → citizens notice immediately.<br>
+        Every citizen is an auditor.
+      </div>
+    </div>
+  </div>
+
+  <!-- Voucher system + 3T -->
+  <div class="card-grid-2" style="margin-bottom:2rem;">
+    <div class="card">
+      <span class="tag tag-blue">4-Voucher System</span>
+      <h3>PV · RV · JV · SV</h3>
+      <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem;">Every transaction produces an immutable voucher. Once created — no deletion, no modification. Corrections require a new voucher.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;font-size:0.8rem;">
+        <div style="padding:0.5rem;background:#0f172a;border-radius:6px;"><span style="color:var(--d);font-weight:700;">PV</span> — Payment (Bank Out)</div>
+        <div style="padding:0.5rem;background:#0f172a;border-radius:6px;"><span style="color:var(--r);font-weight:700;">RV</span> — Receipt (Bank In)</div>
+        <div style="padding:0.5rem;background:#0f172a;border-radius:6px;"><span style="color:var(--fg);font-weight:700;">JV</span> — Journal (Non-cash)</div>
+        <div style="padding:0.5rem;background:#0f172a;border-radius:6px;"><span style="color:var(--g);font-weight:700;">SV</span> — System (Auto only)</div>
+      </div>
+    </div>
+    <div class="card">
+      <span class="tag tag-blue">3T Separation of Powers</span>
+      <h3>TRD · TAD · TIAD</h3>
+      <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem;">Three departments. Three different powers. None can do what the others do.</p>
+      <div style="display:grid;gap:0.5rem;font-size:0.8rem;">
+        <div style="padding:0.5rem;background:#0f172a;border-radius:6px;display:flex;justify-content:space-between;"><span><span style="color:var(--accent);font-weight:700;">TRD</span> — Transaction Record</span><span style="color:var(--muted);">Write Only</span></div>
+        <div style="padding:0.5rem;background:#0f172a;border-radius:6px;display:flex;justify-content:space-between;"><span><span style="color:var(--accent);font-weight:700;">TAD</span> — Transaction Analysis</span><span style="color:var(--muted);">Aggregate Only</span></div>
+        <div style="padding:0.5rem;background:#0f172a;border-radius:6px;display:flex;justify-content:space-between;"><span><span style="color:var(--accent);font-weight:700;">TIAD</span> — Investigation</span><span style="color:var(--muted);">Auth Required</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daily cycle visual -->
+  <div class="card" style="margin-bottom:2rem;">
+    <span class="tag tag-blue" style="margin-bottom:1rem;display:inline-block;">The Daily Heartbeat</span>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:0.5rem;text-align:center;font-size:0.8rem;">
+      <div style="padding:1rem;background:#0f172a;border-radius:8px;border:1px solid var(--d);">
+        <div style="font-size:1.5rem;">🌙</div>
+        <div style="color:var(--d);font-weight:700;margin-top:0.25rem;">12:00am</div>
+        <div style="color:var(--muted);margin-top:0.25rem;">D-Pool issues<br>TH to all entities</div>
+      </div>
+      <div style="color:var(--muted);font-size:1.2rem;">→</div>
+      <div style="padding:1rem;background:#0f172a;border-radius:8px;border:1px solid #334155;">
+        <div style="font-size:1.5rem;">☀️</div>
+        <div style="color:var(--text);font-weight:700;margin-top:0.25rem;">Daytime</div>
+        <div style="color:var(--muted);margin-top:0.25rem;">Free flow between<br>entities via PV/RV/JV</div>
+      </div>
+      <div style="color:var(--muted);font-size:1.2rem;">→</div>
+      <div style="padding:1rem;background:#0f172a;border-radius:8px;border:1px solid var(--fg);">
+        <div style="font-size:1.5rem;">🌆</div>
+        <div style="color:var(--fg);font-weight:700;margin-top:0.25rem;">23:59pm</div>
+        <div style="color:var(--muted);margin-top:0.25rem;">Unspent TH returns<br>to D-Pool</div>
+      </div>
+      <div style="color:var(--muted);font-size:1.2rem;">→</div>
+      <div style="padding:1rem;background:#0f172a;border-radius:8px;border:1px solid var(--g);">
+        <div style="font-size:1.5rem;">✅</div>
+        <div style="color:var(--g);font-weight:700;margin-top:0.25rem;">Reset</div>
+        <div style="color:var(--muted);margin-top:0.25rem;">Balance Equation<br>verified. New day.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Coming soon note -->
+  <div class="card" style="border:1px dashed #334155;text-align:center;">
+    <p style="color:var(--muted);font-size:0.875rem;">
+      <strong style="color:var(--accent);">Zone Accounting Software v2.0</strong> — A working prototype (React) implementing the full 4-Pool ledger, all portal views, and real-time Balance Equation verification is in development. Live demo coming soon.
+    </p>
+  </div>
+
+</section>
+
+<hr class="divider">
+
 <!-- BOOKS -->
 <section id="books">
   <div class="section-header">
@@ -1866,8 +2037,14 @@
       <div class="book-desc">From a humble Excel sheet to 3,520 simulations. The discovery of S = min(Stock Margin, FX Margin) ≥ 0 — civilization's continuity equation — co-discovered by Tuzi and six AIs at Senai Airport Starbucks, 1 Jan 2026.</div>
     </div>
 
+    <div class="book-card" style="border-top:3px solid var(--accent);">
+      <div class="book-num">Book 10 · v1.1</div>
+      <div class="book-title">THOOTB Zone Accounting System</div>
+      <div class="book-desc">The technical specification of THOOTB's 4-Pool ledger. Accounting before power. Event-sourced, immutable, zero-profit. Care &amp; Support, not Surveillance &amp; Control. Prototype v2.0 in development.</div>
+    </div>
+
   <div style="margin-top:1.5rem; text-align:center;">
-    <p style="color:var(--muted); font-size:0.875rem;">Books 10–13 cover accounting system, audit &amp; power, implementation guides, and SECRET operations.</p>
+    <p style="color:var(--muted); font-size:0.875rem;">Books 11–13 cover audit &amp; power, implementation guides, and SECRET operations.</p>
   </div>
 </section>
 
@@ -1943,6 +2120,7 @@
     <a href="#symphony">Symphony</a>
     <a href="#pilot">Pilot</a>
     <a href="#simulator">Simulator</a>
+    <a href="#accounting">Accounting</a>
     <a href="#principles">Principles</a>
     <a href="#books">Books</a>
     <a href="https://github.com/ChinSookLing" target="_blank">GitHub: ChinSookLing</a>
