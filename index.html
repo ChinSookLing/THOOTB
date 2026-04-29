@@ -333,7 +333,9 @@
     <li><a href="#what">What is THOOTB</a></li>
     <li><a href="#four-pools">Four Pools</a></li>
     <li><a href="#chi">CHI</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
     <li><a href="#validation">Validation</a></li>
+    <li><a href="#governance">Governance</a></li>
     <li><a href="#principles">Principles</a></li>
     <li><a href="#books">Books</a></li>
     <li><a href="https://github.com/ChinSookLing/THOOTB" target="_blank"><span class="nav-badge">GitHub</span></a></li>
@@ -529,6 +531,368 @@
   <div class="card" style="background:rgba(16,185,129,0.05); border-color:rgba(16,185,129,0.2);">
     <h3 style="color:var(--r); margin-bottom:0.75rem;">Key Finding from Phase 3 (Book 3)</h3>
     <p style="font-size:0.875rem; color:var(--muted);">In Agent-Based Model mode with 10,000 heterogeneous citizens, CHI showed near-zero Sobol sensitivity (S₁ ≈ 0, ST ≈ 0.004). This is because individual <code style="background:var(--dark); padding:2px 6px; border-radius:4px; color:var(--r); font-family:'JetBrains Mono',monospace;">recycle_habit</code> variance became the binding constraint — citizens with low recycling behavior bottlenecked the entire system. <strong style="color:var(--text);">Policy implication: invest in citizen education before infrastructure.</strong></p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- DASHBOARD — 13 INDICATORS (Book 4) -->
+<section id="dashboard">
+  <div class="section-header">
+    <span class="section-label">Book 4 · Civilization Health</span>
+    <h2>The 13-Indicator Dashboard</h2>
+    <p>GDP measures speed, not direction. These 13 indicators are THOOTB's immune system — not KPIs for control, but a language for understanding civilization health.</p>
+  </div>
+
+  <!-- Priority Scale -->
+  <div style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:2.5rem;">
+    <span style="background:rgba(74,222,128,0.15); color:#4ade80; border:1px solid rgba(74,222,128,0.3); padding:4px 14px; border-radius:20px; font-size:0.75rem; font-weight:600;">● EXCELLENT</span>
+    <span style="background:rgba(250,204,21,0.15); color:#facc15; border:1px solid rgba(250,204,21,0.3); padding:4px 14px; border-radius:20px; font-size:0.75rem; font-weight:600;">● HEALTHY</span>
+    <span style="background:rgba(251,146,60,0.15); color:#fb923c; border:1px solid rgba(251,146,60,0.3); padding:4px 14px; border-radius:20px; font-size:0.75rem; font-weight:600;">● WARNING</span>
+    <span style="background:rgba(248,113,113,0.15); color:#f87171; border:1px solid rgba(248,113,113,0.3); padding:4px 14px; border-radius:20px; font-size:0.75rem; font-weight:600;">● CRISIS</span>
+  </div>
+
+  <!-- Zone 1: Core Vitality -->
+  <div style="margin-bottom:2rem;">
+    <h3 style="color:var(--accent); font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+      <span style="width:28px; height:2px; background:var(--accent); display:inline-block;"></span>
+      Zone 1 — Core Vitality · 系統心跳
+    </h3>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1rem;">
+
+      <div class="card" style="border-color:rgba(56,189,248,0.25);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--accent);">TSI</span>
+            <span style="color:var(--muted); font-size:0.8rem; margin-left:0.5rem;">Total System Integrity</span>
+          </div>
+          <span style="font-size:0.7rem; color:var(--muted);">≥85 EXCELLENT</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted); margin-bottom:0.75rem;">文明的「信用評分」— The master health score. Any one component at zero = TSI = 0 (collapse).</p>
+        <div class="formula-box" style="font-size:0.75rem; padding:0.6rem 0.9rem;">
+          TSI = 357 × CHI<sup>1.515</sup> × export_rate<sup>0.548</sup> × logistic(RBI)
+        </div>
+      </div>
+
+      <div class="card" style="border-color:rgba(16,185,129,0.25);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--r);">CHI</span>
+            <span style="color:var(--muted); font-size:0.8rem; margin-left:0.5rem;">Circularity Harmony Index</span>
+          </div>
+          <span style="font-size:0.7rem; color:var(--muted);">≥0.85 EXCELLENT</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted); margin-bottom:0.75rem;">資源是否在循環？— Is the system self-sustaining? Earth min ≥0.70 · Mars standard ≥0.80.</p>
+        <div class="formula-box" style="font-size:0.75rem; padding:0.6rem 0.9rem;">
+          CHI = recycled / (recycled + landfilled + incinerated)
+        </div>
+      </div>
+
+      <div class="card" style="border-color:rgba(59,130,246,0.25);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--fg);">ALIR</span>
+            <span style="color:var(--muted); font-size:0.8rem; margin-left:0.5rem;">Active Life Impact Rate</span>
+          </div>
+          <span style="font-size:0.7rem; color:var(--muted);">0.90–1.10 EXCELLENT</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted); margin-bottom:0.75rem;">系統是否兌現了承諾？— Did the system deliver what it promised to citizens?</p>
+        <div class="formula-box" style="font-size:0.75rem; padding:0.6rem 0.9rem;">
+          ALIR = actual_allocation / promised_allocation
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Zone 2: Resource Security -->
+  <div style="margin-bottom:2rem;">
+    <h3 style="color:var(--r); font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+      <span style="width:28px; height:2px; background:var(--r); display:inline-block;"></span>
+      Zone 2 — Resource Security · 生存底線
+    </h3>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1rem;">
+
+      <div class="card" style="border-color:rgba(16,185,129,0.2);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--r);">RBI</span>
+            <span style="color:var(--muted); font-size:0.8rem; margin-left:0.5rem;">Resource Buffer Index</span>
+          </div>
+          <span style="font-size:0.7rem; color:var(--muted);">≥12 months EXCELLENT</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted);">我們還能活幾個月？— How many months can the zone survive without any new input?</p>
+      </div>
+
+      <div class="card" style="border-color:rgba(16,185,129,0.2);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--r);">PRE</span>
+            <span style="color:var(--muted); font-size:0.8rem; margin-left:0.5rem;">Planetary Resource Equilibrium</span>
+          </div>
+          <span style="font-size:0.7rem; color:var(--muted);">≥1.10 EXCELLENT</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted);">流入 &gt; 流出嗎？— Is the system producing more than it consumes? PRE = inflow / outflow.</p>
+      </div>
+
+      <div class="card" style="border-color:rgba(16,185,129,0.2);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--r);">GSR</span>
+            <span style="color:var(--muted); font-size:0.8rem; margin-left:0.5rem;">Governance Self-Reliance</span>
+          </div>
+          <span style="font-size:0.7rem; color:var(--muted);">≥0.90 EXCELLENT</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted);">政府需要「救火」嗎？— Fraction of months without emergency government intervention.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Zone 3: Equity & Harmony -->
+  <div style="margin-bottom:2rem;">
+    <h3 style="color:var(--g); font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+      <span style="width:28px; height:2px; background:var(--g); display:inline-block;"></span>
+      Zone 3 — Equity &amp; Harmony · 社會品質
+    </h3>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1rem;">
+
+      <div class="card" style="border-color:rgba(245,158,11,0.2);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--g);">MSC</span>
+            <span style="color:var(--muted); font-size:0.8rem; margin-left:0.5rem;">Multi-Scale Coherence</span>
+          </div>
+          <span style="font-size:0.7rem; color:var(--muted);">≥0.95 EXCELLENT</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted);">所有地區都被公平對待嗎？— Consistency of ALIR across all sub-zones. Hides no regional injustice.</p>
+      </div>
+
+      <div class="card" style="border-color:rgba(245,158,11,0.2);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--g);">EQI</span>
+            <span style="color:var(--muted); font-size:0.8rem; margin-left:0.5rem;">Equity Quality Index</span>
+          </div>
+          <span style="font-size:0.7rem; color:var(--muted);">≥0.95 EXCELLENT</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted);">人人都有機會嗎？— Income equality × opportunity equality. Wealth without access scores low.</p>
+      </div>
+
+      <div class="card" style="border-color:rgba(245,158,11,0.2);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--g);">FFI</span>
+            <span style="color:var(--muted); font-size:0.8rem; margin-left:0.5rem;">Four Freedoms Index</span>
+          </div>
+          <span style="font-size:0.7rem; color:var(--muted);">≥0.90 EXCELLENT</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted);">四大自由是否得到保障？— Freedom of thought, movement, association, and expression. Weighted average.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Zone 4: Systemic Resilience -->
+  <div style="margin-bottom:2rem;">
+    <h3 style="color:var(--d); font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+      <span style="width:28px; height:2px; background:var(--d); display:inline-block;"></span>
+      Zone 4 — Systemic Resilience · 抗壓能力
+    </h3>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1rem;">
+
+      <div class="card" style="border-color:rgba(244,63,94,0.2);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--d);">CRI</span>
+            <span style="color:var(--muted); font-size:0.8rem; margin-left:0.5rem;">Crisis Recovery Index</span>
+          </div>
+          <span style="font-size:0.7rem; color:var(--muted);">≥0.90 EXCELLENT</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted);">被打倒後能多快站起來？— Post-crisis level ÷ pre-crisis baseline. Measures bounce-back speed.</p>
+      </div>
+
+      <div class="card" style="border-color:rgba(244,63,94,0.2);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--d);">SDI</span>
+            <span style="color:var(--muted); font-size:0.8rem; margin-left:0.5rem;">Sustainable Density Index</span>
+          </div>
+          <span style="font-size:0.7rem; color:var(--muted);">≤0.50 EXCELLENT</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted);">規模是否合適？— Population ÷ carrying capacity. Lower is better — growth room, not overload.</p>
+      </div>
+
+      <div class="card" style="border-color:rgba(244,63,94,0.2);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
+          <div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--d);">VaR</span>
+            <span style="color:var(--muted); font-size:0.8rem; margin-left:0.5rem;">Value at Risk</span>
+          </div>
+          <span style="font-size:0.7rem; color:var(--muted);">≥12 months EXCELLENT</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted);">最壞情況下還能撐多久？— Survival months at 95% stress scenario: supply cut + 30% production drop + 20% demand spike.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Centre: M.I. -->
+  <div style="background:linear-gradient(135deg, rgba(56,189,248,0.06) 0%, rgba(245,158,11,0.06) 100%); border:1px solid rgba(56,189,248,0.2); border-radius:12px; padding:2rem; text-align:center;">
+    <span style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent);">Dashboard Centre · 儀表板中央</span>
+    <h3 style="font-size:1.5rem; font-weight:700; margin:0.75rem 0 0.5rem; color:var(--text);">
+      <span style="font-family:'JetBrains Mono',monospace; color:var(--accent);">M.I.</span> — Maslow Index
+    </h3>
+    <p style="color:var(--muted); max-width:560px; margin:0 auto 1.25rem; font-size:0.9rem;">人們真的在「繁盛」嗎？— All 12 indicators exist to serve this one question: Are people genuinely flourishing?</p>
+    <div class="formula-box" style="display:inline-block; text-align:left; font-size:0.8rem; margin-bottom:1.25rem;">
+      M.I. = Σ(Layer_i × Weight_i)<br>
+      <span class="formula-comment"># Physiological 30% · Safety 25% · Social 20% · Esteem 15% · Self-Actualisation 10%</span>
+    </div>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; font-size:0.8rem; color:var(--muted);">
+      <span>≥85% → <span style="color:#4ade80;">EXCELLENT</span></span>
+      <span>70–85% → <span style="color:#facc15;">HEALTHY</span></span>
+      <span>50–70% → <span style="color:#fb923c;">WARNING</span></span>
+      <span>&lt;50% → <span style="color:#f87171;">CRISIS</span></span>
+    </div>
+  </div>
+
+  <!-- Spirit over Letter note -->
+  <div class="card" style="margin-top:1.5rem; background:rgba(56,189,248,0.04); border-color:rgba(56,189,248,0.15);">
+    <p style="font-size:0.875rem; color:var(--muted);"><strong style="color:var(--accent);">Spirit over Letter (精神高於字面)</strong> — These indicators are an immune system, not a KPI regime. When CHI drops below 0.70, the response is not punishment — it is the question: <em>"What happened? How can we help?"</em> Numbers are tools. Understanding is the purpose.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- GOVERNANCE — BRAKING SYSTEM (Book 5) -->
+<section id="governance">
+  <div class="section-header">
+    <span class="section-label">Book 5 · Civilizational Governance</span>
+    <h2>The Braking System</h2>
+    <p>A civilization that cannot stop itself is not mature. Book 5 is not about how to accelerate — it is about knowing when to stop.</p>
+  </div>
+
+  <!-- Priority Stack -->
+  <div style="margin-bottom:2.5rem;">
+    <h3 style="color:var(--muted); font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:1rem; text-align:center;">Civilizational Priority Order — Non-Negotiable · Cannot be Reordered</h3>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0.75rem; max-width:700px; margin:0 auto;">
+      <div style="background:rgba(244,63,94,0.08); border:1px solid rgba(244,63,94,0.3); border-radius:10px; padding:1.25rem; text-align:center;">
+        <div style="font-size:1.5rem; font-weight:800; color:var(--d); margin-bottom:0.25rem;">1</div>
+        <div style="font-weight:700; color:var(--text); margin-bottom:0.25rem;">Survival</div>
+        <div style="font-size:0.7rem; color:var(--muted);">Without survival, nothing else matters</div>
+      </div>
+      <div style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.3); border-radius:10px; padding:1.25rem; text-align:center;">
+        <div style="font-size:1.5rem; font-weight:800; color:var(--fg); margin-bottom:0.25rem;">2</div>
+        <div style="font-weight:700; color:var(--text); margin-bottom:0.25rem;">Dignity</div>
+        <div style="font-size:0.7rem; color:var(--muted);">Without dignity, survival is mere servitude</div>
+      </div>
+      <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:1.25rem; text-align:center;">
+        <div style="font-size:1.5rem; font-weight:800; color:var(--r); margin-bottom:0.25rem;">3</div>
+        <div style="font-weight:700; color:var(--text); margin-bottom:0.25rem;">Freedom</div>
+        <div style="font-size:0.7rem; color:var(--muted);">Without freedom, civilization loses error-correction</div>
+      </div>
+      <div style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.3); border-radius:10px; padding:1.25rem; text-align:center;">
+        <div style="font-size:1.5rem; font-weight:800; color:var(--g); margin-bottom:0.25rem;">4</div>
+        <div style="font-weight:700; color:var(--text); margin-bottom:0.25rem;">Efficiency</div>
+        <div style="font-size:0.7rem; color:var(--muted);">Always last. A means, never an end</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Override & Kill Switch -->
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; margin-bottom:2rem;">
+    <div class="card" style="border-color:rgba(251,146,60,0.3);">
+      <h3 style="color:#fb923c; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-size:1.2rem;">⏸</span> Override
+      </h3>
+      <p style="font-size:0.875rem; color:var(--muted); margin-bottom:0.75rem;">Suspends a specific decision in progress. Can be triggered by <strong style="color:var(--text);">any single citizen</strong> who believes an irreversible civilizational risk exists — even if all indicators are green and all AIs agree.</p>
+      <div style="background:rgba(251,146,60,0.08); border-radius:8px; padding:0.75rem; font-size:0.8rem; color:var(--muted);">
+        <strong style="color:#fb923c;">Trigger condition:</strong> Possibility of irreversible consequence — not certainty. Waiting for proof means losing the intervention window.
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(248,113,113,0.3);">
+      <h3 style="color:#f87171; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-size:1.2rem;">🔴</span> Kill Switch
+      </h3>
+      <p style="font-size:0.875rem; color:var(--muted); margin-bottom:0.75rem;">Full halt of a subsystem. Reserved for imminent <strong style="color:var(--text);">irreversible civilizational-level consequences</strong>. After activation: system pause → human review → principles check. <em>No new policies, no power expansion.</em></p>
+      <div style="background:rgba(248,113,113,0.08); border-radius:8px; padding:0.75rem; font-size:0.8rem; color:var(--muted);">
+        <strong style="color:#f87171;">Key principle:</strong> The right to stop ≠ the right to rule. Kill Switch grants no new governance authority.
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Red Lines -->
+  <div class="card" style="margin-bottom:1.5rem; border-color:rgba(56,189,248,0.2);">
+    <h3 style="margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;">
+      <span style="color:var(--accent);">◈</span> AI Red Lines — Four Non-Negotiable Boundaries
+    </h3>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:0.75rem;">
+      <div style="background:rgba(56,189,248,0.05); border:1px solid rgba(56,189,248,0.15); border-radius:8px; padding:1rem;">
+        <div style="font-size:0.7rem; font-weight:700; color:var(--accent); letter-spacing:0.1em; margin-bottom:0.4rem;">RED LINE 1</div>
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.3rem;">No Final Interpretation</div>
+        <div style="font-size:0.78rem; color:var(--muted);">When rules are ambiguous, humans interpret. AI cannot hold the final word on meaning.</div>
+      </div>
+      <div style="background:rgba(56,189,248,0.05); border:1px solid rgba(56,189,248,0.15); border-radius:8px; padding:1rem;">
+        <div style="font-size:0.7rem; font-weight:700; color:var(--accent); letter-spacing:0.1em; margin-bottom:0.4rem;">RED LINE 2</div>
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.3rem;">No Defining Human Values</div>
+        <div style="font-size:0.78rem; color:var(--muted);">What is good, what is right — defined by humans only. AI cannot set the moral compass.</div>
+      </div>
+      <div style="background:rgba(56,189,248,0.05); border:1px solid rgba(56,189,248,0.15); border-radius:8px; padding:1rem;">
+        <div style="font-size:0.7rem; font-weight:700; color:var(--accent); letter-spacing:0.1em; margin-bottom:0.4rem;">RED LINE 3</div>
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.3rem;">No Kill Switch Ownership</div>
+        <div style="font-size:0.78rem; color:var(--muted);">The power to pause civilization belongs only to humans. AI cannot be trusted with irreversibility.</div>
+      </div>
+      <div style="background:rgba(56,189,248,0.05); border:1px solid rgba(56,189,248,0.15); border-radius:8px; padding:1rem;">
+        <div style="font-size:0.7rem; font-weight:700; color:var(--accent); letter-spacing:0.1em; margin-bottom:0.4rem;">RED LINE 4</div>
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.3rem;">No Auto-Decision</div>
+        <div style="font-size:0.78rem; color:var(--muted);">AI suggestions never auto-execute. Every recommendation requires human review and approval.</div>
+      </div>
+    </div>
+    <p style="font-size:0.8rem; color:var(--muted); margin-top:1rem;">Capability ≠ Responsibility. Even if AI prediction accuracy surpasses humans, it cannot feel pain, bear cross-generational accountability, or be punished. Delegating irreversible decisions to AI is delegating responsibility to an entity with none.</p>
+  </div>
+
+  <!-- Decision Layers -->
+  <div class="card">
+    <h3 style="margin-bottom:1.25rem;">Four-Layer Decision Architecture</h3>
+    <div style="overflow-x:auto;">
+      <table class="redlines-table">
+        <thead>
+          <tr>
+            <th>Layer</th>
+            <th>Scope</th>
+            <th>Can Decide</th>
+            <th>Cannot Decide</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--accent);">Civilization</strong></td>
+            <td>All THOOTB</td>
+            <td class="yes-cell">✓ Core principles, value ordering</td>
+            <td class="no-cell">✗ Local daily operations</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--fg);">System</strong></td>
+            <td>Single planet / region</td>
+            <td class="yes-cell">✓ Economic rules, indicator thresholds</td>
+            <td class="no-cell">✗ Core principle changes</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--r);">Zone</strong></td>
+            <td>City / community group</td>
+            <td class="yes-cell">✓ Resource allocation ratios</td>
+            <td class="no-cell">✗ Currency formula</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--g);">Local</strong></td>
+            <td>Single community</td>
+            <td class="yes-cell">✓ Daily operations, cultural expression</td>
+            <td class="no-cell">✗ Cross-zone standards</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.8rem; color:var(--muted); margin-top:0.75rem;">Governance maturity is not measured by how fast decisions are made — but by whether errors can be stopped in time.</p>
   </div>
 </section>
 
@@ -844,13 +1208,18 @@
     </div>
     <div class="book-card">
       <div class="book-num">Book 4</div>
-      <div class="book-title">CHI Monitoring Manual</div>
-      <div class="book-desc">13 civilization health indicators. Real-time monitoring framework for THOOTB zones.</div>
+      <div class="book-title">The First Language of Civilization Health</div>
+      <div class="book-desc">13 civilization health indicators across 4 pillars. TSI, CHI, ALIR, RBI, PRE, GSR, MSC, EQI, FFI, CRI, SDI, VaR, M.I.</div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">Book 5</div>
+      <div class="book-title">The Braking System of Civilization</div>
+      <div class="book-desc">Civilizational governance constitution. Override, Kill Switch, AI red lines, decision layers, and cross-planetary governance.</div>
     </div>
   </div>
 
   <div style="margin-top:1.5rem; text-align:center;">
-    <p style="color:var(--muted); font-size:0.875rem;">Books 5–13 cover accounting, simulation, governance, Mars adaptation, AI integration, and implementation guides.</p>
+    <p style="color:var(--muted); font-size:0.875rem;">Books 6–13 cover expansion protocols, accounting, simulation, audit, implementation guides, and SECRET operations.</p>
   </div>
 </section>
 
