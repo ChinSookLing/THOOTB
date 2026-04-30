@@ -336,7 +336,9 @@ const createInitialState = () => {
       },
       gPool: {
         bankTH: 0,
-        premium: 0,
+        bankFC: 0,
+        premiumFC: 0,
+        emergencyAdvance: 0,
         txns: []
       }
     },
@@ -655,15 +657,21 @@ const THOOTBAccounting = () => {
             txns: [...ns.pools.rPool.txns, v]
           }
         };
-        if (to === 'POOL-FG') ns.pools = {
-          ...ns.pools,
-          fgPool: {
-            ...ns.pools.fgPool,
-            bankTH: ns.pools.fgPool.bankTH + amount,
-            cpvImpTH: ns.pools.fgPool.cpvImpTH + amount,
-            txns: [...ns.pools.fgPool.txns, v]
-          }
-        };
+        if (to === 'POOL-FG') {
+          ns.pools = {
+            ...ns.pools,
+            fgPool: {
+              ...ns.pools.fgPool,
+              bankTH: ns.pools.fgPool.bankTH + amount,
+              cpvImpTH: ns.pools.fgPool.cpvImpTH + amount,
+              txns: [...ns.pools.fgPool.txns, v]
+            }
+          };
+          ns.cpPool = {
+            ...ns.cpPool,
+            cpvImportNormal: ns.cpPool.cpvImportNormal + amount
+          };
+        }
         if (ns.businesses[to]) ns.businesses = {
           ...ns.businesses,
           [to]: {
@@ -832,7 +840,37 @@ const THOOTBAccounting = () => {
       className: "flex justify-between"
     }, /*#__PURE__*/React.createElement("span", null, "FC Reserve:"), /*#__PURE__*/React.createElement("span", null, formatFC(state.pools.gPool.bankFC))), /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between"
-    }, /*#__PURE__*/React.createElement("span", null, "Export Premium:"), /*#__PURE__*/React.createElement("span", null, formatFC(state.pools.gPool.premiumFC)))))), state.dayStatus === 'consolidated' && /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("span", null, "Export Premium:"), /*#__PURE__*/React.createElement("span", null, formatFC(state.pools.gPool.premiumFC)))))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-white p-4 rounded-xl border"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold mb-3"
+    }, "\uD83D\uDCCB CP Pool (CPA/CPV)"), /*#__PURE__*/React.createElement("div", {
+      className: "grid grid-cols-2 gap-3 text-sm"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "p-2 bg-amber-50 rounded"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-500"
+    }, "CPA Export Normal"), /*#__PURE__*/React.createElement("div", {
+      className: "font-bold"
+    }, formatTH(state.cpPool.cpaExportNormal))), /*#__PURE__*/React.createElement("div", {
+      className: "p-2 bg-red-50 rounded"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-500"
+    }, "CPA Export Overdue"), /*#__PURE__*/React.createElement("div", {
+      className: "font-bold text-red-600"
+    }, formatTH(state.cpPool.cpaExportOverdue))), /*#__PURE__*/React.createElement("div", {
+      className: "p-2 bg-blue-50 rounded"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-500"
+    }, "CPV Import Normal"), /*#__PURE__*/React.createElement("div", {
+      className: "font-bold"
+    }, formatTH(state.cpPool.cpvImportNormal))), /*#__PURE__*/React.createElement("div", {
+      className: "p-2 bg-red-50 rounded"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-500"
+    }, "CPV Import Overdue"), /*#__PURE__*/React.createElement("div", {
+      className: "font-bold text-red-600"
+    }, formatTH(state.cpPool.cpvImportOverdue))))), state.dayStatus === 'consolidated' && /*#__PURE__*/React.createElement("div", {
       className: "bg-white p-5 rounded-xl border"
     }, /*#__PURE__*/React.createElement("h3", {
       className: "font-bold mb-3"
@@ -1204,17 +1242,24 @@ const THOOTBAccounting = () => {
     className: "p-3 bg-green-50 border-l-4 border-green-500 rounded"
   }, /*#__PURE__*/React.createElement("div", {
     className: "font-bold text-green-700"
-  }, "\u2705 CPA/CPV \u2014 No overdue items")), state.dayStatus === 'consolidated' && state.pools.dPool.bank !== 0 ? /*#__PURE__*/React.createElement("div", {
-    className: "p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "font-bold text-yellow-700"
-  }, "\u26A0\uFE0F D-Pool Not Balanced After Return"), /*#__PURE__*/React.createElement("div", {
-    className: "text-sm text-yellow-600"
-  }, "Residual: ", formatTH(state.pools.dPool.bank))) : /*#__PURE__*/React.createElement("div", {
-    className: "p-3 bg-green-50 border-l-4 border-green-500 rounded"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "font-bold text-green-700"
-  }, "\u2705 D-Pool \u2014 Balanced")), state.pools.rPool.stock < 10000 ? /*#__PURE__*/React.createElement("div", {
+  }, "\u2705 CPA/CPV \u2014 No overdue items")), (() => {
+    const ti = Object.values(state.pools.dPool.issued).reduce((s, v) => s + v, 0);
+    const tr = Object.values(state.pools.dPool.returned).reduce((s, v) => s + v, 0);
+    const dPoolNet = ti - tr;
+    const eqSum = state.pools.rPool.bank + state.pools.fgPool.bankTH + state.pools.gPool.bankTH;
+    const diff = dPoolNet - eqSum;
+    return diff !== 0 && state.dayStatus === 'consolidated' ? /*#__PURE__*/React.createElement("div", {
+      className: "p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "font-bold text-yellow-700"
+    }, "\u26A0\uFE0F Balance Equation Difference Detected"), /*#__PURE__*/React.createElement("div", {
+      className: "text-sm text-yellow-600"
+    }, "D-Pool Net (", formatTH(dPoolNet), ") \u2260 R+FG+G (", formatTH(eqSum), ") | Diff: ", formatTH(diff))) : /*#__PURE__*/React.createElement("div", {
+      className: "p-3 bg-green-50 border-l-4 border-green-500 rounded"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "font-bold text-green-700"
+    }, "\u2705 Balance Equation \u2014 Verified"));
+  })(), state.pools.rPool.stock < 10000 ? /*#__PURE__*/React.createElement("div", {
     className: "p-3 bg-red-50 border-l-4 border-red-500 rounded"
   }, /*#__PURE__*/React.createElement("div", {
     className: "font-bold text-red-700"
