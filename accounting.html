@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THOOTB Zone Accounting v2.0</title>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>body { margin: 0; padding: 0; background: #f8fafc; }</style>
+</head>
+<body>
+  <div id="root"></div>
+  <div id="error-display" style="display:none; position:fixed; top:0; left:0; right:0; background:red; color:white; padding:20px; z-index:9999; font-family:monospace; font-size:14px; white-space:pre-wrap;"></div>
+  <script>
+    window.onerror = function(msg, src, line, col, err) {
+      var d = document.getElementById('error-display');
+      d.style.display = 'block';
+      d.textContent = 'ERROR at line ' + line + ':' + col + '\n' + msg + '\n\n' + (err ? err.stack : '');
+      return true;
+    };
+  </script>
+  <script>
+const { useState, useEffect } = React;
+
+
+// ============================================================
+// THOOTB ZONE ACCOUNTING SOFTWARE v2.0 (FINAL)
+// For Book 10 Appendix - Complete Version with all Amendments
+// Created by: Tuzi + 6AI Affiliates (Claude, GPT, Copilot, DeepSeek, Gemini, Grok)
+// Date: January 2026 | License: CC BY 4.0
+// ============================================================
+// v2.0 Changes from v1.9:
+// 1. D-Pool daily new account (D + ZoneCode + YYMMDD)
+// 2. Business Balance Sheet: Full structure with 循環成本吸收調整, Fund (D-Pool)
+// 3. Business Trading Account: Full COGS, Expenses, 循環成本吸收調整
+// 4. Equity → Fund (D-Pool)
+// 5. Balance Equation uses Pool not Bank (Copilot suggestion)
+// 6. Transaction ID format: timestamp-Payee-Receiver-Amount-6alphacode
+// ============================================================
+
+const formatNumber = num => num?.toLocaleString('en-US') || '0';
+const formatTH = num => `TH ${formatNumber(num)}`;
+const formatFC = num => `FC ${formatNumber(num)}`;
+const getTodayDateStr = () => {
+  const d = new Date();
+  return `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+};
+const formatTimeDisplay = ts => {
+  if (!ts) return '--:--';
+  const h = parseInt(ts.slice(8, 10));
+  return `${h === 0 ? 12 : h > 12 ? h - 12 : h}:${ts.slice(10, 12)}${h >= 12 ? 'pm' : 'am'}`;
+};
+const formatDateDisplay = d => d ? `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}` : '--';
+const getTimestamp = (date, time) => `${date}${time.replace(':', '')}00`;
+const genVoucherId = (type, date, seq) => `${type}-${date.slice(2)}-${String(seq).padStart(4, '0')}`;
+const getDPoolAccountId = (zoneCode, dateStr) => `D${zoneCode}${dateStr.slice(2)}`;
+const genTransactionId = (ts, payee, receiver, amount) => {
+  const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+  return `${ts}-${payee}-${receiver}-${amount}-${code}`;
+};
+const ZONE_CODE = 'E0001';
+const fourCorePrinciples = [{
+  id: 1,
+  title: 'THOOTB is an Idea',
+  chinese: 'THOOTB 是一个理念',
+  desc: 'Not organization, party, or company',
+  icon: '💡'
+}, {
+  id: 2,
+  title: 'Simulates Natural Flow',
+  chinese: '模拟自然流动',
+  desc: 'Context-Adaptive, not mechanical',
+  icon: '🌊'
+}, {
+  id: 3,
+  title: 'Built on Readiness',
+  chinese: '建立在准备之上',
+  desc: 'Technical + Mental preparation',
+  icon: '🎯'
+}, {
+  id: 4,
+  title: 'Currency as Record Only',
+  chinese: '货币仅作记录',
+  desc: 'TH cannot speculate or accumulate',
+  icon: '📝'
+}];
+const sixRedLines = [{
+  category: 'Implementation',
+  yes: 'Voluntary',
+  no: 'Forced',
+  yesIcon: '🤝',
+  noIcon: '⛓️'
+}, {
+  category: 'Power',
+  yes: '3-Dept, 6-mo rotate',
+  no: 'Lifetime',
+  yesIcon: '🔄',
+  noIcon: '👑'
+}, {
+  category: 'Data',
+  yes: 'Care & Support',
+  no: 'Surveillance',
+  yesIcon: '💚',
+  noIcon: '👁️'
+}, {
+  category: 'Diversity',
+  yes: 'Respect all',
+  no: 'Template',
+  yesIcon: '🌈',
+  noIcon: '📋'
+}, {
+  category: 'Conflict',
+  yes: 'Non-violence',
+  no: 'Violence',
+  yesIcon: '🕊️',
+  noIcon: '⚔️'
+}, {
+  category: 'IP',
+  yes: 'Open source',
+  no: 'Paid',
+  yesIcon: '🔓',
+  noIcon: '🔒'
+}];
+const operationalPrinciples = [{
+  id: 'equal-spending',
+  title: '完全平等的每日支出',
+  icon: '👥',
+  content: '每人每日获得 TH 1,000，不论年龄、职业、贡献。'
+}, {
+  id: 'daily-reset',
+  title: '每日重置',
+  icon: '🔄',
+  content: '23:59 未用完的钱自动返回 D-Pool。不能储蓄 TH。'
+}, {
+  id: 'circular-economy',
+  title: '完全循环经济',
+  icon: '♻️',
+  content: '所有商品必须 100% 本地采购或进口。无私人生产。'
+}, {
+  id: 'balance-equation',
+  title: 'Balance Equation 質能守恆',
+  icon: '📐',
+  content: 'D-Pool Net = R-Pool + FG-Pool + G-Pool\n(用 Pool 不用 Bank - Copilot 建議)'
+}];
+const entities = {
+  citizens: [{
+    id: 'P8500000001',
+    name: 'Citizen A',
+    daily: 1000
+  }],
+  businesses: [{
+    id: 'B1234567890',
+    name: 'Business A',
+    type: 'General Trading',
+    daily: 35000
+  }, {
+    id: 'B1234567891',
+    name: 'Business B',
+    type: 'Utility Provider',
+    daily: 20000
+  }],
+  govDepts: [{
+    id: 'GOV-RD',
+    name: 'Registry',
+    icon: '📋',
+    daily: 50000
+  }, {
+    id: 'GOV-GD',
+    name: 'Governance',
+    icon: '⚖️',
+    daily: 80000
+  }, {
+    id: 'GOV-OD',
+    name: 'Operations',
+    icon: '⚙️',
+    daily: 120000
+  }, {
+    id: 'GOV-SD',
+    name: 'Simulation',
+    icon: '🎮',
+    daily: 60000
+  }, {
+    id: 'GOV-StD',
+    name: 'Stewardship',
+    icon: '👁️',
+    daily: 40000
+  }, {
+    id: 'GOV-ID',
+    name: 'Interface',
+    icon: '🌐',
+    daily: 70000
+  }, {
+    id: 'GOV-TRD',
+    name: 'TRD',
+    icon: '📝',
+    daily: 30000
+  }, {
+    id: 'GOV-TAD',
+    name: 'TAD',
+    icon: '📊',
+    daily: 25000
+  }, {
+    id: 'GOV-TIAD',
+    name: 'TIAD',
+    icon: '🔍',
+    daily: 25000
+  }]
+};
+const journalTypes = {
+  PV: [{
+    code: 'PURCHASE-RPOOL',
+    name: 'Purchase from R-Pool'
+  }, {
+    code: 'PURCHASE-RAW',
+    name: 'Purchase Raw Material'
+  }, {
+    code: 'UTILITY',
+    name: 'Utility Expense'
+  }, {
+    code: 'ADMIN',
+    name: 'Admin Expense'
+  }, {
+    code: 'MEDICAL',
+    name: 'Medical Service'
+  }, {
+    code: 'PREPAY',
+    name: 'Prepayment'
+  }],
+  RV: [{
+    code: 'CASH-SALE',
+    name: 'Cash Sale'
+  }, {
+    code: 'INSTALLMENT-RECEIVE',
+    name: 'Installment Receipt'
+  }, {
+    code: 'EXPORT-SETTLE',
+    name: 'Export Settlement'
+  }],
+  JV: [{
+    code: 'CREDIT-SALE-LOCAL',
+    name: 'Credit Sale (Local)'
+  }, {
+    code: 'SERVICE-EXPORT',
+    name: 'Service Export (R-Pool)'
+  }, {
+    code: 'RECEIVE-GOODS',
+    name: 'Receive Goods'
+  }, {
+    code: 'CYCLE-COST-ADJ',
+    name: '循環成本吸收調整'
+  }]
+};
+const createInitialState = () => {
+  const today = getTodayDateStr();
+  const dPoolAccountId = getDPoolAccountId(ZONE_CODE, today);
+  const totalDaily = entities.citizens.reduce((s, c) => s + c.daily, 0) + entities.businesses.reduce((s, b) => s + b.daily, 0) + entities.govDepts.reduce((s, g) => s + g.daily, 0);
+  const citizens = {};
+  entities.citizens.forEach(c => {
+    citizens[c.id] = {
+      ...c,
+      bank: 0,
+      trailer: 0,
+      creditorInst: 0,
+      fundDPool: 0,
+      txns: []
+    };
+  });
+  const businesses = {};
+  entities.businesses.forEach(b => {
+    businesses[b.id] = {
+      ...b,
+      car: 20000,
+      furniture: 5000,
+      equipment: 15000,
+      stockLocal: 80000,
+      cycleCostAdjBS: 25000,
+      bankLocal: 0,
+      debtorInst1: 0,
+      debtorInst2: 0,
+      creditorInst: 0,
+      fundDPool: 145000,
+      salesCreditLocal: 0,
+      salesServiceRPool: 0,
+      openingStock: 80000,
+      purchaseRPool: 0,
+      purchaseRawMaterial: 0,
+      closingStockLocal: 80000,
+      adminExp: 0,
+      medicalService: 0,
+      utilityExp: 0,
+      cycleCostAdjTrading: 0,
+      txns: []
+    };
+  });
+  const govDepts = {};
+  entities.govDepts.forEach(g => {
+    govDepts[g.id] = {
+      ...g,
+      bank: 0,
+      prepay: 0,
+      fixedAssets: 0,
+      fundDPool: 0,
+      txns: []
+    };
+  });
+  return {
+    zoneCode: ZONE_CODE,
+    currentDate: today,
+    dPoolAccountId,
+    dayStatus: 'pre-allocation',
+    vSeq: {
+      PV: 0,
+      RV: 0,
+      JV: 0,
+      SV: 0
+    },
+    pools: {
+      dPool: {
+        accountId: dPoolAccountId,
+        bank: totalDaily,
+        issued: {},
+        returned: {},
+        txns: []
+      },
+      rPool: {
+        bank: 0,
+        stock: 50000,
+        txns: []
+      },
+      fgPool: {
+        bankTH: 0,
+        bankFC: 15000,
+        cpvImpTH: 0,
+        txns: []
+      },
+      gPool: {
+        bankTH: 0,
+        premium: 0,
+        txns: []
+      }
+    },
+    citizens,
+    businesses,
+    govDepts,
+    vouchers: [],
+    trdLog: []
+  };
+};
+const THOOTBAccounting = () => {
+  const [state, setState] = useState(createInitialState());
+  const [activeTab, setActiveTab] = useState('console');
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [notification, setNotification] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [vType, setVType] = useState('PV');
+  const [vData, setVData] = useState({
+    time: '09:00',
+    from: '',
+    to: '',
+    jType: '',
+    desc: '',
+    currency: 'TH',
+    amount: 0
+  });
+  const [selCitizen, setSelCitizen] = useState('P8500000001');
+  const [selBusiness, setSelBusiness] = useState('B1234567890');
+  const [selGovDept, setSelGovDept] = useState('GOV-OD');
+  const [sel3T, setSel3T] = useState('TRD');
+  useEffect(() => {
+    const t = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(t);
+  }, []);
+  const notify = msg => {
+    setNotification(msg);
+    setTimeout(() => setNotification(null), 3000);
+  };
+  const allEntities = () => [...entities.citizens.map(c => ({
+    id: c.id,
+    name: c.name,
+    type: 'Citizen'
+  })), ...entities.businesses.map(b => ({
+    id: b.id,
+    name: b.name,
+    type: 'Business'
+  })), ...entities.govDepts.map(g => ({
+    id: g.id,
+    name: g.name,
+    type: 'Gov'
+  })), {
+    id: 'POOL-R',
+    name: 'R-Pool',
+    type: 'Pool'
+  }, {
+    id: 'POOL-FG',
+    name: 'FG-Pool',
+    type: 'Pool'
+  }];
+  const handleAllocation = () => {
+    const ts = `${state.currentDate}000000`,
+      vouchers = [],
+      issued = {};
+    [...Object.values(state.citizens), ...Object.values(state.businesses), ...Object.values(state.govDepts)].forEach(e => {
+      const txnId = genTransactionId(ts, state.dPoolAccountId, e.id, e.daily);
+      vouchers.push({
+        id: genVoucherId('SV', state.currentDate, vouchers.length + 1),
+        txnId,
+        type: 'SV',
+        ts,
+        desc: 'D-Pool Allocation',
+        from: state.dPoolAccountId,
+        to: e.id,
+        amount: e.daily,
+        currency: 'TH'
+      });
+      issued[e.id] = e.daily;
+    });
+    const total = Object.values(issued).reduce((s, v) => s + v, 0);
+    setState(prev => {
+      const nc = {
+          ...prev.citizens
+        },
+        nb = {
+          ...prev.businesses
+        },
+        ng = {
+          ...prev.govDepts
+        };
+      Object.keys(nc).forEach(id => {
+        nc[id] = {
+          ...nc[id],
+          bank: nc[id].daily,
+          fundDPool: nc[id].daily,
+          txns: [...nc[id].txns, vouchers.find(v => v.to === id)]
+        };
+      });
+      Object.keys(nb).forEach(id => {
+        nb[id] = {
+          ...nb[id],
+          bankLocal: nb[id].daily,
+          fundDPool: nb[id].fundDPool + nb[id].daily,
+          txns: [...nb[id].txns, vouchers.find(v => v.to === id)]
+        };
+      });
+      Object.keys(ng).forEach(id => {
+        ng[id] = {
+          ...ng[id],
+          bank: ng[id].daily,
+          fundDPool: ng[id].daily,
+          txns: [...ng[id].txns, vouchers.find(v => v.to === id)]
+        };
+      });
+      return {
+        ...prev,
+        dayStatus: 'active',
+        vSeq: {
+          ...prev.vSeq,
+          SV: vouchers.length
+        },
+        pools: {
+          ...prev.pools,
+          dPool: {
+            ...prev.pools.dPool,
+            bank: prev.pools.dPool.bank - total,
+            issued,
+            txns: [...prev.pools.dPool.txns, ...vouchers]
+          }
+        },
+        citizens: nc,
+        businesses: nb,
+        govDepts: ng,
+        vouchers: [...prev.vouchers, ...vouchers],
+        trdLog: [...prev.trdLog, ...vouchers]
+      };
+    });
+    notify(`✅ Allocation: ${formatTH(total)} from ${state.dPoolAccountId}`);
+  };
+  const handleReturn = () => {
+    const ts = `${state.currentDate}235900`,
+      vouchers = [],
+      returned = {};
+    let total = 0;
+    [...Object.entries(state.citizens), ...Object.entries(state.businesses), ...Object.entries(state.govDepts)].forEach(([id, e]) => {
+      const bal = e.bank || e.bankLocal || 0;
+      if (bal > 0) {
+        const txnId = genTransactionId(ts, id, state.dPoolAccountId, bal);
+        vouchers.push({
+          id: genVoucherId('SV', state.currentDate, state.vSeq.SV + vouchers.length + 1),
+          txnId,
+          type: 'SV',
+          ts,
+          desc: 'D-Pool Return',
+          from: id,
+          to: state.dPoolAccountId,
+          amount: bal,
+          currency: 'TH'
+        });
+        returned[id] = bal;
+        total += bal;
+      }
+    });
+    setState(prev => {
+      const nc = {
+          ...prev.citizens
+        },
+        nb = {
+          ...prev.businesses
+        },
+        ng = {
+          ...prev.govDepts
+        };
+      Object.keys(nc).forEach(id => {
+        nc[id] = {
+          ...nc[id],
+          bank: 0,
+          fundDPool: 0
+        };
+      });
+      Object.keys(nb).forEach(id => {
+        nb[id] = {
+          ...nb[id],
+          bankLocal: 0
+        };
+      });
+      Object.keys(ng).forEach(id => {
+        ng[id] = {
+          ...ng[id],
+          bank: 0,
+          fundDPool: 0
+        };
+      });
+      return {
+        ...prev,
+        dayStatus: 'consolidated',
+        vSeq: {
+          ...prev.vSeq,
+          SV: prev.vSeq.SV + vouchers.length
+        },
+        pools: {
+          ...prev.pools,
+          dPool: {
+            ...prev.pools.dPool,
+            bank: prev.pools.dPool.bank + total,
+            returned,
+            txns: [...prev.pools.dPool.txns, ...vouchers]
+          }
+        },
+        citizens: nc,
+        businesses: nb,
+        govDepts: ng,
+        vouchers: [...prev.vouchers, ...vouchers],
+        trdLog: [...prev.trdLog, ...vouchers]
+      };
+    });
+    notify(`🌙 Return: ${formatTH(total)} to ${state.dPoolAccountId}`);
+  };
+  const openModal = (type, from = '', to = '') => {
+    setVType(type);
+    setVData({
+      time: currentTime.toTimeString().slice(0, 5),
+      from,
+      to,
+      jType: journalTypes[type]?.[0]?.code || '',
+      desc: '',
+      currency: 'TH',
+      amount: 0
+    });
+    setShowModal(true);
+  };
+  const submitVoucher = () => {
+    const ts = getTimestamp(state.currentDate, vData.time),
+      vid = genVoucherId(vType, state.currentDate, state.vSeq[vType] + 1);
+    const txnId = vType === 'PV' || vType === 'RV' ? genTransactionId(ts, vData.from, vData.to, vData.amount) : null;
+    const v = {
+      id: vid,
+      txnId,
+      type: vType,
+      ts,
+      desc: vData.desc || vData.jType,
+      from: vData.from,
+      to: vData.to,
+      amount: vData.amount,
+      currency: vData.currency,
+      jType: vData.jType
+    };
+    setState(prev => {
+      let ns = {
+        ...prev,
+        vSeq: {
+          ...prev.vSeq,
+          [vType]: prev.vSeq[vType] + 1
+        },
+        vouchers: [...prev.vouchers, v],
+        trdLog: [...prev.trdLog, v]
+      };
+      const {
+        from,
+        to,
+        amount
+      } = vData;
+      if (vType === 'PV') {
+        if (ns.citizens[from]) ns.citizens = {
+          ...ns.citizens,
+          [from]: {
+            ...ns.citizens[from],
+            bank: ns.citizens[from].bank - amount,
+            txns: [...ns.citizens[from].txns, v]
+          }
+        };
+        if (ns.businesses[from]) {
+          const u = {
+            ...ns.businesses[from],
+            bankLocal: ns.businesses[from].bankLocal - amount,
+            txns: [...ns.businesses[from].txns, v]
+          };
+          if (vData.jType === 'PURCHASE-RPOOL') {
+            u.purchaseRPool += amount;
+            u.stockLocal += amount;
+          }
+          if (vData.jType === 'UTILITY') {
+            u.utilityExp += amount;
+          }
+          if (vData.jType === 'ADMIN') {
+            u.adminExp += amount;
+          }
+          ns.businesses = {
+            ...ns.businesses,
+            [from]: u
+          };
+        }
+        if (ns.govDepts[from]) {
+          const u = {
+            ...ns.govDepts[from],
+            bank: ns.govDepts[from].bank - amount,
+            txns: [...ns.govDepts[from].txns, v]
+          };
+          if (vData.jType === 'PREPAY') u.prepay += amount;
+          ns.govDepts = {
+            ...ns.govDepts,
+            [from]: u
+          };
+        }
+        if (to === 'POOL-R') ns.pools = {
+          ...ns.pools,
+          rPool: {
+            ...ns.pools.rPool,
+            bank: ns.pools.rPool.bank + amount,
+            stock: ns.pools.rPool.stock - amount,
+            txns: [...ns.pools.rPool.txns, v]
+          }
+        };
+        if (to === 'POOL-FG') ns.pools = {
+          ...ns.pools,
+          fgPool: {
+            ...ns.pools.fgPool,
+            bankTH: ns.pools.fgPool.bankTH + amount,
+            cpvImpTH: ns.pools.fgPool.cpvImpTH + amount,
+            txns: [...ns.pools.fgPool.txns, v]
+          }
+        };
+        if (ns.businesses[to]) ns.businesses = {
+          ...ns.businesses,
+          [to]: {
+            ...ns.businesses[to],
+            bankLocal: ns.businesses[to].bankLocal + amount,
+            salesCreditLocal: ns.businesses[to].salesCreditLocal + amount,
+            txns: [...ns.businesses[to].txns, v]
+          }
+        };
+      }
+      if (vType === 'RV') {
+        if (ns.businesses[to]) {
+          const u = {
+            ...ns.businesses[to],
+            bankLocal: ns.businesses[to].bankLocal + amount,
+            txns: [...ns.businesses[to].txns, v]
+          };
+          if (vData.jType === 'INSTALLMENT-RECEIVE') u.debtorInst1 -= amount;
+          ns.businesses = {
+            ...ns.businesses,
+            [to]: u
+          };
+        }
+      }
+      if (vType === 'JV') {
+        if (vData.jType === 'CREDIT-SALE-LOCAL' && ns.businesses[to]) {
+          ns.businesses = {
+            ...ns.businesses,
+            [to]: {
+              ...ns.businesses[to],
+              debtorInst1: ns.businesses[to].debtorInst1 + amount,
+              salesCreditLocal: ns.businesses[to].salesCreditLocal + amount,
+              txns: [...ns.businesses[to].txns, v]
+            }
+          };
+          if (ns.citizens[from]) ns.citizens = {
+            ...ns.citizens,
+            [from]: {
+              ...ns.citizens[from],
+              trailer: ns.citizens[from].trailer + amount,
+              creditorInst: ns.citizens[from].creditorInst + amount,
+              txns: [...ns.citizens[from].txns, v]
+            }
+          };
+        }
+        if (vData.jType === 'SERVICE-EXPORT' && ns.businesses[to]) ns.businesses = {
+          ...ns.businesses,
+          [to]: {
+            ...ns.businesses[to],
+            debtorInst2: ns.businesses[to].debtorInst2 + amount,
+            salesServiceRPool: ns.businesses[to].salesServiceRPool + amount,
+            txns: [...ns.businesses[to].txns, v]
+          }
+        };
+        if (vData.jType === 'RECEIVE-GOODS' && ns.govDepts[to]) {
+          ns.govDepts = {
+            ...ns.govDepts,
+            [to]: {
+              ...ns.govDepts[to],
+              fixedAssets: ns.govDepts[to].fixedAssets + amount,
+              prepay: ns.govDepts[to].prepay - amount,
+              txns: [...ns.govDepts[to].txns, v]
+            }
+          };
+        }
+      }
+      return ns;
+    });
+    notify(`✅ ${vid}`);
+    setShowModal(false);
+  };
+  const calcBusinessTotals = b => {
+    const totalAssets = b.car + b.furniture + b.equipment + b.stockLocal + b.cycleCostAdjBS + b.bankLocal + b.debtorInst1 + b.debtorInst2;
+    const totalLiabilities = b.creditorInst;
+    const totalSales = b.salesCreditLocal + b.salesServiceRPool;
+    const totalCOGS = b.openingStock + b.purchaseRPool + b.purchaseRawMaterial - b.closingStockLocal;
+    const totalExpenses = b.adminExp + b.medicalService + b.utilityExp;
+    const tradingDiff = totalSales - totalCOGS - totalExpenses;
+    return {
+      totalAssets,
+      totalLiabilities,
+      totalSales,
+      totalCOGS,
+      totalExpenses,
+      tradingDiff
+    };
+  };
+
+  // RENDER PAGES
+  const renderConsole = () => {
+    const d = state.pools.dPool,
+      ti = Object.values(d.issued).reduce((s, v) => s + v, 0),
+      tr = Object.values(d.returned).reduce((s, v) => s + v, 0),
+      nf = ti - tr;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "space-y-6"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "bg-gradient-to-r from-slate-800 to-slate-700 text-white p-6 rounded-2xl"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-sm opacity-70 font-mono"
+    }, "Zone: ", state.zoneCode, " | D-Pool: ", state.dPoolAccountId), /*#__PURE__*/React.createElement("h1", {
+      className: "text-3xl font-bold"
+    }, "Zone Alpha Console"), /*#__PURE__*/React.createElement("div", {
+      className: `inline-block mt-2 px-4 py-2 rounded-lg font-bold ${state.dayStatus === 'pre-allocation' ? 'bg-yellow-500' : state.dayStatus === 'active' ? 'bg-green-500' : 'bg-blue-500'}`
+    }, state.dayStatus === 'pre-allocation' ? '⏳ Pre-Allocation' : state.dayStatus === 'active' ? '🟢 Active' : '📊 Consolidated')), /*#__PURE__*/React.createElement("div", {
+      className: "bg-white p-4 rounded-xl border"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold mb-3"
+    }, "\uD83D\uDD12 System Voucher (OD Operations)"), /*#__PURE__*/React.createElement("div", {
+      className: "flex gap-4"
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: handleAllocation,
+      disabled: state.dayStatus !== 'pre-allocation',
+      className: `flex-1 py-3 rounded-xl font-bold ${state.dayStatus !== 'pre-allocation' ? 'bg-gray-200 text-gray-500' : 'bg-green-500 text-white'}`
+    }, "\uD83C\uDF05 12:00am Allocation"), /*#__PURE__*/React.createElement("button", {
+      onClick: handleReturn,
+      disabled: state.dayStatus !== 'active',
+      className: `flex-1 py-3 rounded-xl font-bold ${state.dayStatus !== 'active' ? 'bg-gray-200 text-gray-500' : 'bg-orange-500 text-white'}`
+    }, "\uD83C\uDF19 23:59pm Return"))), /*#__PURE__*/React.createElement("div", {
+      className: "grid md:grid-cols-4 gap-4"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "bg-gradient-to-br from-rose-500 to-pink-600 text-white p-4 rounded-xl"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold"
+    }, "\u2764\uFE0F D-Pool"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xs opacity-70 font-mono"
+    }, state.dPoolAccountId), /*#__PURE__*/React.createElement("div", {
+      className: "text-sm mt-2 space-y-1"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", null, "Bank:"), /*#__PURE__*/React.createElement("span", null, formatTH(d.bank))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", null, "Issued:"), /*#__PURE__*/React.createElement("span", null, formatTH(ti))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", null, "Returned:"), /*#__PURE__*/React.createElement("span", null, formatTH(tr))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between font-bold border-t border-white/30 pt-1"
+    }, /*#__PURE__*/React.createElement("span", null, "Net:"), /*#__PURE__*/React.createElement("span", null, formatTH(nf))))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-4 rounded-xl"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold"
+    }, "\uD83C\uDFED R-Pool"), /*#__PURE__*/React.createElement("div", {
+      className: "text-sm mt-2 space-y-1"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", null, "Bank:"), /*#__PURE__*/React.createElement("span", null, formatTH(state.pools.rPool.bank))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", null, "Stock:"), /*#__PURE__*/React.createElement("span", null, formatTH(state.pools.rPool.stock))))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-gradient-to-br from-blue-500 to-indigo-600 text-white p-4 rounded-xl"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold"
+    }, "\uD83C\uDF10 FG-Pool"), /*#__PURE__*/React.createElement("div", {
+      className: "text-sm mt-2 space-y-1"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", null, "TH:"), /*#__PURE__*/React.createElement("span", null, formatTH(state.pools.fgPool.bankTH))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", null, "FC:"), /*#__PURE__*/React.createElement("span", null, formatFC(state.pools.fgPool.bankFC))))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-gradient-to-br from-amber-500 to-orange-600 text-white p-4 rounded-xl"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold"
+    }, "\uD83D\uDEE1\uFE0F G-Pool"), /*#__PURE__*/React.createElement("div", {
+      className: "text-sm mt-2 space-y-1"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", null, "TH:"), /*#__PURE__*/React.createElement("span", null, formatTH(state.pools.gPool.bankTH))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", null, "Premium:"), /*#__PURE__*/React.createElement("span", null, formatTH(state.pools.gPool.premium)))))), state.dayStatus === 'consolidated' && /*#__PURE__*/React.createElement("div", {
+      className: "bg-white p-5 rounded-xl border"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold mb-3"
+    }, "\uD83D\uDCD0 Balance Equation"), /*#__PURE__*/React.createElement("div", {
+      className: "p-4 bg-indigo-50 rounded-lg font-mono text-sm"
+    }, /*#__PURE__*/React.createElement("div", null, "D-Pool Net = R-Pool + FG-Pool (TH) + G-Pool"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-500"
+    }, "(\u7528 Pool \u4E0D\u7528 Bank - Copilot \u5EFA\u8B70)"), /*#__PURE__*/React.createElement("div", {
+      className: "mt-2"
+    }, formatNumber(nf), " = ", formatNumber(state.pools.rPool.bank), " + ", formatNumber(state.pools.fgPool.bankTH), " + ", formatNumber(state.pools.gPool.bankTH)), /*#__PURE__*/React.createElement("div", {
+      className: "mt-2 font-bold"
+    }, nf === state.pools.rPool.bank + state.pools.fgPool.bankTH + state.pools.gPool.bankTH ? '✅ Balanced' : '⚠️ Difference'))));
+  };
+  const renderBusiness = () => {
+    const b = state.businesses[selBusiness];
+    if (!b) return null;
+    const calc = calcBusinessTotals(b);
+    return /*#__PURE__*/React.createElement("div", {
+      className: "space-y-6"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "bg-gradient-to-r from-emerald-500 to-teal-600 text-white p-6 rounded-2xl flex justify-between items-center"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center gap-4"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-2xl"
+    }, "\uD83C\uDFE2"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("select", {
+      value: selBusiness,
+      onChange: e => setSelBusiness(e.target.value),
+      className: "bg-transparent text-xl font-bold border-none"
+    }, Object.values(state.businesses).map(b => /*#__PURE__*/React.createElement("option", {
+      key: b.id,
+      value: b.id,
+      className: "text-gray-800"
+    }, b.name))), /*#__PURE__*/React.createElement("div", {
+      className: "text-xs opacity-70"
+    }, b.type))), /*#__PURE__*/React.createElement("div", {
+      className: "text-right"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-sm opacity-70"
+    }, "Daily"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xl font-bold"
+    }, formatTH(b.daily)))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-white p-5 rounded-xl border"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold mb-3"
+    }, "\uD83D\uDCCA Balance Sheet as at ", formatDateDisplay(state.currentDate)), /*#__PURE__*/React.createElement("div", {
+      className: "grid md:grid-cols-2 gap-4"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-500 mb-2 font-bold"
+    }, "ASSETS"), /*#__PURE__*/React.createElement("div", {
+      className: "space-y-1 text-sm"
+    }, [['Car', b.car], ['Furniture', b.furniture], ['Equipment', b.equipment], ['Stock (local)', b.stockLocal], ['循環成本吸收調整', b.cycleCostAdjBS], ['Bank (TH)', b.bankLocal], ['Debtor-Inst-1', b.debtorInst1]].map(([n, v]) => /*#__PURE__*/React.createElement("div", {
+      key: n,
+      className: "flex justify-between p-1 bg-gray-50 rounded"
+    }, /*#__PURE__*/React.createElement("span", null, n), /*#__PURE__*/React.createElement("span", null, formatTH(v)))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between p-2 bg-emerald-100 rounded font-bold mt-2"
+    }, /*#__PURE__*/React.createElement("span", null, "Total Assets"), /*#__PURE__*/React.createElement("span", null, formatTH(calc.totalAssets))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-500 mb-2 font-bold"
+    }, "LIABILITIES"), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between p-1 bg-gray-50 rounded text-sm"
+    }, /*#__PURE__*/React.createElement("span", null, "Creditor-Inst"), /*#__PURE__*/React.createElement("span", null, formatTH(b.creditorInst))), /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-500 mb-2 mt-4 font-bold"
+    }, "FUND"), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between p-2 bg-blue-100 rounded font-bold text-sm"
+    }, /*#__PURE__*/React.createElement("span", null, "D-Pool"), /*#__PURE__*/React.createElement("span", null, formatTH(b.fundDPool))), /*#__PURE__*/React.createElement("div", {
+      className: "mt-4 p-2 bg-slate-100 rounded text-xs"
+    }, /*#__PURE__*/React.createElement("div", null, "Assets = Liabilities + Fund"), /*#__PURE__*/React.createElement("div", {
+      className: "font-mono"
+    }, formatNumber(calc.totalAssets), " = ", formatNumber(calc.totalLiabilities), " + ", formatNumber(b.fundDPool)))))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-white p-5 rounded-xl border"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold mb-3"
+    }, "\uD83D\uDCC8 Trading Account"), /*#__PURE__*/React.createElement("div", {
+      className: "grid md:grid-cols-2 gap-4"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-500 mb-2 font-bold"
+    }, "SALES"), [['Sales (credit) - local', b.salesCreditLocal], ['Service Sales (R-Pool)', b.salesServiceRPool]].map(([n, v]) => /*#__PURE__*/React.createElement("div", {
+      key: n,
+      className: "flex justify-between p-1 bg-gray-50 rounded text-sm"
+    }, /*#__PURE__*/React.createElement("span", null, n), /*#__PURE__*/React.createElement("span", null, formatTH(v)))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between p-2 bg-green-100 rounded font-bold text-sm mt-1"
+    }, /*#__PURE__*/React.createElement("span", null, "Total Sales"), /*#__PURE__*/React.createElement("span", null, formatTH(calc.totalSales))), /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-500 mb-2 mt-3 font-bold"
+    }, "COGS"), [['Opening Stock', b.openingStock], ['Purchase R-Pool', b.purchaseRPool], ['Less: Closing Stock', -b.closingStockLocal]].map(([n, v]) => /*#__PURE__*/React.createElement("div", {
+      key: n,
+      className: "flex justify-between p-1 bg-gray-50 rounded text-sm"
+    }, /*#__PURE__*/React.createElement("span", null, n), /*#__PURE__*/React.createElement("span", null, formatTH(v)))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between p-2 bg-orange-100 rounded font-bold text-sm mt-1"
+    }, /*#__PURE__*/React.createElement("span", null, "Total COGS"), /*#__PURE__*/React.createElement("span", null, formatTH(calc.totalCOGS)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-500 mb-2 font-bold"
+    }, "EXPENSES"), [['Admin', b.adminExp], ['Medical', b.medicalService], ['Utility', b.utilityExp]].map(([n, v]) => /*#__PURE__*/React.createElement("div", {
+      key: n,
+      className: "flex justify-between p-1 bg-gray-50 rounded text-sm"
+    }, /*#__PURE__*/React.createElement("span", null, n), /*#__PURE__*/React.createElement("span", null, formatTH(v)))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between p-2 bg-red-100 rounded font-bold text-sm mt-1"
+    }, /*#__PURE__*/React.createElement("span", null, "Total Expenses"), /*#__PURE__*/React.createElement("span", null, formatTH(calc.totalExpenses))), /*#__PURE__*/React.createElement("div", {
+      className: "mt-3 p-3 bg-purple-50 rounded border border-purple-200"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-purple-600 font-bold mb-2"
+    }, "\u5FAA\u74B0\u6210\u672C\u5438\u6536\u8ABF\u6574"), /*#__PURE__*/React.createElement("div", {
+      className: "text-sm space-y-1"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", null, "Sales - COGS - Exp"), /*#__PURE__*/React.createElement("span", null, formatTH(calc.tradingDiff))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between text-purple-700"
+    }, /*#__PURE__*/React.createElement("span", null, "\u5FAA\u74B0\u6210\u672C\u5438\u6536\u8ABF\u6574"), /*#__PURE__*/React.createElement("span", null, formatTH(-calc.tradingDiff))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between font-bold border-t pt-1"
+    }, /*#__PURE__*/React.createElement("span", null, "Net"), /*#__PURE__*/React.createElement("span", null, formatTH(0)))), /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-500 mt-2"
+    }, "\u2192 ", calc.tradingDiff > 0 ? '下月商品變便宜' : calc.tradingDiff < 0 ? '下月商品變貴 (自動審計)' : '平衡'))))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-white p-5 rounded-xl border"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold mb-3"
+    }, "\uD83D\uDCDD Data Entry"), /*#__PURE__*/React.createElement("div", {
+      className: "flex gap-2"
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: () => openModal('PV', selBusiness, ''),
+      disabled: state.dayStatus !== 'active',
+      className: "px-3 py-2 bg-red-500 text-white rounded-lg text-sm disabled:bg-gray-300"
+    }, "\uD83D\uDCB3 PV"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => openModal('RV', '', selBusiness),
+      disabled: state.dayStatus !== 'active',
+      className: "px-3 py-2 bg-green-500 text-white rounded-lg text-sm disabled:bg-gray-300"
+    }, "\uD83D\uDCB0 RV"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => openModal('JV', selBusiness, ''),
+      disabled: state.dayStatus !== 'active',
+      className: "px-3 py-2 bg-blue-500 text-white rounded-lg text-sm disabled:bg-gray-300"
+    }, "\uD83D\uDCDD JV"))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-white p-5 rounded-xl border"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold mb-3"
+    }, "\uD83D\uDCDC Transactions (", b.txns.length, ")"), b.txns.length === 0 ? /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-400 text-center py-4"
+    }, "No transactions") : /*#__PURE__*/React.createElement("div", {
+      className: "space-y-2 max-h-48 overflow-y-auto"
+    }, [...b.txns].reverse().map((t, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "p-2 bg-gray-50 rounded text-sm"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", null, formatTimeDisplay(t.ts), " ", /*#__PURE__*/React.createElement("span", {
+      className: `px-1 rounded text-xs ${t.type === 'SV' ? 'bg-purple-100' : t.type === 'PV' ? 'bg-red-100' : 'bg-blue-100'}`
+    }, t.type), " ", t.desc), /*#__PURE__*/React.createElement("span", {
+      className: "font-bold"
+    }, formatTH(t.amount))), t.txnId && /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-400 font-mono"
+    }, "TXN: ...", t.txnId.slice(-6)))))));
+  };
+  const renderCitizen = () => {
+    const c = state.citizens[selCitizen];
+    if (!c) return null;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "space-y-6"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "bg-gradient-to-r from-sky-500 to-blue-600 text-white p-6 rounded-2xl flex justify-between items-center"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center gap-4"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-2xl"
+    }, "\uD83D\uDC64"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "text-xl font-bold"
+    }, c.name), /*#__PURE__*/React.createElement("div", {
+      className: "text-xs opacity-70"
+    }, c.id))), /*#__PURE__*/React.createElement("div", {
+      className: "text-right"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-sm opacity-70"
+    }, "Daily"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xl font-bold"
+    }, formatTH(c.daily)))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-white p-5 rounded-xl border"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold mb-4"
+    }, "\uD83D\uDCCA Personal Account"), /*#__PURE__*/React.createElement("div", {
+      className: "grid grid-cols-4 gap-3"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "p-3 bg-green-50 rounded-lg"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-600"
+    }, "Bank"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xl font-bold text-green-600"
+    }, formatTH(c.bank))), /*#__PURE__*/React.createElement("div", {
+      className: "p-3 bg-blue-50 rounded-lg"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-600"
+    }, "Trailer"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xl font-bold text-blue-600"
+    }, formatTH(c.trailer))), /*#__PURE__*/React.createElement("div", {
+      className: "p-3 bg-orange-50 rounded-lg"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-600"
+    }, "Creditor"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xl font-bold text-orange-600"
+    }, formatTH(c.creditorInst))), /*#__PURE__*/React.createElement("div", {
+      className: "p-3 bg-purple-50 rounded-lg"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-600"
+    }, "Net Worth"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xl font-bold text-purple-600"
+    }, formatTH(c.bank + c.trailer - c.creditorInst))))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-white p-5 rounded-xl border"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold mb-3"
+    }, "\uD83D\uDCDD Data Entry"), /*#__PURE__*/React.createElement("div", {
+      className: "flex gap-2"
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: () => openModal('PV', selCitizen, ''),
+      disabled: state.dayStatus !== 'active',
+      className: "px-3 py-2 bg-red-500 text-white rounded-lg text-sm disabled:bg-gray-300"
+    }, "\uD83D\uDCB3 PV"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => openModal('JV', selCitizen, ''),
+      disabled: state.dayStatus !== 'active',
+      className: "px-3 py-2 bg-blue-500 text-white rounded-lg text-sm disabled:bg-gray-300"
+    }, "\uD83D\uDCDD JV"))));
+  };
+  const renderGov = () => {
+    const g = state.govDepts[selGovDept];
+    if (!g) return null;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "space-y-6"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-6 rounded-2xl flex justify-between items-center"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center gap-4"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-2xl"
+    }, "\uD83C\uDFDB\uFE0F"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("select", {
+      value: selGovDept,
+      onChange: e => setSelGovDept(e.target.value),
+      className: "bg-transparent text-xl font-bold border-none"
+    }, Object.values(state.govDepts).map(d => /*#__PURE__*/React.createElement("option", {
+      key: d.id,
+      value: d.id,
+      className: "text-gray-800"
+    }, d.icon, " ", d.name))), /*#__PURE__*/React.createElement("div", {
+      className: "text-xs opacity-70"
+    }, g.id))), /*#__PURE__*/React.createElement("div", {
+      className: "text-right"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-sm opacity-70"
+    }, "Daily"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xl font-bold"
+    }, formatTH(g.daily)))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-white p-5 rounded-xl border"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold mb-4"
+    }, "\uD83D\uDCCA Department Account"), /*#__PURE__*/React.createElement("div", {
+      className: "grid grid-cols-4 gap-3"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "p-3 bg-green-50 rounded-lg"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-600"
+    }, "Bank"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xl font-bold text-green-600"
+    }, formatTH(g.bank))), /*#__PURE__*/React.createElement("div", {
+      className: "p-3 bg-blue-50 rounded-lg"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-600"
+    }, "Prepay"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xl font-bold text-blue-600"
+    }, formatTH(g.prepay))), /*#__PURE__*/React.createElement("div", {
+      className: "p-3 bg-orange-50 rounded-lg"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs text-gray-600"
+    }, "Fixed Assets"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xl font-bold text-orange-600"
+    }, formatTH(g.fixedAssets))), /*#__PURE__*/React.createElement("div", {
+      className: "p-3 bg-emerald-50 rounded-lg"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-xs"
+    }, "Total"), /*#__PURE__*/React.createElement("div", {
+      className: "text-xl font-bold text-emerald-600"
+    }, formatTH(g.bank + g.prepay + g.fixedAssets))))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-white p-5 rounded-xl border"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "font-bold mb-3"
+    }, "\uD83D\uDCDD Data Entry"), /*#__PURE__*/React.createElement("div", {
+      className: "flex gap-2"
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: () => openModal('PV', selGovDept, ''),
+      disabled: state.dayStatus !== 'active',
+      className: "px-3 py-2 bg-red-500 text-white rounded-lg text-sm disabled:bg-gray-300"
+    }, "\uD83D\uDCB3 PV"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => openModal('JV', selGovDept, ''),
+      disabled: state.dayStatus !== 'active',
+      className: "px-3 py-2 bg-blue-500 text-white rounded-lg text-sm disabled:bg-gray-300"
+    }, "\uD83D\uDCDD JV"))));
+  };
+  const render3T = () => /*#__PURE__*/React.createElement("div", {
+    className: "space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-gradient-to-r from-slate-700 to-slate-800 text-white p-6 rounded-2xl"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-2xl font-bold"
+  }, "\uD83D\uDD0D 3T Portal")), /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-2"
+  }, ['TRD', 'TAD', 'TIAD'].map(t => /*#__PURE__*/React.createElement("button", {
+    key: t,
+    onClick: () => setSel3T(t),
+    className: `flex-1 py-3 rounded-xl font-semibold ${sel3T === t ? 'bg-slate-700 text-white' : 'bg-white border'}`
+  }, t === 'TRD' ? '📝' : t === 'TAD' ? '📊' : '🔍', " ", t))), sel3T === 'TRD' && /*#__PURE__*/React.createElement("div", {
+    className: "bg-white p-5 rounded-xl border"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold mb-3"
+  }, "\uD83D\uDCDD All Vouchers (", state.trdLog.length, ")"), state.trdLog.length === 0 ? /*#__PURE__*/React.createElement("p", {
+    className: "text-gray-400 text-center py-8"
+  }, "No transactions") : /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2 max-h-80 overflow-y-auto"
+  }, [...state.trdLog].reverse().map((t, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "p-2 bg-gray-50 rounded text-sm border-l-4 border-slate-400"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-mono text-xs text-gray-400"
+  }, t.id, t.txnId && ` | TXN: ...${t.txnId.slice(-6)}`), /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between mt-1"
+  }, /*#__PURE__*/React.createElement("span", null, formatTimeDisplay(t.ts), " ", /*#__PURE__*/React.createElement("span", {
+    className: `px-1 rounded text-xs ${t.type === 'SV' ? 'bg-purple-100' : t.type === 'PV' ? 'bg-red-100' : 'bg-blue-100'}`
+  }, t.type)), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold"
+  }, formatTH(t.amount))), /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-gray-500"
+  }, t.from, " \u2192 ", t.to))))), sel3T === 'TAD' && /*#__PURE__*/React.createElement("div", {
+    className: "bg-white p-5 rounded-xl border"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold mb-3"
+  }, "\uD83D\uDCCA Analysis"), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-2 gap-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "p-4 bg-blue-50 rounded-lg text-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-2xl font-bold text-blue-600"
+  }, state.trdLog.length), /*#__PURE__*/React.createElement("div", {
+    className: "text-sm"
+  }, "Vouchers")), /*#__PURE__*/React.createElement("div", {
+    className: "p-4 bg-green-50 rounded-lg text-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-2xl font-bold text-green-600"
+  }, formatTH(state.trdLog.reduce((a, t) => a + t.amount, 0))), /*#__PURE__*/React.createElement("div", {
+    className: "text-sm"
+  }, "Volume")))), sel3T === 'TIAD' && /*#__PURE__*/React.createElement("div", {
+    className: "bg-white p-5 rounded-xl border"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold mb-3"
+  }, "\uD83D\uDD0D Investigation"), /*#__PURE__*/React.createElement("div", {
+    className: "p-8 text-center text-gray-400"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-4xl mb-2"
+  }, "\u2705"), /*#__PURE__*/React.createElement("div", null, "No Alerts"), /*#__PURE__*/React.createElement("div", {
+    className: "text-xs mt-2"
+  }, "Requires GD authorization"))));
+  const renderPrinciples = () => /*#__PURE__*/React.createElement("div", {
+    className: "space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-8 rounded-2xl"
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "text-3xl font-bold"
+  }, "\uD83D\uDCDC Core Principles"), /*#__PURE__*/React.createElement("p", {
+    className: "mt-2 opacity-80"
+  }, "ETERNAL - Cannot change 2025-2200")), /*#__PURE__*/React.createElement("div", {
+    className: "bg-white p-6 rounded-xl border"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-xl font-bold text-blue-800 mb-4"
+  }, "\uD83C\uDFAF Four Core Principles"), /*#__PURE__*/React.createElement("div", {
+    className: "grid md:grid-cols-2 gap-4"
+  }, fourCorePrinciples.map(p => /*#__PURE__*/React.createElement("div", {
+    key: p.id,
+    className: "p-4 bg-blue-50 rounded-lg border border-blue-200"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-3"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-2xl"
+  }, p.icon), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold text-blue-800"
+  }, p.id, ". ", p.title), /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-gray-600"
+  }, p.chinese))), /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-gray-700 mt-2"
+  }, p.desc))))), /*#__PURE__*/React.createElement("div", {
+    className: "bg-white p-6 rounded-xl border"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-xl font-bold text-red-800 mb-4"
+  }, "\uD83D\uDEAB Six Red Lines"), /*#__PURE__*/React.createElement("div", {
+    className: "overflow-x-auto"
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "w-full text-sm"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", {
+    className: "border-b"
+  }, /*#__PURE__*/React.createElement("th", {
+    className: "text-left p-2"
+  }, "Category"), /*#__PURE__*/React.createElement("th", {
+    className: "text-left p-2 text-green-600"
+  }, "\u2705 Allowed"), /*#__PURE__*/React.createElement("th", {
+    className: "text-left p-2 text-red-600"
+  }, "\u274C Not Allowed"))), /*#__PURE__*/React.createElement("tbody", null, sixRedLines.map((r, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i,
+    className: "border-b"
+  }, /*#__PURE__*/React.createElement("td", {
+    className: "p-2 font-medium"
+  }, r.category), /*#__PURE__*/React.createElement("td", {
+    className: "p-2 text-green-700"
+  }, r.yesIcon, " ", r.yes), /*#__PURE__*/React.createElement("td", {
+    className: "p-2 text-red-700"
+  }, r.noIcon, " ", r.no))))))));
+  const renderVersion = () => /*#__PURE__*/React.createElement("div", {
+    className: "space-y-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-gradient-to-r from-gray-700 to-gray-800 text-white p-8 rounded-2xl"
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "text-3xl font-bold"
+  }, "\uD83D\uDCCB v2.0 Changes")), /*#__PURE__*/React.createElement("div", {
+    className: "bg-white p-6 rounded-xl border"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3 text-sm"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-green-50 rounded-lg border-l-4 border-green-500"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-bold"
+  }, "1. D-Pool Daily New Account"), /*#__PURE__*/React.createElement("div", {
+    className: "text-gray-600"
+  }, "Format: D + ZoneCode + YYMMDD (e.g., ", state.dPoolAccountId, ")")), /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-bold"
+  }, "2. Balance Sheet: \u5FAA\u74B0\u6210\u672C\u5438\u6536\u8ABF\u6574, Fund (D-Pool)")), /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-purple-50 rounded-lg border-l-4 border-purple-500"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-bold"
+  }, "3. Trading Account: COGS, Expenses, \u5FAA\u74B0\u6210\u672C\u5438\u6536\u8ABF\u6574")), /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-bold"
+  }, "4. Transaction ID: timestamp-Payee-Receiver-Amount-6code")), /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-teal-50 rounded-lg border-l-4 border-teal-500"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-bold"
+  }, "5. Balance Equation uses Pool not Bank (Copilot)")))));
+  const renderModal = () => {
+    if (!showModal) return null;
+    const ents = allEntities(),
+      jts = journalTypes[vType] || [];
+    return /*#__PURE__*/React.createElement("div", {
+      className: "fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between items-center mb-4"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "text-xl font-bold"
+    }, vType === 'PV' ? '💳 Payment' : vType === 'RV' ? '💰 Receipt' : '📝 Journal', " Voucher"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => setShowModal(false),
+      className: "text-gray-400 text-2xl"
+    }, "\xD7")), /*#__PURE__*/React.createElement("div", {
+      className: "space-y-3"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "grid grid-cols-2 gap-3"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      className: "text-xs text-gray-600"
+    }, "Time"), /*#__PURE__*/React.createElement("input", {
+      type: "time",
+      value: vData.time,
+      onChange: e => setVData({
+        ...vData,
+        time: e.target.value
+      }),
+      className: "w-full p-2 border rounded-lg mt-1"
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      className: "text-xs text-gray-600"
+    }, "Currency"), /*#__PURE__*/React.createElement("select", {
+      value: vData.currency,
+      onChange: e => setVData({
+        ...vData,
+        currency: e.target.value
+      }),
+      className: "w-full p-2 border rounded-lg mt-1"
+    }, /*#__PURE__*/React.createElement("option", {
+      value: "TH"
+    }, "TH"), /*#__PURE__*/React.createElement("option", {
+      value: "FC"
+    }, "FC")))), /*#__PURE__*/React.createElement("div", {
+      className: "grid grid-cols-2 gap-3"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      className: "text-xs text-gray-600"
+    }, "From"), /*#__PURE__*/React.createElement("select", {
+      value: vData.from,
+      onChange: e => setVData({
+        ...vData,
+        from: e.target.value
+      }),
+      className: "w-full p-2 border rounded-lg mt-1 text-sm"
+    }, /*#__PURE__*/React.createElement("option", {
+      value: ""
+    }, "--"), ents.map(e => /*#__PURE__*/React.createElement("option", {
+      key: e.id,
+      value: e.id
+    }, "[", e.type, "] ", e.name)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      className: "text-xs text-gray-600"
+    }, "To"), /*#__PURE__*/React.createElement("select", {
+      value: vData.to,
+      onChange: e => setVData({
+        ...vData,
+        to: e.target.value
+      }),
+      className: "w-full p-2 border rounded-lg mt-1 text-sm"
+    }, /*#__PURE__*/React.createElement("option", {
+      value: ""
+    }, "--"), ents.map(e => /*#__PURE__*/React.createElement("option", {
+      key: e.id,
+      value: e.id
+    }, "[", e.type, "] ", e.name))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      className: "text-xs text-gray-600"
+    }, "Type"), /*#__PURE__*/React.createElement("select", {
+      value: vData.jType,
+      onChange: e => setVData({
+        ...vData,
+        jType: e.target.value
+      }),
+      className: "w-full p-2 border rounded-lg mt-1"
+    }, jts.map(j => /*#__PURE__*/React.createElement("option", {
+      key: j.code,
+      value: j.code
+    }, j.name)))), /*#__PURE__*/React.createElement("div", {
+      className: "grid grid-cols-2 gap-3"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      className: "text-xs text-gray-600"
+    }, "Amount"), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      value: vData.amount,
+      onChange: e => setVData({
+        ...vData,
+        amount: parseInt(e.target.value) || 0
+      }),
+      className: "w-full p-2 border rounded-lg mt-1"
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      className: "text-xs text-gray-600"
+    }, "Desc"), /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      value: vData.desc,
+      onChange: e => setVData({
+        ...vData,
+        desc: e.target.value
+      }),
+      className: "w-full p-2 border rounded-lg mt-1",
+      placeholder: "Optional"
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "bg-slate-50 p-2 rounded-lg text-xs font-mono"
+    }, genVoucherId(vType, state.currentDate, state.vSeq[vType] + 1), " | ", vData.from, "\u2192", vData.to, " | ", vData.currency, " ", formatNumber(vData.amount)), /*#__PURE__*/React.createElement("button", {
+      onClick: submitVoucher,
+      disabled: !vData.from || !vData.to || vData.amount <= 0,
+      className: "w-full py-3 bg-indigo-600 text-white rounded-xl font-bold disabled:bg-gray-300"
+    }, "Confirm"))));
+  };
+  const tabs = [{
+    id: 'console',
+    icon: '🖥️',
+    label: 'Console'
+  }, {
+    id: 'citizen',
+    icon: '👤',
+    label: 'Citizen'
+  }, {
+    id: 'business',
+    icon: '🏢',
+    label: 'Business'
+  }, {
+    id: 'gov',
+    icon: '🏛️',
+    label: 'Government'
+  }, {
+    id: '3t',
+    icon: '🔍',
+    label: '3T'
+  }, {
+    id: 'principles',
+    icon: '📜',
+    label: 'Principles'
+  }, {
+    id: 'version',
+    icon: '📋',
+    label: 'Version'
+  }];
+  return /*#__PURE__*/React.createElement("div", {
+    className: "min-h-screen bg-gradient-to-br from-slate-100 to-slate-200"
+  }, /*#__PURE__*/React.createElement("header", {
+    className: "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white shadow-lg"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-3"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-3xl"
+  }, "\uD83C\uDF10"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
+    className: "text-xl font-bold"
+  }, "THOOTB Zone Accounting"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs opacity-80"
+  }, "v2.0 Final | Book 10"))), /*#__PURE__*/React.createElement("div", {
+    className: "text-right text-sm"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-mono"
+  }, currentTime.toTimeString().slice(0, 8)), /*#__PURE__*/React.createElement("div", {
+    className: "opacity-80"
+  }, formatDateDisplay(state.currentDate)), /*#__PURE__*/React.createElement("div", {
+    className: "text-xs opacity-60"
+  }, state.dPoolAccountId)))), /*#__PURE__*/React.createElement("nav", {
+    className: "bg-white shadow-md sticky top-0 z-40"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "max-w-7xl mx-auto px-4 flex gap-1 py-2 overflow-x-auto"
+  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    onClick: () => setActiveTab(t.id),
+    className: `px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap ${activeTab === t.id ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'}`
+  }, t.icon, " ", t.label)))), /*#__PURE__*/React.createElement("main", {
+    className: "max-w-7xl mx-auto px-4 py-6"
+  }, activeTab === 'console' && renderConsole(), activeTab === 'citizen' && renderCitizen(), activeTab === 'business' && renderBusiness(), activeTab === 'gov' && renderGov(), activeTab === '3t' && render3T(), activeTab === 'principles' && renderPrinciples(), activeTab === 'version' && renderVersion()), /*#__PURE__*/React.createElement("footer", {
+    className: "bg-slate-800 text-slate-400 py-6 mt-8"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "max-w-7xl mx-auto px-4 text-center"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "font-semibold text-white"
+  }, "THOOTB Zone Accounting v2.0 Final"), /*#__PURE__*/React.createElement("p", {
+    className: "text-sm mt-1"
+  }, "Tuzi + 6AI Affiliates | January 2026 | CC BY 4.0"))), renderModal(), notification && /*#__PURE__*/React.createElement("div", {
+    className: "fixed top-4 right-4 px-6 py-4 rounded-xl shadow-2xl z-50 bg-green-500 text-white font-semibold"
+  }, notification));
+};
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(React.createElement(THOOTBAccounting));
+  </script>
+</body>
+</html>
