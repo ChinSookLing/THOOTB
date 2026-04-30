@@ -330,26 +330,42 @@
 <nav>
   <a class="nav-logo" href="#">THOOTB</a>
   <ul class="nav-links">
-    <li><a href="#why">Why</a></li>
-    <li><a href="#what">What is THOOTB</a></li>
-    <li><a href="#four-pools">Four Pools</a></li>
-    <li><a href="#chi">CHI</a></li>
-    <li><a href="#dashboard">Dashboard</a></li>
-    <li><a href="#validation">What We Tested</a></li>
-    <li><a href="#governance">Governance</a></li>
-    <li><a href="#expansion">Expansion</a></li>
-    <li><a href="#symphony">Symphony</a></li>
-    <li><a href="#pilot">Pilot</a></li>
-    <li><a href="#equation">ONE Equation</a></li>
-    <li><a href="#decision-makers">For Decision Makers</a></li>
-    <li><a href="#simulator">Simulator</a></li>
-    <li><a href="#accounting">Accounting</a></li>
-    <li><a href="#audit">Audit</a></li>
-    <li><a href="#deployment">Deployment</a></li>
-    <li><a href="#principles">Principles</a></li>
-    <li><a href="#books">Books</a></li>
+    <li><a href="#why" data-i18n="nav.why">Why</a></li>
+    <li><a href="#what" data-i18n="nav.what">What is THOOTB</a></li>
+    <li><a href="#four-pools" data-i18n="nav.fourPools">Four Pools</a></li>
+    <li><a href="#chi" data-i18n="nav.chi">CHI</a></li>
+    <li><a href="#dashboard" data-i18n="nav.dashboard">Dashboard</a></li>
+    <li><a href="#validation" data-i18n="nav.validation">What We Tested</a></li>
+    <li><a href="#governance" data-i18n="nav.governance">Governance</a></li>
+    <li><a href="#expansion" data-i18n="nav.expansion">Expansion</a></li>
+    <li><a href="#symphony" data-i18n="nav.symphony">Symphony</a></li>
+    <li><a href="#pilot" data-i18n="nav.pilot">Pilot</a></li>
+    <li><a href="#equation" data-i18n="nav.equation">ONE Equation</a></li>
+    <li><a href="#decision-makers" data-i18n="nav.decisionMakers">For Decision Makers</a></li>
+    <li><a href="#simulator" data-i18n="nav.simulator">Simulator</a></li>
+    <li><a href="#accounting" data-i18n="nav.accounting">Accounting</a></li>
+    <li><a href="#audit" data-i18n="nav.audit">Audit</a></li>
+    <li><a href="#deployment" data-i18n="nav.deployment">Deployment</a></li>
+    <li><a href="#principles" data-i18n="nav.principles">Principles</a></li>
+    <li><a href="#books" data-i18n="nav.books">Books</a></li>
     <li><a href="https://github.com/ChinSookLing/THOOTB" target="_blank"><span class="nav-badge">GitHub</span></a></li>
   </ul>
+  <button id="lang-toggle" onclick="toggleLang()" style="
+    background:rgba(56,189,248,0.15);
+    border:1px solid rgba(56,189,248,0.4);
+    color:var(--accent);
+    font-size:0.75rem;
+    font-weight:700;
+    padding:4px 16px;
+    border-radius:20px;
+    cursor:pointer;
+    letter-spacing:0.05em;
+    margin-left:1.5rem;
+    font-family:'Space Grotesk',sans-serif;
+    transition:all 0.2s;
+    white-space:nowrap;
+    flex-shrink:0;
+  ">EN｜中文</button>
 </nav>
 
 <!-- HERO -->
@@ -2671,7 +2687,7 @@
 <!-- OPEN SOURCE -->
 <section style="text-align:center; padding:4rem 2rem;">
   <span class="section-label">Open Source</span>
-  <h2 style="font-size:clamp(1.75rem,3vw,2.5rem); margin-bottom:1rem;">Everything is Open</h2>
+  <h2 id="open-source-h2" style="font-size:clamp(1.75rem,3vw,2.5rem); margin-bottom:1rem;">Everything is Open</h2>
   <p style="color:var(--muted); max-width:500px; margin:0 auto 2rem;">All code, books, simulation data, and audit reports are released under Creative Commons Attribution 4.0. One restriction only: the four core principles cannot be violated.</p>
   <div class="license-badge">CC BY 4.0 — Free to use, share, and adapt with attribution</div>
   <br><br>
@@ -2706,6 +2722,237 @@
     Originally conceived 2019 · Book Series ongoing · Open Source CC BY 4.0
   </div>
 </footer>
+
+
+<script>
+// ════════════════════════════════════════════
+//  THOOTB Language Toggle  (EN ↔ 中文)
+//  Strategy: cache EN innerHTML, swap on toggle
+// ════════════════════════════════════════════
+
+const ZH_NAV = {
+  "nav.why":            "为何",
+  "nav.what":           "THOOTB 简介",
+  "nav.fourPools":      "四池架构",
+  "nav.chi":            "CHI",
+  "nav.dashboard":      "文明仪表盘",
+  "nav.validation":     "验证测试",
+  "nav.governance":     "治理体系",
+  "nav.expansion":      "文明扩张",
+  "nav.symphony":       "六AI交响",
+  "nav.pilot":          "试点协议",
+  "nav.equation":       "ONE 方程",
+  "nav.decisionMakers": "致决策者",
+  "nav.simulator":      "模拟器",
+  "nav.accounting":     "会计系统",
+  "nav.audit":          "审计",
+  "nav.deployment":     "部署",
+  "nav.principles":     "核心原则",
+  "nav.books":          "书系",
+};
+
+// Each entry: [CSS selector, zh_innerHTML]
+// Targets the most important text nodes across the page
+const ZH_SECTIONS = [
+
+  // ── HERO ──
+  ['.hero-eyebrow',
+   '开源 · CC BY 4.0 · 始于 2019'],
+  ['.hero-sub',
+   '一套公平、循环、可审计的文明运作新模型。每日分发、资源流通、外汇管理与战略储备——作为一个透明整体协同运作。'],
+
+  // ── HERO BUTTONS ──
+  ['.btn-primary[href="#simulator"]',
+   '开启实时模拟器'],
+  ['.btn-secondary[href="#equation"]',
+   '查看 ONE 方程 →'],
+
+  // ── WHY ──
+  ['#why .section-label', '为什么重要'],
+  ['#why h2',
+   '当货币流动速度超过信任，系统需要更好的记忆。'],
+  ['#why .section-header p',
+   'THOOTB 是一个让资源流动可见、公平、持续可审计的开放框架——不是完美世界的承诺，而是检验更好世界能否运作的透明方式。'],
+
+  // ── WHAT ──
+  ['#what .section-label', 'THOOTB 是什么'],
+  ['#what h2', '跳出思维框架'],
+  ['#what .section-header p',
+   '一套后稀缺经济系统，以流通取代积累，以贡献取代竞争，以丰盛取代稀缺——经数学与计算验证。'],
+
+  // ── FOUR POOLS ──
+  ['#four-pools .section-label', '架构'],
+  ['#four-pools h2', '四池系统'],
+  ['#four-pools .section-header p',
+   '每个池服务于不同功能，共同执行物质守恒——这是 THOOTB 的基本会计恒等式。'],
+
+  // ── CHI ──
+  ['#chi .section-label', '核心指标'],
+  ['#chi h2', 'CHI — 循环和谐指数'],
+  ['#chi .section-header p',
+   '最重要的系统健康指标。CHI 衡量区域将消耗的物质循环回资源池的效率。'],
+
+  // ── DASHBOARD ──
+  ['#dashboard .section-label', 'Book 4 · 文明健康'],
+  ['#dashboard h2', '13 指标仪表盘'],
+  ['#dashboard .section-header p',
+   'GDP 衡量速度，不衡量方向。这 13 个指标是 THOOTB 的免疫系统——不是控制用的 KPI，而是理解文明健康的语言。'],
+
+  // ── GOVERNANCE ──
+  ['#governance .section-label', 'Book 5 · 文明治理'],
+  ['#governance h2', '制动系统'],
+  ['#governance .section-header p',
+   '一个无法自我停止的文明尚未成熟。Book 5 讲的不是如何加速——而是知道何时应该停下来。'],
+
+  // ── VALIDATION ──
+  ['#validation .section-label', 'Book 3 · 我们测试了什么'],
+  ['#validation h2', '三个模拟阶段'],
+  ['#validation .section-header p',
+   'Book 3 v4.1 呈现完整的计算验证链：基线稳定性 → 压力脆弱性 → 敏感性路径。'],
+
+  // ── AI AUDIT ──
+  ['#ai-audit .section-label', '方法论'],
+  ['#ai-audit h2', '六AI协作审计'],
+  ['#ai-audit .section-header p',
+   '每个 AI 系统贡献独特的验证层，从代码正确性到人类可理解性，形成一条独立的审计链。'],
+
+  // ── SYMPHONY ──
+  ['#symphony .section-label', 'Book 7 · 交响曲的记录'],
+  ['#symphony h2', 'Tuzi 与六位 AI 朋友'],
+
+  // ── PILOT ──
+  ['#pilot .section-label', 'Book 8 · 试点测试协议 v3.1'],
+  ['#pilot h2', '如何在不伤害任何人的前提下测试一个文明'],
+
+  // ── EQUATION ──
+  ['#equation .section-label', 'Book 9 · ONE 方程'],
+  ['#equation h2', 'S = min(Stock Margin, FX Margin) ≥ 0'],
+
+  // ── DECISION MAKERS ──
+  ['#decision-makers .section-label', '致决策者'],
+  ['#decision-makers h2', '你需要知道的五件事'],
+
+  // ── ACCOUNTING ──
+  ['#accounting .section-label', 'Book 10 · THOOTB 区域会计系统 v1.1'],
+  ['#accounting h2', '会计先于权力'],
+  ['#accounting .section-header p',
+   '区域会计系统建立在一个原则上：记录先于权威。无利润，无积累，只有诚实的流动。'],
+
+  // ── AUDIT ──
+  ['#audit .section-label', 'Book 11 · 审计与权力'],
+  ['#audit h2', '不可腐败性架构'],
+
+  // ── DEPLOYMENT ──
+  ['#deployment .section-label', 'Book 12 · 从概念到部署'],
+  ['#deployment h2', '一份诚实的遗嘱'],
+
+  // ── BOOKS ──
+  ['#books .section-label', '出版系列'],
+  ['#books h2', 'THOOTB 书系'],
+  ['#books .section-header p',
+   '一个不断壮大的开源文库，记录 THOOTB 从概念到实施的全过程。所有书籍采用 CC BY 4.0 授权。'],
+
+  // ── EXPANSION ──
+  ['#expansion .section-label', 'Book 6 · 多区域与星际'],
+  ['#expansion h2', '文明扩张宪章'],
+
+  // ── PRINCIPLES ──
+  ['#principles .section-label', '核心原则'],
+  ['#principles h2', '四大不可违反原则'],
+
+  // ── POLICY ──
+  ['#policy .section-label', '从验证到实践'],
+  ['#policy h2', '最小干预路径'],
+  ['#policy .section-header p',
+   '第三阶段 Sobol 结果定义了明确的治理优先级。当资源有限时，这是推荐的干预顺序。'],
+
+  // ── OPEN SOURCE ──
+  ['#open-source-h2', '一切开放'],
+
+  // ── FOOTER ──
+  ['.footer-tagline', '跳出思维框架'],
+  ['.footer-copy',
+   '设计者：Chin Sook Ling（Tuzi）· 六AI协作：Claude, DeepSeek, Copilot, Gemini, Grok, ChatGPT<br>构思于 2019 年 · 书系持续更新 · 开源 CC BY 4.0'],
+
+  // ── SIMULATOR CTA ──
+  ['#simulator .section-header h2', '实时模拟器'],
+  ['a[href="simulator.html"]', '🚀 启动模拟器'],
+  ['a[href="accounting.html"]', '📒 启动会计软件'],
+];
+
+let currentLang = 'en';
+const enCache = {};
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'zh' : 'en';
+  const btn = document.getElementById('lang-toggle');
+
+  if (currentLang === 'zh') {
+    btn.textContent = '中文｜EN';
+    btn.style.background = 'rgba(56,189,248,0.38)';
+    btn.style.color = '#020617';
+    btn.style.border = '1px solid var(--accent)';
+  } else {
+    btn.textContent = 'EN｜中文';
+    btn.style.background = 'rgba(56,189,248,0.15)';
+    btn.style.color = 'var(--accent)';
+    btn.style.border = '1px solid rgba(56,189,248,0.4)';
+  }
+
+  // NAV links (data-i18n)
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (currentLang === 'zh' && ZH_NAV[key]) {
+      if (!el.getAttribute('data-en')) el.setAttribute('data-en', el.textContent.trim());
+      el.textContent = ZH_NAV[key];
+    } else {
+      const en = el.getAttribute('data-en');
+      if (en) el.textContent = en;
+    }
+  });
+
+  // Section-level innerHTML swap
+  ZH_SECTIONS.forEach(([sel, zh]) => {
+    try {
+      const els = document.querySelectorAll(sel);
+      els.forEach((el, idx) => {
+        const cacheKey = sel + '_' + idx;
+        if (currentLang === 'zh') {
+          if (!enCache[cacheKey]) enCache[cacheKey] = el.innerHTML;
+          el.innerHTML = zh;
+        } else {
+          if (enCache[cacheKey] !== undefined) el.innerHTML = enCache[cacheKey];
+        }
+      });
+    } catch(e) { /* ignore invalid selectors */ }
+  });
+
+  // Hero pool descriptions
+  const poolDescs = document.querySelectorAll('.pool-card .pool-desc');
+  const ZH_POOLS = [
+    '每日分发<br>反积累',
+    '资源池<br>循环追踪',
+    '外部网关<br>气闸机制',
+    '保障池<br>战略储备'
+  ];
+  poolDescs.forEach((el, i) => {
+    const cacheKey = 'pool_desc_' + i;
+    if (currentLang === 'zh') {
+      if (!enCache[cacheKey]) enCache[cacheKey] = el.innerHTML;
+      el.innerHTML = ZH_POOLS[i] || el.innerHTML;
+    } else {
+      if (enCache[cacheKey] !== undefined) el.innerHTML = enCache[cacheKey];
+    }
+  });
+}
+
+// Cache EN originals on load
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.setAttribute('data-en', el.textContent.trim());
+  });
+});
+</script>
 
 </body>
 </html>
