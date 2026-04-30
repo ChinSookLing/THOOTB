@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>THOOTB Zone Accounting v2.0</title>
+  <title>THOOTB Zone Accounting v2.0 Reference Prototype</title>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,7 +25,7 @@ const { useState, useEffect } = React;
 
 
 // ============================================================
-// THOOTB ZONE ACCOUNTING SOFTWARE v2.0 (FINAL)
+// THOOTB ZONE ACCOUNTING SOFTWARE v2.0 (Reference Prototype)
 // For Book 10 Appendix - Complete Version with all Amendments
 // Created by: Tuzi + 6AI Affiliates (Claude, GPT, Copilot, DeepSeek, Gemini, Grok)
 // Date: January 2026 | License: CC BY 4.0
@@ -36,7 +36,7 @@ const { useState, useEffect } = React;
 // 3. Business Trading Account: Full COGS, Expenses, 循環成本吸收調整
 // 4. Equity → Fund (D-Pool)
 // 5. Balance Equation uses Pool not Bank (Copilot suggestion)
-// 6. Transaction ID format: timestamp-Payee-Receiver-Amount-6alphacode
+// 6. Transaction ID format: timestamp-from-to-amount-6alphacode
 // ============================================================
 
 const formatNumber = num => num?.toLocaleString('en-US') || '0';
@@ -55,9 +55,9 @@ const formatDateDisplay = d => d ? `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(
 const getTimestamp = (date, time) => `${date}${time.replace(':', '')}00`;
 const genVoucherId = (type, date, seq) => `${type}-${date.slice(2)}-${String(seq).padStart(4, '0')}`;
 const getDPoolAccountId = (zoneCode, dateStr) => `D${zoneCode}${dateStr.slice(2)}`;
-const genTransactionId = (ts, payee, receiver, amount) => {
+const genTransactionId = (ts, from, to, amount) => {
   const code = Math.random().toString(36).substring(2, 8).toUpperCase();
-  return `${ts}-${payee}-${receiver}-${amount}-${code}`;
+  return `${ts}-${from}-${to}-${amount}-${code}`;
 };
 const ZONE_CODE = 'E0001';
 const fourCorePrinciples = [{
@@ -248,7 +248,7 @@ const journalTypes = {
     name: 'Receive Goods'
   }, {
     code: 'CYCLE-COST-ADJ',
-    name: '循環成本吸收調整'
+    name: 'EN-J-9000 Cycle Cost Absorption Adjustment'
   }]
 };
 const createInitialState = () => {
@@ -344,7 +344,13 @@ const createInitialState = () => {
     businesses,
     govDepts,
     vouchers: [],
-    trdLog: []
+    trdLog: [],
+    cpPool: {
+      cpaExportNormal: 0,
+      cpaExportOverdue: 0,
+      cpvImportNormal: 0,
+      cpvImportOverdue: 0
+    }
   };
 };
 const THOOTBAccounting = () => {
@@ -788,7 +794,7 @@ const THOOTBAccounting = () => {
       className: "text-sm mt-2 space-y-1"
     }, /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between"
-    }, /*#__PURE__*/React.createElement("span", null, "Bank:"), /*#__PURE__*/React.createElement("span", null, formatTH(d.bank))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("span", null, "Available for Issue:"), /*#__PURE__*/React.createElement("span", null, formatTH(d.bank))), /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between"
     }, /*#__PURE__*/React.createElement("span", null, "Issued:"), /*#__PURE__*/React.createElement("span", null, formatTH(ti))), /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between"
@@ -818,13 +824,15 @@ const THOOTBAccounting = () => {
       className: "bg-gradient-to-br from-amber-500 to-orange-600 text-white p-4 rounded-xl"
     }, /*#__PURE__*/React.createElement("h3", {
       className: "font-bold"
-    }, "\uD83D\uDEE1\uFE0F G-Pool"), /*#__PURE__*/React.createElement("div", {
+    }, "\uD83D\uDEE1\uFE0F G-Pool (Guarantee Pool)"), /*#__PURE__*/React.createElement("div", {
       className: "text-sm mt-2 space-y-1"
     }, /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between"
-    }, /*#__PURE__*/React.createElement("span", null, "TH:"), /*#__PURE__*/React.createElement("span", null, formatTH(state.pools.gPool.bankTH))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("span", null, "TH Reserve:"), /*#__PURE__*/React.createElement("span", null, formatTH(state.pools.gPool.bankTH))), /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between"
-    }, /*#__PURE__*/React.createElement("span", null, "Premium:"), /*#__PURE__*/React.createElement("span", null, formatTH(state.pools.gPool.premium)))))), state.dayStatus === 'consolidated' && /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("span", null, "FC Reserve:"), /*#__PURE__*/React.createElement("span", null, formatFC(state.pools.gPool.bankFC))), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between"
+    }, /*#__PURE__*/React.createElement("span", null, "Export Premium:"), /*#__PURE__*/React.createElement("span", null, formatFC(state.pools.gPool.premiumFC)))))), state.dayStatus === 'consolidated' && /*#__PURE__*/React.createElement("div", {
       className: "bg-white p-5 rounded-xl border"
     }, /*#__PURE__*/React.createElement("h3", {
       className: "font-bold mb-3"
@@ -891,9 +899,13 @@ const THOOTBAccounting = () => {
       className: "flex justify-between p-2 bg-blue-100 rounded font-bold text-sm"
     }, /*#__PURE__*/React.createElement("span", null, "D-Pool"), /*#__PURE__*/React.createElement("span", null, formatTH(b.fundDPool))), /*#__PURE__*/React.createElement("div", {
       className: "mt-4 p-2 bg-slate-100 rounded text-xs"
-    }, /*#__PURE__*/React.createElement("div", null, "Assets = Liabilities + Fund"), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "font-bold mb-1"
+    }, "Assets = Liabilities + Fund + Cycle Adjustment"), /*#__PURE__*/React.createElement("div", {
       className: "font-mono"
-    }, formatNumber(calc.totalAssets), " = ", formatNumber(calc.totalLiabilities), " + ", formatNumber(b.fundDPool)))))), /*#__PURE__*/React.createElement("div", {
+    }, formatNumber(calc.totalAssets), " = ", formatNumber(calc.totalLiabilities), " + ", formatNumber(b.fundDPool), " + ", formatNumber(b.cycleCostAdjBS)), /*#__PURE__*/React.createElement("div", {
+      className: "text-amber-600 mt-1 italic"
+    }, "\u26A0\uFE0F Reference Prototype \u2014 not full double-entry retained balance yet."))))), /*#__PURE__*/React.createElement("div", {
       className: "bg-white p-5 rounded-xl border"
     }, /*#__PURE__*/React.createElement("h3", {
       className: "font-bold mb-3"
@@ -924,7 +936,7 @@ const THOOTBAccounting = () => {
       className: "mt-3 p-3 bg-purple-50 rounded border border-purple-200"
     }, /*#__PURE__*/React.createElement("div", {
       className: "text-xs text-purple-600 font-bold mb-2"
-    }, "\u5FAA\u74B0\u6210\u672C\u5438\u6536\u8ABF\u6574"), /*#__PURE__*/React.createElement("div", {
+    }, "EN-J-9000 Cycle Cost Absorption Adjustment"), /*#__PURE__*/React.createElement("div", {
       className: "text-sm space-y-1"
     }, /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between"
@@ -1164,17 +1176,57 @@ const THOOTBAccounting = () => {
     className: "text-2xl font-bold text-green-600"
   }, formatTH(state.trdLog.reduce((a, t) => a + t.amount, 0))), /*#__PURE__*/React.createElement("div", {
     className: "text-sm"
-  }, "Volume")))), sel3T === 'TIAD' && /*#__PURE__*/React.createElement("div", {
+  }, "Total Volume")), /*#__PURE__*/React.createElement("div", {
+    className: "p-4 bg-purple-50 rounded-lg text-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-2xl font-bold text-purple-600"
+  }, formatTH(state.cpPool.cpvImportNormal + state.cpPool.cpvImportOverdue)), /*#__PURE__*/React.createElement("div", {
+    className: "text-sm"
+  }, "CPV Import")), /*#__PURE__*/React.createElement("div", {
+    className: "p-4 bg-amber-50 rounded-lg text-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-2xl font-bold text-amber-600"
+  }, formatTH(state.cpPool.cpaExportNormal + state.cpPool.cpaExportOverdue)), /*#__PURE__*/React.createElement("div", {
+    className: "text-sm"
+  }, "CPA Export")))), sel3T === 'TIAD' && /*#__PURE__*/React.createElement("div", {
     className: "bg-white p-5 rounded-xl border"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "font-bold mb-3"
-  }, "\uD83D\uDD0D Investigation"), /*#__PURE__*/React.createElement("div", {
-    className: "p-8 text-center text-gray-400"
+  }, "\uD83D\uDD0D TIAD Investigation Alerts"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3"
+  }, state.cpPool.cpaExportOverdue > 0 ? /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-red-50 border-l-4 border-red-500 rounded"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "text-4xl mb-2"
-  }, "\u2705"), /*#__PURE__*/React.createElement("div", null, "No Alerts"), /*#__PURE__*/React.createElement("div", {
-    className: "text-xs mt-2"
-  }, "Requires GD authorization"))));
+    className: "font-bold text-red-700"
+  }, "\uD83D\uDD34 CPA/CPV Overdue > 72h"), /*#__PURE__*/React.createElement("div", {
+    className: "text-sm text-red-600"
+  }, "Export receivables overdue: ", formatTH(state.cpPool.cpaExportOverdue))) : /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-green-50 border-l-4 border-green-500 rounded"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-bold text-green-700"
+  }, "\u2705 CPA/CPV \u2014 No overdue items")), state.dayStatus === 'consolidated' && state.pools.dPool.bank !== 0 ? /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-bold text-yellow-700"
+  }, "\u26A0\uFE0F D-Pool Not Balanced After Return"), /*#__PURE__*/React.createElement("div", {
+    className: "text-sm text-yellow-600"
+  }, "Residual: ", formatTH(state.pools.dPool.bank))) : /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-green-50 border-l-4 border-green-500 rounded"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-bold text-green-700"
+  }, "\u2705 D-Pool \u2014 Balanced")), state.pools.rPool.stock < 10000 ? /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-red-50 border-l-4 border-red-500 rounded"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-bold text-red-700"
+  }, "\uD83D\uDD34 R-Pool Stock Below Threshold"), /*#__PURE__*/React.createElement("div", {
+    className: "text-sm text-red-600"
+  }, "Current stock: ", formatTH(state.pools.rPool.stock), " (threshold: TH 10,000)")) : /*#__PURE__*/React.createElement("div", {
+    className: "p-3 bg-green-50 border-l-4 border-green-500 rounded"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "font-bold text-green-700"
+  }, "\u2705 R-Pool Stock \u2014 Adequate")), /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-gray-400 text-center mt-2"
+  }, "TIAD requires GD authorization for investigation actions"))));
   const renderPrinciples = () => /*#__PURE__*/React.createElement("div", {
     className: "space-y-6"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1256,7 +1308,7 @@ const THOOTBAccounting = () => {
     className: "p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500"
   }, /*#__PURE__*/React.createElement("div", {
     className: "font-bold"
-  }, "4. Transaction ID: timestamp-Payee-Receiver-Amount-6code")), /*#__PURE__*/React.createElement("div", {
+  }, "4. Transaction ID: timestamp-from-to-amount-6code")), /*#__PURE__*/React.createElement("div", {
     className: "p-3 bg-teal-50 rounded-lg border-l-4 border-teal-500"
   }, /*#__PURE__*/React.createElement("div", {
     className: "font-bold"
@@ -1419,7 +1471,7 @@ const THOOTBAccounting = () => {
     className: "text-xl font-bold"
   }, "THOOTB Zone Accounting"), /*#__PURE__*/React.createElement("p", {
     className: "text-xs opacity-80"
-  }, "v2.0 Final | Book 10"))), /*#__PURE__*/React.createElement("div", {
+  }, "v2.0 Reference Prototype | Book 10"))), /*#__PURE__*/React.createElement("div", {
     className: "text-right text-sm"
   }, /*#__PURE__*/React.createElement("div", {
     className: "font-mono"
@@ -1443,13 +1495,12 @@ const THOOTBAccounting = () => {
     className: "max-w-7xl mx-auto px-4 text-center"
   }, /*#__PURE__*/React.createElement("p", {
     className: "font-semibold text-white"
-  }, "THOOTB Zone Accounting v2.0 Final"), /*#__PURE__*/React.createElement("p", {
+  }, "THOOTB Zone Accounting v2.0 Reference Prototype"), /*#__PURE__*/React.createElement("p", {
     className: "text-sm mt-1"
   }, "Tuzi + 6AI Affiliates | January 2026 | CC BY 4.0"))), renderModal(), notification && /*#__PURE__*/React.createElement("div", {
     className: "fixed top-4 right-4 px-6 py-4 rounded-xl shadow-2xl z-50 bg-green-500 text-white font-semibold"
   }, notification));
 };
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(React.createElement(THOOTBAccounting));
