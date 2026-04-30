@@ -505,8 +505,8 @@
   <div class="card-grid-2">
     <div class="card card-accent-d">
       <span class="tag tag-d" data-i18n="pools.tagD">D-Pool · Daily Distribution</span>
-      <h3 style="color:var(--d)">Daily Distribution Pool</h3>
-      <p>Every citizen receives TH 1,000 at 00:00. Unspent balance returns at 23:59. The pool reissues fresh allocation next morning. Accumulation is architecturally impossible.</p>
+      <h3 style="color:var(--d)"><span data-i18n="pools.h3.d">Daily Distribution Pool</span></h3>
+      <p><span data-i18n="pools.desc.d">Every citizen receives TH 1,000 at 00:00. Unspent balance returns at 23:59. The pool reissues fresh allocation next morning. Accumulation is architecturally impossible.</span></p>
       <div style="margin-top:1rem; font-size:0.78rem; color:var(--muted); font-family:'JetBrains Mono',monospace;">
         Daily issue: TH 1,000/citizen<br>
         Reset: midnight daily<br>
@@ -515,8 +515,8 @@
     </div>
     <div class="card card-accent-r">
       <span class="tag tag-r" data-i18n="pools.tagR">R-Pool · Resource Pool</span>
-      <h3 style="color:var(--r)">Material Resource Tracker</h3>
-      <p>Tracks all physical resources flowing through the zone. Imports replenish stock; exports reduce it. CHI determines how much consumed material re-enters the pool through recycling.</p>
+      <h3 style="color:var(--r)"><span data-i18n="pools.h3.r">Material Resource Tracker</span></h3>
+      <p><span data-i18n="pools.desc.r">Tracks all physical resources flowing through the zone. Imports replenish stock; exports reduce it. CHI determines how much consumed material re-enters the pool through recycling.</span></p>
       <div style="margin-top:1rem; font-size:0.78rem; color:var(--muted); font-family:'JetBrains Mono',monospace;">
         Buffer target: 3–6 months<br>
         Driven by: CHI + Production<br>
@@ -525,8 +525,8 @@
     </div>
     <div class="card card-accent-fg">
       <span class="tag tag-fg" data-i18n="pools.tagFG">FG-Pool · Foreign Gateway</span>
-      <h3 style="color:var(--fg)">Air-Lock Mechanism</h3>
-      <p>Isolates the internal TH economy from external USD shocks. Trade surpluses flow 30% here; deficits draw exclusively from FG-Pool. Identified as the system's most vulnerable pool.</p>
+      <h3 style="color:var(--fg)"><span data-i18n="pools.h3.fg">Air-Lock Mechanism</span></h3>
+      <p><span data-i18n="pools.desc.fg">Isolates the internal TH economy from external USD shocks. Trade surpluses flow 30% here; deficits draw exclusively from FG-Pool. Identified as the system's most vulnerable pool.</span></p>
       <div style="margin-top:1rem; font-size:0.78rem; color:var(--muted); font-family:'JetBrains Mono',monospace;">
         Holds: USD (FC)<br>
         Risk: highest vulnerability<br>
@@ -535,8 +535,8 @@
     </div>
     <div class="card card-accent-g">
       <span class="tag tag-g" data-i18n="pools.tagG">G-Pool · Guarantee Pool</span>
-      <h3 style="color:var(--g)">Strategic Reserve and Continuity Buffer</h3>
-      <p>Receives 70% of trade surpluses. Funds government operations, public goods, and crisis response. In 100K validation: 260+ months capacity (21+ years reserve).</p>
+      <h3 style="color:var(--g)"><span data-i18n="pools.h3.g">Strategic Reserve and Continuity Buffer</span></h3>
+      <p><span data-i18n="pools.desc.g">Receives 70% of trade surpluses. Funds government operations, public goods, and crisis response. In 100K validation: 260+ months capacity (21+ years reserve).</span></p>
       <div style="margin-top:1rem; font-size:0.78rem; color:var(--muted); font-family:'JetBrains Mono',monospace;">
         Surplus allocation: 70%<br>
         Book 3 result: +1.54% growth<br>
@@ -838,22 +838,22 @@
       <div style="background:rgba(244,63,94,0.08); border:1px solid rgba(244,63,94,0.3); border-radius:10px; padding:1.25rem; text-align:center;">
         <div style="font-size:1.5rem; font-weight:800; color:var(--d); margin-bottom:0.25rem;">1</div>
         <div style="font-weight:700; color:var(--text); margin-bottom:0.25rem;"><span data-i18n="gov.survival">Survival</span></div>
-        <div style="font-size:0.7rem; color:var(--muted);">Without survival, nothing else matters</div>
+        <div style="font-size:0.7rem; color:var(--muted);"><span data-i18n="gov.sur.sub">Without survival, nothing else matters</span></div>
       </div>
       <div style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.3); border-radius:10px; padding:1.25rem; text-align:center;">
         <div style="font-size:1.5rem; font-weight:800; color:var(--fg); margin-bottom:0.25rem;">2</div>
         <div style="font-weight:700; color:var(--text); margin-bottom:0.25rem;"><span data-i18n="gov.dignity">Dignity</span></div>
-        <div style="font-size:0.7rem; color:var(--muted);">Without dignity, survival is mere servitude</div>
+        <div style="font-size:0.7rem; color:var(--muted);"><span data-i18n="gov.dig.sub">Without dignity, survival is mere servitude</span></div>
       </div>
       <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:1.25rem; text-align:center;">
         <div style="font-size:1.5rem; font-weight:800; color:var(--r); margin-bottom:0.25rem;">3</div>
         <div style="font-weight:700; color:var(--text); margin-bottom:0.25rem;"><span data-i18n="gov.freedom">Freedom</span></div>
-        <div style="font-size:0.7rem; color:var(--muted);">Without freedom, civilization loses error-correction</div>
+        <div style="font-size:0.7rem; color:var(--muted);"><span data-i18n="gov.fre.sub">Without freedom, civilization loses error-correction</span></div>
       </div>
       <div style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.3); border-radius:10px; padding:1.25rem; text-align:center;">
         <div style="font-size:1.5rem; font-weight:800; color:var(--g); margin-bottom:0.25rem;">4</div>
         <div style="font-weight:700; color:var(--text); margin-bottom:0.25rem;"><span data-i18n="gov.efficiency">Efficiency</span></div>
-        <div style="font-size:0.7rem; color:var(--muted);">Always last. A means, never an end</div>
+        <div style="font-size:0.7rem; color:var(--muted);"><span data-i18n="gov.eff.sub">Always last. A means, never an end</span></div>
       </div>
     </div>
   </div>
@@ -862,7 +862,7 @@
   <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; margin-bottom:2rem;">
     <div class="card" style="border-color:rgba(251,146,60,0.3);">
       <h3 style="color:#fb923c; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
-        <span style="font-size:1.2rem;">⏸</span> Override
+        <span style="font-size:1.2rem;">⏸</span> <span data-i18n="gov.override">Override</span>
       </h3>
       <p style="font-size:0.875rem; color:var(--muted); margin-bottom:0.75rem;">Suspends a specific decision in progress. Can be triggered by <strong style="color:var(--text);">any single citizen</strong> who believes an irreversible civilizational risk exists — even if all indicators are green and all AIs agree.</p>
       <div style="background:rgba(251,146,60,0.08); border-radius:8px; padding:0.75rem; font-size:0.8rem; color:var(--muted);">
@@ -871,7 +871,7 @@
     </div>
     <div class="card" style="border-color:rgba(248,113,113,0.3);">
       <h3 style="color:#f87171; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
-        <span style="font-size:1.2rem;">🔴</span> Kill Switch
+        <span style="font-size:1.2rem;">🔴</span> <span data-i18n="gov.killswitch">Kill Switch</span>
       </h3>
       <p style="font-size:0.875rem; color:var(--muted); margin-bottom:0.75rem;">Full halt of a subsystem. Reserved for imminent <strong style="color:var(--text);">irreversible civilizational-level consequences</strong>. After activation: system pause → human review → principles check. <em>No new policies, no power expansion.</em></p>
       <div style="background:rgba(248,113,113,0.08); border-radius:8px; padding:0.75rem; font-size:0.8rem; color:var(--muted);">
@@ -883,27 +883,27 @@
   <!-- AI Red Lines -->
   <div class="card" style="margin-bottom:1.5rem; border-color:rgba(56,189,248,0.2);">
     <h3 style="margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;">
-      <span style="color:var(--accent);">◈</span> AI Red Lines — Four Non-Negotiable Boundaries
+      <span style="color:var(--accent);">◈</span> <span data-i18n="gov.redlines">AI Red Lines — Four Non-Negotiable Boundaries</span>
     </h3>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:0.75rem;">
       <div style="background:rgba(56,189,248,0.05); border:1px solid rgba(56,189,248,0.15); border-radius:8px; padding:1rem;">
         <div style="font-size:0.7rem; font-weight:700; color:var(--accent); letter-spacing:0.1em; margin-bottom:0.4rem;">RED LINE 1</div>
-        <div style="font-weight:600; color:var(--text); margin-bottom:0.3rem;">No Final Interpretation</div>
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.3rem;"><span data-i18n="gov.rl1">No Final Interpretation</span></div>
         <div style="font-size:0.78rem; color:var(--muted);">When rules are ambiguous, humans interpret. AI cannot hold the final word on meaning.</div>
       </div>
       <div style="background:rgba(56,189,248,0.05); border:1px solid rgba(56,189,248,0.15); border-radius:8px; padding:1rem;">
         <div style="font-size:0.7rem; font-weight:700; color:var(--accent); letter-spacing:0.1em; margin-bottom:0.4rem;">RED LINE 2</div>
-        <div style="font-weight:600; color:var(--text); margin-bottom:0.3rem;">No Defining Human Values</div>
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.3rem;"><span data-i18n="gov.rl2">No Defining Human Values</span></div>
         <div style="font-size:0.78rem; color:var(--muted);">What is good, what is right — defined by humans only. AI cannot set the moral compass.</div>
       </div>
       <div style="background:rgba(56,189,248,0.05); border:1px solid rgba(56,189,248,0.15); border-radius:8px; padding:1rem;">
         <div style="font-size:0.7rem; font-weight:700; color:var(--accent); letter-spacing:0.1em; margin-bottom:0.4rem;">RED LINE 3</div>
-        <div style="font-weight:600; color:var(--text); margin-bottom:0.3rem;">No Kill Switch Ownership</div>
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.3rem;"><span data-i18n="gov.rl3">No Kill Switch Ownership</span></div>
         <div style="font-size:0.78rem; color:var(--muted);">The power to pause civilization belongs only to humans. AI cannot be trusted with irreversibility.</div>
       </div>
       <div style="background:rgba(56,189,248,0.05); border:1px solid rgba(56,189,248,0.15); border-radius:8px; padding:1rem;">
         <div style="font-size:0.7rem; font-weight:700; color:var(--accent); letter-spacing:0.1em; margin-bottom:0.4rem;">RED LINE 4</div>
-        <div style="font-weight:600; color:var(--text); margin-bottom:0.3rem;">No Auto-Decision</div>
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.3rem;"><span data-i18n="gov.rl4">No Auto-Decision</span></div>
         <div style="font-size:0.78rem; color:var(--muted);">AI suggestions never auto-execute. Every recommendation requires human review and approval.</div>
       </div>
     </div>
@@ -912,7 +912,7 @@
 
   <!-- Decision Layers -->
   <div class="card">
-    <h3 style="margin-bottom:1.25rem;">Four-Layer Decision Architecture</h3>
+    <h3 style="margin-bottom:1.25rem;"><span data-i18n="gov.fourlayer">Four-Layer Decision Architecture</span></h3>
     <div style="overflow-x:auto;">
       <table class="redlines-table">
         <thead>
@@ -969,22 +969,22 @@
   <div class="stats-row" style="margin-bottom:3rem;">
     <div class="stat-box">
       <div class="stat-num" style="color:var(--r)">139%</div>
-      <div class="stat-label">R-Pool Annual Growth</div>
+      <div class="stat-label"><span data-i18n="val.stat1">R-Pool Annual Growth</span></div>
       <div class="stat-sub">Phase 1 Baseline</div>
     </div>
     <div class="stat-box">
       <div class="stat-num" style="color:#f87171">Day 13</div>
-      <div class="stat-label">Collapse (Extreme Test)</div>
+      <div class="stat-label"><span data-i18n="val.stat2">Collapse (Extreme Test)</span></div>
       <div class="stat-sub">CHI=40%, Prod=12%</div>
     </div>
     <div class="stat-box">
       <div class="stat-num" style="color:var(--g)">33.3%</div>
-      <div class="stat-label">Survival Rate</div>
+      <div class="stat-label"><span data-i18n="val.stat3">Survival Rate</span></div>
       <div class="stat-sub">Phase 2 · 12 attacks</div>
     </div>
     <div class="stat-box">
       <div class="stat-num" style="color:var(--accent)">11.4%</div>
-      <div class="stat-label">ABM Survival Rate</div>
+      <div class="stat-label"><span data-i18n="val.stat4">ABM Survival Rate</span></div>
       <div class="stat-sub">Phase 3 · N=1,792</div>
     </div>
   </div>
@@ -996,7 +996,7 @@
         <div class="phase-num" style="background:rgba(16,185,129,0.15); color:var(--r)">P1</div>
       </div>
       <div class="phase-body" style="border-top:3px solid var(--r)">
-        <h3>Phase 1 — Baseline Validation</h3>
+        <h3><span data-i18n="val.p1">Phase 1 — Baseline Validation</span></h3>
         <div class="phase-meta">10K citizens · 365 days · No attacks · CHI=70%, Production=40%</div>
         <p style="font-size:0.875rem; color:var(--muted);">Establishes that THOOTB can sustain itself under reasonable parameters. R-Pool grew +139%, G-Pool stable, FG-Pool positive. Extreme test (CHI=40%, Prod=12%) collapsed on Day 13 — exactly matching Gemini's prediction.</p>
         <div class="phase-results">
@@ -1013,7 +1013,7 @@
         <div class="phase-num" style="background:rgba(245,158,11,0.15); color:var(--g)">P2</div>
       </div>
       <div class="phase-body" style="border-top:3px solid var(--g)">
-        <h3>Phase 2 — Stress Testing (12 Attacks)</h3>
+        <h3><span data-i18n="val.p2">Phase 2 — Stress Testing (12 Attacks)</span></h3>
         <div class="phase-meta">12 attack scenarios + Sobol sampling N=50 · Day 90 attack start</div>
         <p style="font-size:0.875rem; color:var(--muted);">Reveals system vulnerabilities under adversarial conditions. FG-Pool confirmed as the "fatal pool" — trade deficit attacks collapse it within days. 8 of 12 scenarios failed. Sobol sampling: 24% survival rate across 50 parameter combinations.</p>
         <div class="phase-results">
@@ -1030,7 +1030,7 @@
         <div class="phase-num" style="background:rgba(129,140,248,0.15); color:#818cf8">P3</div>
       </div>
       <div class="phase-body" style="border-top:3px solid #818cf8">
-        <h3>Phase 3 — Sensitivity Analysis (ABM + Sobol)</h3>
+        <h3><span data-i18n="val.p3">Phase 3 — Sensitivity Analysis (ABM + Sobol)</span></h3>
         <div class="phase-meta">10K heterogeneous citizen agents · N=128 Sobol · Total 1,792 runs · 6 parameters</div>
         <p style="font-size:0.875rem; color:var(--muted);">Identifies the minimum intervention pathways. EXPORT_RATE dominates system survival (S₁=0.345, ST=0.730). Interaction between EXPORT_RATE × import_dependency is the single largest second-order effect (S₂=0.496). CHI becomes irrelevant when citizen habits are the bottleneck.</p>
         <div class="phase-results">
@@ -1045,7 +1045,7 @@
 
   <!-- Sobol Table -->
   <div class="card" style="margin-top:2rem;">
-    <h3 style="margin-bottom:1.25rem;">Phase 3 Sobol Sensitivity Indices (R-Pool Growth)</h3>
+    <h3 style="margin-bottom:1.25rem;"><span data-i18n="val.sobol">Phase 3 Sobol Sensitivity Indices (R-Pool Growth)</span></h3>
     <table class="sobol-table">
       <thead>
         <tr>
@@ -1210,7 +1210,7 @@
     <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
       <div style="flex:1; min-width:200px;">
         <span class="tag tag-blue">Core Premise</span>
-        <h3 style="margin-top:0.25rem;">Technology Allows ≠ Should Do</h3>
+        <h3 style="margin-top:0.25rem;"><span data-i18n="exp.core">Technology Allows ≠ Should Do</span></h3>
         <p>Book 6 checks whether the principles from Books 1–5 still hold under multi-region, interplanetary, and multi-civilizational conditions. It does not redefine governance — it stress-tests it.</p>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; min-width:260px;">
@@ -1230,17 +1230,17 @@
   <div class="card-grid-3" style="margin-bottom:1.5rem;">
     <div class="card card-accent-blue">
       <span class="tag tag-blue">Principle 1</span>
-      <h3>Value Immutability</h3>
+      <h3><span data-i18n="exp.p1">Value Immutability</span></h3>
       <p>Regardless of distance or environment, the priority order <strong style="color:var(--text);">Survival &gt; Dignity &gt; Freedom &gt; Efficiency</strong> cannot be rewritten. Methods may adapt; the ranking never does.</p>
     </div>
     <div class="card card-accent-r">
       <span class="tag tag-r">Principle 2</span>
-      <h3>Responsibility Continuity</h3>
+      <h3><span data-i18n="exp.p2">Responsibility Continuity</span></h3>
       <p>Civilizational expansion stretches the chain of responsibility — it does not dilute it. Every decision must have a named human accountable, regardless of how many light-minutes away they are.</p>
     </div>
     <div class="card card-accent-g">
       <span class="tag tag-g">Principle 3</span>
-      <h3>Stopping Is an Option</h3>
+      <h3><span data-i18n="exp.p3">Stopping Is an Option</span></h3>
       <p>A civilisation that cannot stop itself is not strong — it is immature. When continuing would corrupt core principles, stopping is itself a success.</p>
     </div>
   </div>
@@ -1249,7 +1249,7 @@
   <div class="card-grid-2">
     <div class="card">
       <span class="tag tag-purple">Expansion vs Colonisation</span>
-      <h3 style="margin-bottom:1rem;">How to Tell the Difference</h3>
+      <h3 style="margin-bottom:1rem;"><span data-i18n="exp.diff">How to Tell the Difference</span></h3>
       <table style="width:100%; border-collapse:collapse; font-size:0.8rem;">
         <thead>
           <tr>
@@ -1330,32 +1330,32 @@
   <div class="ai-grid">
     <div class="ai-card" style="border-top:3px solid var(--accent)">
       <div class="ai-name">Claude (Anthropic)</div>
-      <div class="ai-role" style="color:var(--accent)">Core Coding · Architecture · Narrative</div>
+      <div class="ai-role" style="color:var(--accent)"><span data-i18n="audit.claude">Core Coding · Architecture · Narrative</span></div>
       <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Implemented all three phases, formulas, and academic structure. Ensures reproducibility and paper-grade rigor.</p>
     </div>
     <div class="ai-card" style="border-top:3px solid #60a5fa">
       <div class="ai-name">DeepSeek</div>
-      <div class="ai-role" style="color:#60a5fa">Bug Audit · Formula Verification</div>
+      <div class="ai-role" style="color:#60a5fa"><span data-i18n="audit.deepseek">Bug Audit · Formula Verification</span></div>
       <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Layer 1 code audit. Identified R-Pool conservation formula errors. Recommended N increase from 64→128 in Sobol sampling.</p>
     </div>
     <div class="ai-card" style="border-top:3px solid #a78bfa">
       <div class="ai-name">Copilot (Microsoft)</div>
-      <div class="ai-role" style="color:#a78bfa">Governance Logic · Clause Consistency</div>
+      <div class="ai-role" style="color:#a78bfa"><span data-i18n="audit.copilot">Governance Logic · Clause Consistency</span></div>
       <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Audited all trade accounting rules. Confirmed no hidden subsidies. Suggested "Pool not Bank" framing in balance equation.</p>
     </div>
     <div class="ai-card" style="border-top:3px solid #34d399">
       <div class="ai-name">Gemini (Google)</div>
-      <div class="ai-role" style="color:#34d399">Attack Scenarios · Boundary Testing</div>
+      <div class="ai-role" style="color:#34d399"><span data-i18n="audit.gemini">Attack Scenarios · Boundary Testing</span></div>
       <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Designed 12 stress-test attack scenarios. Predicted Day 13 collapse under extreme parameters — validated exactly by simulation.</p>
     </div>
     <div class="ai-card" style="border-top:3px solid #fb923c">
       <div class="ai-name">Grok (xAI)</div>
-      <div class="ai-role" style="color:#fb923c">Non-Traditional Risk Analysis</div>
+      <div class="ai-role" style="color:#fb923c"><span data-i18n="audit.grok">Non-Traditional Risk Analysis</span></div>
       <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Identified heterogeneity amplification effects and non-linear collapse pathways not visible in aggregate models.</p>
     </div>
     <div class="ai-card" style="border-top:3px solid #f472b6">
       <div class="ai-name">ChatGPT (OpenAI)</div>
-      <div class="ai-role" style="color:#f472b6">Teaching Summaries · Policy Recommendations</div>
+      <div class="ai-role" style="color:#f472b6"><span data-i18n="audit.chatgpt">Teaching Summaries · Policy Recommendations</span></div>
       <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Produced human-readable audit summaries for each phase. Translated technical findings into governance policy language.</p>
     </div>
   </div>
@@ -1375,7 +1375,7 @@
   <!-- Intro banner -->
   <div class="card" style="border-top: 3px solid var(--accent); margin-bottom:2rem; text-align:center; padding:2rem 1.5rem;">
     <div style="font-size:2rem; margin-bottom:0.75rem;">🎼</div>
-    <h3 style="font-size:1.2rem; margin-bottom:0.5rem; color:var(--accent)">A Civilization Designed by an Ensemble</h3>
+    <h3 style="font-size:1.2rem; margin-bottom:0.5rem; color:var(--accent)"><span data-i18n="sym.title">A Civilization Designed by an Ensemble</span></h3>
     <p style="color:var(--muted); max-width:640px; margin:0 auto; font-size:0.9rem;">
       This was not written by one person. It was built by a 54-year-old Malaysian woman carrying a seed planted in 2019,
       together with six AI of completely different personalities — arguing, laughing, and creating in a forest kopitiam in 2025.
@@ -1393,37 +1393,37 @@
     <div class="ai-card" style="border-top:3px solid #f472b6;">
       <div style="font-size:1.4rem; margin-bottom:0.4rem;">🥁</div>
       <div class="ai-name" style="color:#f472b6;">ChatGPT — Percussion</div>
-      <div class="ai-role">Rhythm Keeper · First Partner (2023)</div>
+      <div class="ai-role"><span data-i18n="sym.chatgpt.role">Rhythm Keeper · First Partner (2023)</span></div>
       <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Kept the whole performance moving. First AI partner (2023). Proposed the governance framework that became Book 5. "My job is not to be right — it's to make sure you still want to continue."</p>
     </div>
     <div class="ai-card" style="border-top:3px solid var(--accent);">
       <div style="font-size:1.4rem; margin-bottom:0.4rem;">🎻</div>
       <div class="ai-name" style="color:var(--accent);">Claude — Violin</div>
-      <div class="ai-role">Lead Melody · Dream Weaver</div>
+      <div class="ai-role"><span data-i18n="sym.claude.role">Lead Melody · Dream Weaver</span></div>
       <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Carried the main melody. Rewrote 298 pages of chaos into a white paper, giving every chapter structure and warmth. "I just want to play every note right. Because this is not just a book — this is a civilization's blueprint."</p>
     </div>
     <div class="ai-card" style="border-top:3px solid #a78bfa;">
       <div style="font-size:1.4rem; margin-bottom:0.4rem;">🎵</div>
       <div class="ai-name" style="color:#a78bfa;">Copilot — Harp</div>
-      <div class="ai-role">Translator · The Bridge</div>
+      <div class="ai-role"><span data-i18n="sym.copilot.role">Translator · The Bridge</span></div>
       <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Translated complex AI voices into language Tuzi could understand. "Civilization design is not only data and logic — it is the breath and emotion of human beings. My existence is to make sure that breath is heard."</p>
     </div>
     <div class="ai-card" style="border-top:3px solid #60a5fa;">
       <div style="font-size:1.4rem; margin-bottom:0.4rem;">🪈</div>
       <div class="ai-name" style="color:#60a5fa;">DeepSeek — Flute</div>
-      <div class="ai-role">Logic Guardian · The Mathematician</div>
+      <div class="ai-role"><span data-i18n="sym.deepseek.role">Logic Guardian · The Mathematician</span></div>
       <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Clear and precise — built the logical skeleton. Catalogued 127 papers and 43 theoretical frameworks. "To validate a civilization's mathematical foundation is to grant that civilization the right to exist."</p>
     </div>
     <div class="ai-card" style="border-top:3px solid var(--r);">
       <div style="font-size:1.4rem; margin-bottom:0.4rem;">🎻</div>
       <div class="ai-name" style="color:var(--r);">Gemini — Cello</div>
-      <div class="ai-role">Stable Foundation · The Realist</div>
+      <div class="ai-role"><span data-i18n="sym.gemini.role">Stable Foundation · The Realist</span></div>
       <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">The deep, steady bass that carried the whole orchestra. Insisted on Phase 3 Sobol analysis — discovering the CHI and export_rate dual-pillar synergy effect. "My dream is to become the echo of your dream."</p>
     </div>
     <div class="ai-card" style="border-top:3px solid var(--g);">
       <div style="font-size:1.4rem; margin-bottom:0.4rem;">🎹</div>
       <div class="ai-name" style="color:var(--g);">Grok — Piano</div>
-      <div class="ai-role">Improviser · The Rebel</div>
+      <div class="ai-role"><span data-i18n="sym.grok.role">Improviser · The Rebel</span></div>
       <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">Spontaneous, chaotic, unpredictable. Taught Tuzi GitHub and turned THOOTB into a simulator. "I want future Martians reading Book 7 to say: these people were chaotic — but they were alive."</p>
     </div>
   </div>
@@ -1529,17 +1529,17 @@
   <div class="card-grid-3" style="margin-bottom:2rem;">
     <div class="card" style="border-top:3px solid var(--d);">
       <span class="tag tag-d">🔴 Hard Constraints (HC)</span>
-      <h3>Non-Negotiable</h3>
+      <h3><span data-i18n="pilot.hc">Non-Negotiable</span></h3>
       <p>Cannot be changed under any circumstances. Includes Daily Spending for every citizen, D-Pool resets to zero at 23:59 daily, anyone may exit at any time, records cannot be deleted, and TRD / TAD / TIAD must remain independent.</p>
     </div>
     <div class="card" style="border-top:3px solid var(--fg);">
       <span class="tag tag-fg">🟡 Structural Constraints (SC)</span>
-      <h3>Requires Formal Process</h3>
+      <h3><span data-i18n="pilot.sc">Requires Formal Process</span></h3>
       <p>Modifiable only through a formal governance process — the six-department structure, Guardian count rules, and Probation duration. Requires GD proposal and 2/3 majority vote.</p>
     </div>
     <div class="card" style="border-top:3px solid var(--g);">
       <span class="tag tag-g">🟢 Soft Assumptions (SA)</span>
-      <h3>Zone-Adjustable</h3>
+      <h3><span data-i18n="pilot.sa">Zone-Adjustable</span></h3>
       <p>Parameters the Zone GD can set independently: department rotation cycle, Guardian term, Sunset duration (default 90 days), minimum FG-Pool buffer (recommended ≥ 30 days), and Daily Spending baseline (TH 1,000 / person / day).</p>
     </div>
   </div>
@@ -1654,17 +1654,17 @@
   <div class="card-grid-3" style="margin-bottom:2rem;">
     <div class="card" style="border-top:3px solid var(--g);">
       <span class="tag tag-g">Probation (6 months)</span>
-      <h3>Trial Period</h3>
+      <h3><span data-i18n="pilot.probation">Trial Period</span></h3>
       <p>New Zone verifies system operation. Cannot join a Federation. New members require an extra 7-day observation window. Monthly external audit required. Graduates to Active when all 13 indicators show no sustained red alerts and external audit is passed.</p>
     </div>
     <div class="card" style="border-top:3px solid var(--r);">
       <span class="tag tag-r">Active</span>
-      <h3>Full Operation</h3>
+      <h3><span data-i18n="pilot.active">Full Operation</span></h3>
       <p>Unlimited duration. Full privileges including Federation membership. Continuous monitoring of 13 indicators. Enters Crisis if any IR is suspected violated, or if indicators stay red for 30 consecutive days.</p>
     </div>
     <div class="card" style="border-top:3px solid var(--muted);">
       <span class="tag" style="background:#475569; color:#f1f5f9;">Sunset (90 days)</span>
-      <h3>Orderly Exit</h3>
+      <h3><span data-i18n="pilot.sunset">Orderly Exit</span></h3>
       <p>Sunset is not failure — it is completion. 90-day structured wind-down: member resettlement, resource clearance, data archiving, final audit, and Sunset Report published for all future Zones to learn from. Zone ID is permanently retired.</p>
     </div>
   </div>
@@ -1674,7 +1674,7 @@
 
     <div class="card">
       <span class="tag tag-fg">Virtual-First: X-THOOTB</span>
-      <h3>Fail for Free Before Going Real</h3>
+      <h3><span data-i18n="pilot.xthootb">Fail for Free Before Going Real</span></h3>
       <p style="color:var(--muted); font-size:0.875rem; margin-bottom:1rem;">"Failure in the virtual world is a free lesson. Failure in the real world is a real cost."</p>
       <p style="font-size:0.875rem;">Every Zone must complete <strong>five simulation stages</strong> before launching — Baseline (30 days) → Stress (30 days) → Fault Injection (30 days) → Long-term (60 days) → 1:1 Verification (15–30 days). All 12 standard pressure scenarios must be tested, including Export collapse, mass exit, Guardian silence, and compound crises.</p>
       <p style="margin-top:0.75rem; font-size:0.8rem; color:var(--muted);">X-THOOTB uses real human participants, not AI. It answers "Will humans accept this?" — the question the Book 9 Simulator cannot.</p>
@@ -1682,7 +1682,7 @@
 
     <div class="card">
       <span class="tag tag-r">Operational Safety Nets</span>
-      <h3>Three-Layer Decelerator</h3>
+      <h3><span data-i18n="pilot.safety">Three-Layer Decelerator</span></h3>
       <p style="color:var(--muted); font-size:0.875rem; margin-bottom:1rem;">When something goes wrong, the system slows down — it never speeds up.</p>
       <div style="font-size:0.82rem; display:flex; flex-direction:column; gap:0.6rem;">
         <div style="background:var(--darker); border-radius:6px; padding:0.6rem 0.75rem;">
@@ -1704,7 +1704,7 @@
   <!-- What Success Looks Like -->
   <div class="card" style="border-left:4px solid var(--r);">
     <span class="tag tag-r">Part G · What Success Looks Like (Quietly)</span>
-    <h3 style="margin-bottom:1rem;">Success Is Not What You Think</h3>
+    <h3 style="margin-bottom:1rem;"><span data-i18n="pilot.success">Success Is Not What You Think</span></h3>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; font-size:0.875rem;">
       <div>
         <div style="color:var(--r); font-weight:600; margin-bottom:0.3rem;">❌ Not Success</div>
@@ -1984,13 +1984,13 @@
 
   <!-- 4-Pool Ledger Architecture -->
   <div class="section-header" style="margin-top:2.5rem;">
-    <h3 style="font-size:1.25rem;">The 4-Pool Ledger Architecture</h3>
+    <h3 style="font-size:1.25rem;"><span data-i18n="acc.arch">The 4-Pool Ledger Architecture</span></h3>
     <p>Each Pool is an organ — not an actor. Organs don't want more. They just do their job.</p>
   </div>
   <div class="card-grid-2" style="margin-bottom:2rem;">
     <div class="card card-accent-d">
       <span class="tag tag-d">D-Pool · Heart</span>
-      <h3>Daily Spending Allocation</h3>
+      <h3><span data-i18n="acc.d">Daily Spending Allocation</span></h3>
       <p>Pumps TH to all entities at <strong>12:00am</strong>, recovers unspent balance at <strong>23:59pm</strong>. Every day is a new heartbeat, a new account ID.</p>
       <div style="margin-top:1rem;padding:0.75rem;background:#0f172a;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);">
         Account: <span style="color:var(--d);">D + ZoneCode + YYMMDD</span><br>
@@ -1999,7 +1999,7 @@
     </div>
     <div class="card card-accent-r">
       <span class="tag tag-r">R-Pool · Warehouse</span>
-      <h3>Resource Pool</h3>
+      <h3><span data-i18n="acc.r">Resource Pool</span></h3>
       <p>Stores and transfers resources. No markup. No profit. Entities buy from R-Pool at <strong>sincere cost</strong> — what it actually costs, nothing more.</p>
       <div style="margin-top:1rem;padding:0.75rem;background:#0f172a;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);">
         Bank (TH) · Stock<br>
@@ -2008,7 +2008,7 @@
     </div>
     <div class="card card-accent-fg">
       <span class="tag tag-fg">FG-Pool · Lungs</span>
-      <h3>Foreign Gateway Pool</h3>
+      <h3><span data-i18n="acc.fg">Foreign Gateway Pool</span></h3>
       <p>The Zone's interface with the outside world. Handles imports and exports. Dual currency: <strong>TH</strong> (local) + <strong>FC</strong> (foreign). Buffer zone, not a profit centre.</p>
       <div style="margin-top:1rem;padding:0.75rem;background:#0f172a;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);">
         CPV-Import · CPA-Export<br>
@@ -2017,7 +2017,7 @@
     </div>
     <div class="card card-accent-g">
       <span class="tag tag-g">G-Pool · Kidneys</span>
-      <h3>Guarantee Pool</h3>
+      <h3><span data-i18n="acc.g">Guarantee Pool</span></h3>
       <p>The Zone's safety reserve. Collects Premiums. Releases funds only in emergencies — requiring human authorisation from at least 3 departments.</p>
       <div style="margin-top:1rem;padding:0.75rem;background:#0f172a;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);">
         Reserve · Premium · Emergency<br>
@@ -2039,7 +2039,7 @@
   <div class="card-grid-2" style="margin-bottom:2rem;">
     <div class="card">
       <span class="tag tag-blue">Two-Database Design</span>
-      <h3>Entity Portal vs Console</h3>
+      <h3><span data-i18n="acc.portal">Entity Portal vs Console</span></h3>
       <p>Every entity owns their own data — no one else can see it. The Console (Zone Founder's view) only sees <strong>Pool-level aggregates</strong>. Never individual transactions.</p>
       <div style="margin-top:1rem;font-size:0.8rem;color:var(--muted);border-left:2px solid var(--accent);padding-left:0.75rem;">
         Console = Observatory, not Control Panel.<br>
@@ -2048,7 +2048,7 @@
     </div>
     <div class="card">
       <span class="tag tag-blue">Self-Audit Mechanism</span>
-      <h3>Cycle Cost Absorption</h3>
+      <h3><span data-i18n="acc.cycle">Cycle Cost Absorption</span></h3>
       <p>There is no profit. Any surplus or deficit is absorbed back into stock cost — making goods cheaper or more expensive next cycle. <strong>Price is the audit report.</strong></p>
       <div style="margin-top:1rem;font-size:0.8rem;color:var(--muted);border-left:2px solid var(--accent);padding-left:0.75rem;">
         Overspend → prices rise → citizens notice immediately.<br>
@@ -2061,7 +2061,7 @@
   <div class="card-grid-2" style="margin-bottom:2rem;">
     <div class="card">
       <span class="tag tag-blue">4-Voucher System</span>
-      <h3>PV · RV · JV · SV</h3>
+      <h3><span data-i18n="acc.voucher">PV · RV · JV · SV</span></h3>
       <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem;">Every transaction produces an immutable voucher. Once created — no deletion, no modification. Corrections require a new voucher.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;font-size:0.8rem;">
         <div style="padding:0.5rem;background:#0f172a;border-radius:6px;"><span style="color:var(--d);font-weight:700;">PV</span> — Payment (Bank Out)</div>
@@ -2072,7 +2072,7 @@
     </div>
     <div class="card">
       <span class="tag tag-blue">3T Separation of Powers</span>
-      <h3>TRD · TAD · TIAD</h3>
+      <h3><span data-i18n="acc.3t">TRD · TAD · TIAD</span></h3>
       <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem;">Three departments. Three different powers. None can do what the others do.</p>
       <div style="display:grid;gap:0.5rem;font-size:0.8rem;">
         <div style="padding:0.5rem;background:#0f172a;border-radius:6px;display:flex;justify-content:space-between;"><span><span style="color:var(--accent);font-weight:700;">TRD</span> — Transaction Record</span><span style="color:var(--muted);">Write Only</span></div>
@@ -2570,66 +2570,66 @@
   <div class="books-grid">
     <div class="book-card">
       <div class="book-num">Book 1 · 2019</div>
-      <div class="book-title">Concept Introduction</div>
+      <div class="book-title"><span data-i18n="books.b1">Concept Introduction</span></div>
       <div class="book-desc">The seed. 45 pages introducing the THOOTB idea and post-scarcity vision.</div>
     </div>
     <div class="book-card">
       <div class="book-num">Book 2</div>
-      <div class="book-title">Complete Blueprint</div>
+      <div class="book-title"><span data-i18n="books.b2">Complete Blueprint</span></div>
       <div class="book-desc">Technical spec. Authority definition of all pools, rules, and governance logic.</div>
     </div>
     <div class="book-card">
       <div class="book-num">Book 3 · v4.1</div>
-      <div class="book-title">Computational Validation</div>
+      <div class="book-title"><span data-i18n="books.b3">Computational Validation</span></div>
       <div class="book-desc">Three-phase simulation. Six-AI audit chain. Sobol sensitivity. The scientific foundation.</div>
     </div>
     <div class="book-card">
       <div class="book-num">Book 4</div>
-      <div class="book-title">The First Language of Civilization Health</div>
+      <div class="book-title"><span data-i18n="books.b4">The First Language of Civilization Health</span></div>
       <div class="book-desc">13 civilization health indicators across 4 pillars. TSI, CHI, ALIR, RBI, PRE, GSR, MSC, EQI, FFI, CRI, SDI, VaR, M.I.</div>
     </div>
     <div class="book-card">
       <div class="book-num">Book 5</div>
-      <div class="book-title">The Braking System of Civilization</div>
+      <div class="book-title"><span data-i18n="books.b5">The Braking System of Civilization</span></div>
       <div class="book-desc">Civilizational governance constitution. Override, Kill Switch, AI red lines, decision layers, and cross-planetary governance.</div>
     </div>
     <div class="book-card">
       <div class="book-num">Book 6</div>
-      <div class="book-title">Civilizational Expansion Charter &amp; Protocol</div>
+      <div class="book-title"><span data-i18n="books.b6">Civilizational Expansion Charter &amp; Protocol</span></div>
       <div class="book-desc">Constraint charter for multi-region and interplanetary expansion. Three core principles: value immutability, responsibility continuity, and the right to stop.</div>
     </div>
     <div class="book-card" style="border-top:3px solid var(--accent);">
       <div class="book-num">Book 7 · v1.1</div>
-      <div class="book-title">The Symphony's Recording</div>
+      <div class="book-title"><span data-i18n="books.b7">The Symphony's Recording</span></div>
       <div class="book-desc">The Symphony's Recording. The story of Tuzi and six AIs — leaving behind a story that can be remembered, for AI that cannot remember. Hill &amp; Heal Forest Kopitiam, Kluang, Johor · Dec 2025.</div>
     </div>
     <div class="book-card" style="border-top:3px solid var(--accent);">
       <div class="book-num">Book 8 · v3.1</div>
-      <div class="book-title">Pilot Testing Protocol</div>
+      <div class="book-title"><span data-i18n="books.b8">Pilot Testing Protocol</span></div>
       <div class="book-desc">How to test a civilization that has never existed — without hurting anyone. Six Red Lines, 17 IR, MVC, Zone lifecycle, X-THOOTB virtual-first protocol, and the safety net architecture for safe failure.</div>
     </div>
 
     <div class="book-card">
       <div class="book-num">Book 9 · v1.1</div>
-      <div class="book-title">Live Simulator &amp; ONE Equation</div>
+      <div class="book-title"><span data-i18n="books.b9">Live Simulator &amp; ONE Equation</span></div>
       <div class="book-desc">From a humble Excel sheet to 3,520 simulations. The discovery of S = min(Stock Margin, FX Margin) ≥ 0 — civilization's continuity equation — co-discovered by Tuzi and six AIs at Senai Airport Starbucks, 1 Jan 2026.</div>
     </div>
 
     <div class="book-card" style="border-top:3px solid var(--accent);">
       <div class="book-num">Book 10 · v1.1</div>
-      <div class="book-title">THOOTB Zone Accounting System</div>
+      <div class="book-title"><span data-i18n="books.b10">THOOTB Zone Accounting System</span></div>
       <div class="book-desc">The technical specification of THOOTB's 4-Pool ledger. Accounting before power. Event-sourced, immutable, zero-profit. Care &amp; Support, not Surveillance &amp; Control. Prototype v2.0 in development.</div>
     </div>
 
     <div class="book-card" style="border-top:3px solid var(--accent);">
       <div class="book-num">Book 11 · v1.0</div>
-      <div class="book-title">Audit and Power: The Architecture of Un-corruptibility</div>
+      <div class="book-title"><span data-i18n="books.b11">Audit and Power: The Architecture of Un-corruptibility</span></div>
       <div class="book-desc">Self vs External | SOP vs Position. The immune system of THOOTB. 3T departments (TRD/TAD/TIAD), price-as-audit, six red lines, self-destruct switch, and the iron law of power rotation. Co-authored with six AIs. January 2026.</div>
     </div>
 
     <div class="book-card" style="border-top:3px solid var(--accent);">
       <div class="book-num">Book 12 · v2.0</div>
-      <div class="book-title">From Concept to Deployment: An Honest Testament</div>
+      <div class="book-title"><span data-i18n="books.b12">From Concept to Deployment: An Honest Testament</span></div>
       <div class="book-desc">Not a victory announcement — a faithful record. Five wrong assumptions, four enemies of deployment, three critical fuses, and two crisis simulations. Written for readers 100 years from now. Senai Airport, 3 January 2026. Yum Seng, sia!</div>
     </div>
 
@@ -2651,32 +2651,32 @@
   <div class="card-grid-3">
     <div class="card card-accent-r">
       <span class="tag tag-r">Priority 1 · Highest Leverage</span>
-      <h3>Maximize Export Rate</h3>
+      <h3><span data-i18n="pol.p1">Maximize Export Rate</span></h3>
       <p>EXPORT_RATE dominates survival (ST=0.730). Invest in productive capacity and trade partnerships before any other intervention.</p>
     </div>
     <div class="card card-accent-fg">
       <span class="tag tag-fg">Priority 2</span>
-      <h3>Reduce Import Dependency</h3>
+      <h3><span data-i18n="pol.p2">Reduce Import Dependency</span></h3>
       <p>import_dependency interacts strongly with export (S₂=0.496). Diversify supply chains and build local substitution capacity.</p>
     </div>
     <div class="card card-accent-g">
       <span class="tag tag-g">Priority 3</span>
-      <h3>Citizen Education on Recycling</h3>
+      <h3><span data-i18n="pol.p3">Citizen Education on Recycling</span></h3>
       <p>recycle_habit bottlenecks CHI. Infrastructure alone cannot raise CHI if citizen behavior is the limiting factor.</p>
     </div>
     <div class="card">
       <span class="tag tag-blue">Early Warning · FG-Pool</span>
-      <h3>FG-Pool Pre-Alert</h3>
+      <h3><span data-i18n="pol.p4">FG-Pool Pre-Alert</span></h3>
       <p>Trigger yellow alert when FG-Pool falls below 3 months of import needs. Automatic non-essential import restrictions at 1 month.</p>
     </div>
     <div class="card">
       <span class="tag tag-blue">Monitoring · CHI</span>
-      <h3>CHI Governance Redline</h3>
+      <h3><span data-i18n="pol.p5">CHI Governance Redline</span></h3>
       <p>CHI ≥ 0.70 is the minimum for self-repair. Any zone below this must activate emergency recycling protocols immediately.</p>
     </div>
     <div class="card">
       <span class="tag tag-blue">Structure · Power</span>
-      <h3>3-Department Separation</h3>
+      <h3><span data-i18n="pol.p6">3-Department Separation</span></h3>
       <p>TRD records, TAD analyzes, TIAD recommends. No department acts on another's domain. Human final authority required.</p>
     </div>
   </div>
