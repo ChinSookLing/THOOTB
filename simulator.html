@@ -13,6 +13,15 @@
 </head>
 <body>
   <div id="root"></div>
+  <div id="error-display" style="display:none; position:fixed; top:0; left:0; right:0; background:red; color:white; padding:20px; z-index:9999; font-family:monospace; font-size:14px; white-space:pre-wrap;"></div>
+  <script>
+    window.onerror = function(msg, src, line, col, err) {
+      var d = document.getElementById('error-display');
+      d.style.display = 'block';
+      d.textContent = 'ERROR at line ' + line + ':' + col + '\n' + msg + '\n\n' + (err ? err.stack : '');
+      return true;
+    };
+  </script>
   <script>
 const { useState, useMemo, useRef, useEffect, useCallback } = React;
 
@@ -216,7 +225,7 @@ const quickGlossary = {
     desc: '外部世界貨幣（美元等）'
   },
   'D-Pool': {
-    short: 'Daily Pool',
+    short: 'Daily Distribution Pool',
     desc: '每日發放與回收池（心臟）'
   },
   'R-Pool': {
@@ -224,12 +233,12 @@ const quickGlossary = {
     desc: '物資管理池 Bank+Stock（倉庫）'
   },
   'FG-Pool': {
-    short: 'Foreign Gate',
+    short: 'Foreign Gateway',
     desc: '外匯氣密艙（肺）'
   },
   'G-Pool': {
     short: 'Guarantee Pool',
-    desc: '戰略儲備池（免疫系統）'
+    desc: '保障池（免疫系統）'
   },
   'Export': {
     short: '出口',
@@ -757,7 +766,7 @@ Like the human body separates blood circulation, nutrition storage, immune syste
                    ▼                 ▼
 ┌──────────────────────┐    ┌──────────────────────┐
 │       D-POOL         │    │       FG-POOL        │
-│ (Daily Distribution) │    │   (Foreign Gate)     │
+│ (Daily Distribution) │    │   (Foreign Gateway)     │
 │                      │    │                      │
 │ Distributes to:      │    │ Import/Export        │
 │ • Citizens           │    │ Settlement           │
@@ -875,7 +884,7 @@ All products must be certified before entering system.
   },
   'fg-pool': {
     id: 'fg-pool',
-    title: 'FG-Pool (Foreign Gate Pool)',
+    title: 'FG-Pool (Foreign Gateway Pool)',
     chinese: '金融氣密艙',
     section: '2.4',
     part: 2,
@@ -933,7 +942,7 @@ Step 5: Complete decoupling if necessary`,
   'g-pool': {
     id: 'g-pool',
     title: 'G-Pool (Guarantee Pool)',
-    chinese: '戰略儲備池',
+    chinese: '保障池',
     section: '2.5',
     part: 2,
     content: `The system's "insurance vault". Only in, rarely out.
@@ -2772,7 +2781,7 @@ const THOOTBSimulator = () => {
     }, /*#__PURE__*/React.createElement("label", {
       className: "text-xs text-gray-500"
     }, "FG-Pool \u521D\u59CB (FC)"), /*#__PURE__*/React.createElement(InfoButton, {
-      tooltip: `FG-Pool (Foreign Gate Pool)
+      tooltip: `FG-Pool (Foreign Gateway Pool)
 外匯儲備池的初始金額
 
 FC = Foreign Currency (外幣)
@@ -2955,7 +2964,7 @@ FC = Foreign Currency (外幣)
     }, /*#__PURE__*/React.createElement("span", {
       className: "font-semibold"
     }, "\u63D0\u793A\uFF1A"), " \u4E0A\u65B9\u53C3\u6578\u5DF2\u8207\u6A21\u64EC\u7D50\u679C\u540C\u6B65\u3002\u5982\u9700\u8ABF\u6574\u66F4\u591A\u53C3\u6578\uFF0C\u8ACB\u5230", /*#__PURE__*/React.createElement("button", {
-      onClick: () => setActiveTab('parameters'),
+      onClick: () => setActiveTab('setup'),
       className: "underline font-semibold hover:text-blue-900 mx-1"
     }, "Parameters Tab"), "\u4FEE\u6539\u5F8C\u91CD\u65B0\u904B\u884C\u6A21\u64EC\u3002")), hasRun && simulationResults.length > 0 ?
     /*#__PURE__*/
@@ -3078,7 +3087,7 @@ FC = Foreign Currency (外幣)
       }, /*#__PURE__*/React.createElement("h3", {
         className: "font-bold text-gray-800"
       }, "\uD83D\uDCC8 7-Day FG-Pool Trend"), /*#__PURE__*/React.createElement(InfoButton, {
-        tooltip: `FG-Pool (Foreign Gate Pool) 7 天趨勢圖
+        tooltip: `FG-Pool (Foreign Gateway Pool) 7 天趨勢圖
 
 FG-Pool = 外匯儲備池，存放外幣 (FC)
 用於支付 Import (進口) 費用
