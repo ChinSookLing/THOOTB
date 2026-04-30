@@ -2727,10 +2727,11 @@
 <script>
 // ════════════════════════════════════════════
 //  THOOTB Language Toggle  (EN ↔ 中文)
-//  Strategy: cache EN innerHTML, swap on toggle
+//  Single ZH dict covers ALL data-i18n keys
 // ════════════════════════════════════════════
 
-const ZH_NAV = {
+const ZH = {
+  // NAV
   "nav.why":            "为何",
   "nav.what":           "THOOTB 简介",
   "nav.fourPools":      "四池架构",
@@ -2749,135 +2750,168 @@ const ZH_NAV = {
   "nav.deployment":     "部署",
   "nav.principles":     "核心原则",
   "nav.books":          "书系",
+
+  // WHY cards
+  "why.fair":       "设计即公平",
+  "why.circular":   "结构即循环",
+  "why.auditable":  "永远可审计",
+  "why.exit":       "出口永远敞开",
+
+  // WHAT cards - tags
+  "what.tag1": "哲学",
+  "what.tag2": "架构",
+  "what.tag3": "科学",
+  "what.tag4": "治理",
+  "what.tag5": "适用范围",
+  "what.tag6": "方法论",
+
+  // WHAT cards - h3
+  "what.h3.1": "设计即反积累",
+  "what.h3.2": "四池守恒",
+  "what.h3.3": "阈值稳定性",
+  "what.h3.4": "三部门审计",
+  "what.h3.5": "地球 → 火星 → 更远",
+  "what.h3.6": "六AI协作审计",
+
+  // FOUR POOLS tags
+  "pools.tagD":  "D-Pool · 每日分发",
+  "pools.tagR":  "R-Pool · 资源池",
+  "pools.tagFG": "FG-Pool · 外部网关",
+  "pools.tagG":  "G-Pool · 保障池",
+
+  // GOVERNANCE priority
+  "gov.survival":   "生存",
+  "gov.dignity":    "尊严",
+  "gov.freedom":    "自由",
+  "gov.efficiency": "效率",
+
+  // ACCOUNTING philosophy
+  "acc.records":  "记录优先",
+  "acc.noProfit": "无利润动机",
+  "acc.care":     "关怀而非管控",
+
+  // CTA
+  "sim.cta.title": "体验实时模拟器",
+  "acc.cta.title": "体验区域会计软件",
+
+  // OPEN SOURCE
+  "oss.title": "一切开放",
+
+  // FOOTER links
+  "footer.why":            "为何重要",
+  "footer.what":           "THOOTB 简介",
+  "footer.fourPools":      "四池架构",
+  "footer.validation":     "验证测试",
+  "footer.governance":     "治理",
+  "footer.equation":       "ONE 方程",
+  "footer.decisionMakers": "致决策者",
+  "footer.simulator":      "模拟器",
+  "footer.accounting":     "会计系统",
+  "footer.audit":          "审计",
+  "footer.deployment":     "部署",
+  "footer.principles":     "核心原则",
+  "footer.books":          "书系",
 };
 
-// Each entry: [CSS selector, zh_innerHTML]
-// Targets the most important text nodes across the page
+// Section-level innerHTML swap (for elements without data-i18n)
 const ZH_SECTIONS = [
+  // HERO
+  ['.hero-eyebrow', '开源 · CC BY 4.0 · 始于 2019'],
+  ['.hero-sub', '一套公平、循环、可审计的文明运作新模型。每日分发、资源流通、外汇管理与战略储备——作为一个透明整体协同运作。'],
+  ['.btn-primary[href="#simulator"]', '开启实时模拟器'],
+  ['.btn-secondary[href="#equation"]', '查看 ONE 方程 →'],
 
-  // ── HERO ──
-  ['.hero-eyebrow',
-   '开源 · CC BY 4.0 · 始于 2019'],
-  ['.hero-sub',
-   '一套公平、循环、可审计的文明运作新模型。每日分发、资源流通、外汇管理与战略储备——作为一个透明整体协同运作。'],
-
-  // ── HERO BUTTONS ──
-  ['.btn-primary[href="#simulator"]',
-   '开启实时模拟器'],
-  ['.btn-secondary[href="#equation"]',
-   '查看 ONE 方程 →'],
-
-  // ── WHY ──
+  // WHY
   ['#why .section-label', '为什么重要'],
-  ['#why h2',
-   '当货币流动速度超过信任，系统需要更好的记忆。'],
-  ['#why .section-header p',
-   'THOOTB 是一个让资源流动可见、公平、持续可审计的开放框架——不是完美世界的承诺，而是检验更好世界能否运作的透明方式。'],
+  ['#why h2', '当货币流动速度超过信任，系统需要更好的记忆。'],
+  ['#why .section-header p', 'THOOTB 是一个让资源流动可见、公平、持续可审计的开放框架——不是完美世界的承诺，而是检验更好世界能否运作的透明方式。'],
 
-  // ── WHAT ──
+  // WHAT
   ['#what .section-label', 'THOOTB 是什么'],
   ['#what h2', '跳出思维框架'],
-  ['#what .section-header p',
-   '一套后稀缺经济系统，以流通取代积累，以贡献取代竞争，以丰盛取代稀缺——经数学与计算验证。'],
+  ['#what .section-header p', '一套后稀缺经济系统，以流通取代积累，以贡献取代竞争，以丰盛取代稀缺——经数学与计算验证。'],
 
-  // ── FOUR POOLS ──
+  // FOUR POOLS
   ['#four-pools .section-label', '架构'],
   ['#four-pools h2', '四池系统'],
-  ['#four-pools .section-header p',
-   '每个池服务于不同功能，共同执行物质守恒——这是 THOOTB 的基本会计恒等式。'],
+  ['#four-pools .section-header p', '每个池服务于不同功能，共同执行物质守恒——这是 THOOTB 的基本会计恒等式。'],
 
-  // ── CHI ──
+  // CHI
   ['#chi .section-label', '核心指标'],
   ['#chi h2', 'CHI — 循环和谐指数'],
-  ['#chi .section-header p',
-   '最重要的系统健康指标。CHI 衡量区域将消耗的物质循环回资源池的效率。'],
+  ['#chi .section-header p', '最重要的系统健康指标。CHI 衡量区域将消耗的物质循环回资源池的效率。'],
 
-  // ── DASHBOARD ──
+  // DASHBOARD
   ['#dashboard .section-label', 'Book 4 · 文明健康'],
   ['#dashboard h2', '13 指标仪表盘'],
-  ['#dashboard .section-header p',
-   'GDP 衡量速度，不衡量方向。这 13 个指标是 THOOTB 的免疫系统——不是控制用的 KPI，而是理解文明健康的语言。'],
+  ['#dashboard .section-header p', 'GDP 衡量速度，不衡量方向。这 13 个指标是 THOOTB 的免疫系统——不是控制用的 KPI，而是理解文明健康的语言。'],
 
-  // ── GOVERNANCE ──
+  // GOVERNANCE
   ['#governance .section-label', 'Book 5 · 文明治理'],
   ['#governance h2', '制动系统'],
-  ['#governance .section-header p',
-   '一个无法自我停止的文明尚未成熟。Book 5 讲的不是如何加速——而是知道何时应该停下来。'],
+  ['#governance .section-header p', '一个无法自我停止的文明尚未成熟。Book 5 讲的不是如何加速——而是知道何时应该停下来。'],
 
-  // ── VALIDATION ──
+  // VALIDATION
   ['#validation .section-label', 'Book 3 · 我们测试了什么'],
   ['#validation h2', '三个模拟阶段'],
-  ['#validation .section-header p',
-   'Book 3 v4.1 呈现完整的计算验证链：基线稳定性 → 压力脆弱性 → 敏感性路径。'],
+  ['#validation .section-header p', 'Book 3 v4.1 呈现完整的计算验证链：基线稳定性 → 压力脆弱性 → 敏感性路径。'],
 
-  // ── AI AUDIT ──
+  // AI AUDIT
   ['#ai-audit .section-label', '方法论'],
   ['#ai-audit h2', '六AI协作审计'],
-  ['#ai-audit .section-header p',
-   '每个 AI 系统贡献独特的验证层，从代码正确性到人类可理解性，形成一条独立的审计链。'],
+  ['#ai-audit .section-header p', '每个 AI 系统贡献独特的验证层，从代码正确性到人类可理解性，形成一条独立的审计链。'],
 
-  // ── SYMPHONY ──
+  // SYMPHONY
   ['#symphony .section-label', 'Book 7 · 交响曲的记录'],
   ['#symphony h2', 'Tuzi 与六位 AI 朋友'],
 
-  // ── PILOT ──
+  // PILOT
   ['#pilot .section-label', 'Book 8 · 试点测试协议 v3.1'],
   ['#pilot h2', '如何在不伤害任何人的前提下测试一个文明'],
 
-  // ── EQUATION ──
+  // EQUATION
   ['#equation .section-label', 'Book 9 · ONE 方程'],
-  ['#equation h2', 'S = min(Stock Margin, FX Margin) ≥ 0'],
 
-  // ── DECISION MAKERS ──
+  // DECISION MAKERS
   ['#decision-makers .section-label', '致决策者'],
   ['#decision-makers h2', '你需要知道的五件事'],
 
-  // ── ACCOUNTING ──
+  // ACCOUNTING
   ['#accounting .section-label', 'Book 10 · THOOTB 区域会计系统 v1.1'],
   ['#accounting h2', '会计先于权力'],
-  ['#accounting .section-header p',
-   '区域会计系统建立在一个原则上：记录先于权威。无利润，无积累，只有诚实的流动。'],
+  ['#accounting .section-header p', '区域会计系统建立在一个原则上：记录先于权威。无利润，无积累，只有诚实的流动。'],
 
-  // ── AUDIT ──
+  // AUDIT
   ['#audit .section-label', 'Book 11 · 审计与权力'],
   ['#audit h2', '不可腐败性架构'],
 
-  // ── DEPLOYMENT ──
+  // DEPLOYMENT
   ['#deployment .section-label', 'Book 12 · 从概念到部署'],
   ['#deployment h2', '一份诚实的遗嘱'],
 
-  // ── BOOKS ──
+  // BOOKS
   ['#books .section-label', '出版系列'],
   ['#books h2', 'THOOTB 书系'],
-  ['#books .section-header p',
-   '一个不断壮大的开源文库，记录 THOOTB 从概念到实施的全过程。所有书籍采用 CC BY 4.0 授权。'],
+  ['#books .section-header p', '一个不断壮大的开源文库，记录 THOOTB 从概念到实施的全过程。所有书籍采用 CC BY 4.0 授权。'],
 
-  // ── EXPANSION ──
+  // EXPANSION
   ['#expansion .section-label', 'Book 6 · 多区域与星际'],
   ['#expansion h2', '文明扩张宪章'],
 
-  // ── PRINCIPLES ──
+  // PRINCIPLES
   ['#principles .section-label', '核心原则'],
   ['#principles h2', '四大不可违反原则'],
 
-  // ── POLICY ──
+  // POLICY
   ['#policy .section-label', '从验证到实践'],
   ['#policy h2', '最小干预路径'],
-  ['#policy .section-header p',
-   '第三阶段 Sobol 结果定义了明确的治理优先级。当资源有限时，这是推荐的干预顺序。'],
+  ['#policy .section-header p', '第三阶段 Sobol 结果定义了明确的治理优先级。当资源有限时，这是推荐的干预顺序。'],
 
-  // ── OPEN SOURCE ──
+  // OPEN SOURCE
   ['#open-source-h2', '一切开放'],
 
-  // ── FOOTER ──
+  // FOOTER
   ['.footer-tagline', '跳出思维框架'],
-  ['.footer-copy',
-   '设计者：Chin Sook Ling（Tuzi）· 六AI协作：Claude, DeepSeek, Copilot, Gemini, Grok, ChatGPT<br>构思于 2019 年 · 书系持续更新 · 开源 CC BY 4.0'],
-
-  // ── SIMULATOR CTA ──
-  ['#simulator .section-header h2', '实时模拟器'],
-  ['a[href="simulator.html"]', '🚀 启动模拟器'],
-  ['a[href="accounting.html"]', '📒 启动会计软件'],
 ];
 
 let currentLang = 'en';
@@ -2899,60 +2933,50 @@ function toggleLang() {
     btn.style.border = '1px solid rgba(56,189,248,0.4)';
   }
 
-  // NAV links (data-i18n)
+  // ── data-i18n elements (uses unified ZH dict) ──
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (currentLang === 'zh' && ZH_NAV[key]) {
+    if (currentLang === 'zh' && ZH[key]) {
       if (!el.getAttribute('data-en')) el.setAttribute('data-en', el.textContent.trim());
-      el.textContent = ZH_NAV[key];
+      el.textContent = ZH[key];
     } else {
       const en = el.getAttribute('data-en');
       if (en) el.textContent = en;
     }
   });
 
-  // Section-level innerHTML swap
+  // ── ZH_SECTIONS innerHTML swap ──
   ZH_SECTIONS.forEach(([sel, zh]) => {
     try {
-      const els = document.querySelectorAll(sel);
-      els.forEach((el, idx) => {
-        const cacheKey = sel + '_' + idx;
+      document.querySelectorAll(sel).forEach((el, idx) => {
+        const k = sel + '_' + idx;
         if (currentLang === 'zh') {
-          if (!enCache[cacheKey]) enCache[cacheKey] = el.innerHTML;
+          if (!enCache[k]) enCache[k] = el.innerHTML;
           el.innerHTML = zh;
         } else {
-          if (enCache[cacheKey] !== undefined) el.innerHTML = enCache[cacheKey];
+          if (enCache[k] !== undefined) el.innerHTML = enCache[k];
         }
       });
-    } catch(e) { /* ignore invalid selectors */ }
+    } catch(e) {}
   });
 
-  // Hero pool descriptions
-  const poolDescs = document.querySelectorAll('.pool-card .pool-desc');
-  const ZH_POOLS = [
-    '每日分发<br>反积累',
-    '资源池<br>循环追踪',
-    '外部网关<br>气闸机制',
-    '保障池<br>战略储备'
-  ];
-  poolDescs.forEach((el, i) => {
-    const cacheKey = 'pool_desc_' + i;
+  // ── Pool descriptions in hero ──
+  const ZH_POOLS = ['每日分发<br>反积累','资源池<br>循环追踪','外部网关<br>气闸机制','保障池<br>战略储备'];
+  document.querySelectorAll('.pool-card .pool-desc').forEach((el, i) => {
+    const k = 'pool_' + i;
     if (currentLang === 'zh') {
-      if (!enCache[cacheKey]) enCache[cacheKey] = el.innerHTML;
+      if (!enCache[k]) enCache[k] = el.innerHTML;
       el.innerHTML = ZH_POOLS[i] || el.innerHTML;
     } else {
-      if (enCache[cacheKey] !== undefined) el.innerHTML = enCache[cacheKey];
+      if (enCache[k] !== undefined) el.innerHTML = enCache[k];
     }
   });
 }
 
-// Cache EN originals on load
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     el.setAttribute('data-en', el.textContent.trim());
   });
 });
 </script>
-
 </body>
-</html>
