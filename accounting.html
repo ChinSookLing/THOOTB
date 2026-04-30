@@ -32,8 +32,8 @@ const { useState, useEffect } = React;
 // ============================================================
 // v2.0 Changes from v1.9:
 // 1. D-Pool daily new account (D + ZoneCode + YYMMDD)
-// 2. Business Balance Sheet: Full structure with 循環成本吸收調整, Fund (D-Pool)
-// 3. Business Trading Account: Full COGS, Expenses, 循環成本吸收調整
+// 2. Business Balance Sheet: Full structure with EN-A-3900 Cycle Cost Deferred Balance, Fund (D-Pool)
+// 3. Business Trading Account: Full COGS, Expenses, EN-J-9000 Cycle Cost Absorption Adjustment
 // 4. Equity → Fund (D-Pool)
 // 5. Balance Equation uses Pool not Bank (Copilot suggestion)
 // 6. Transaction ID format: timestamp-from-to-amount-6alphacode
@@ -884,7 +884,7 @@ const THOOTBAccounting = () => {
       className: "text-xs text-gray-500 mb-2 font-bold"
     }, "ASSETS"), /*#__PURE__*/React.createElement("div", {
       className: "space-y-1 text-sm"
-    }, [['Car', b.car], ['Furniture', b.furniture], ['Equipment', b.equipment], ['Stock (local)', b.stockLocal], ['循環成本吸收調整', b.cycleCostAdjBS], ['Bank (TH)', b.bankLocal], ['Debtor-Inst-1', b.debtorInst1]].map(([n, v]) => /*#__PURE__*/React.createElement("div", {
+    }, [['Car', b.car], ['Furniture', b.furniture], ['Equipment', b.equipment], ['Stock (local)', b.stockLocal], ['EN-A-3900 Cycle Cost Deferred Balance', b.cycleCostAdjBS], ['Bank (TH)', b.bankLocal], ['Debtor-Inst-1', b.debtorInst1]].map(([n, v]) => /*#__PURE__*/React.createElement("div", {
       key: n,
       className: "flex justify-between p-1 bg-gray-50 rounded"
     }, /*#__PURE__*/React.createElement("span", null, n), /*#__PURE__*/React.createElement("span", null, formatTH(v)))), /*#__PURE__*/React.createElement("div", {
@@ -942,7 +942,7 @@ const THOOTBAccounting = () => {
       className: "flex justify-between"
     }, /*#__PURE__*/React.createElement("span", null, "Sales - COGS - Exp"), /*#__PURE__*/React.createElement("span", null, formatTH(calc.tradingDiff))), /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between text-purple-700"
-    }, /*#__PURE__*/React.createElement("span", null, "\u5FAA\u74B0\u6210\u672C\u5438\u6536\u8ABF\u6574"), /*#__PURE__*/React.createElement("span", null, formatTH(-calc.tradingDiff))), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("span", null, "EN-J-9000 Cycle Cost Absorption Adjustment"), /*#__PURE__*/React.createElement("span", null, formatTH(-calc.tradingDiff))), /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between font-bold border-t pt-1"
     }, /*#__PURE__*/React.createElement("span", null, "Net"), /*#__PURE__*/React.createElement("span", null, formatTH(0)))), /*#__PURE__*/React.createElement("div", {
       className: "text-xs text-gray-500 mt-2"
@@ -1300,11 +1300,11 @@ const THOOTBAccounting = () => {
     className: "p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500"
   }, /*#__PURE__*/React.createElement("div", {
     className: "font-bold"
-  }, "2. Balance Sheet: \u5FAA\u74B0\u6210\u672C\u5438\u6536\u8ABF\u6574, Fund (D-Pool)")), /*#__PURE__*/React.createElement("div", {
+  }, "2. Balance Sheet: EN-A-3900 Cycle Cost Deferred Balance, Fund (D-Pool)")), /*#__PURE__*/React.createElement("div", {
     className: "p-3 bg-purple-50 rounded-lg border-l-4 border-purple-500"
   }, /*#__PURE__*/React.createElement("div", {
     className: "font-bold"
-  }, "3. Trading Account: COGS, Expenses, \u5FAA\u74B0\u6210\u672C\u5438\u6536\u8ABF\u6574")), /*#__PURE__*/React.createElement("div", {
+  }, "3. Trading Account: COGS, Expenses, EN-J-9000 Cycle Cost Absorption Adjustment")), /*#__PURE__*/React.createElement("div", {
     className: "p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500"
   }, /*#__PURE__*/React.createElement("div", {
     className: "font-bold"
