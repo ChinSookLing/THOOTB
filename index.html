@@ -350,6 +350,7 @@
     <li><a href="#books" data-i18n="nav.books">Books</a></li>
     <li><a href="https://github.com/ChinSookLing/THOOTB" target="_blank"><span class="nav-badge">GitHub</span></a></li>
   </ul>
+  <li style="list-style:none;"><a href="mailto:theplanetthootb@gmail.com" style="color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500;transition:color 0.2s;" data-i18n="nav.contact" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">Contact</a></li>
   <button id="lang-toggle" onclick="toggleLang()" style="
     background:rgba(56,189,248,0.15);
     border:1px solid rgba(56,189,248,0.4);
@@ -405,6 +406,26 @@
   </div>
 </div>
 
+<!-- THE QUESTION - Entry Point -->
+<section id="the-question" style="text-align:center; padding:4rem 1rem 2rem;">
+  <div style="max-width:680px; margin:0 auto;">
+    <p style="font-size:1.2rem; color:var(--muted); line-height:1.8; margin-bottom:1.5rem;">
+      What happens when productivity grows,<br>but people stop earning?
+    </p>
+    <p style="font-size:0.95rem; color:#64748b; line-height:1.8; margin-bottom:1.5rem;">
+      When companies optimise perfectly —<br>
+      but no one can afford what is produced?
+    </p>
+    <p style="font-size:0.95rem; color:#64748b; line-height:1.8; margin-bottom:2rem;">
+      This is not a future problem.<br>
+      <strong style="color:var(--text);">It is already happening.</strong>
+    </p>
+    <p style="font-size:1rem; color:var(--accent); font-weight:600;">
+      THOOTB is an attempt to answer that question.
+    </p>
+  </div>
+</section>
+
 <hr class="divider">
 
 <!-- WHY IT MATTERS -->
@@ -451,8 +472,8 @@
   <div class="card-grid-3">
     <div class="card card-accent-blue">
       <span class="tag tag-blue" data-i18n="what.tag1">Philosophy</span>
-      <h3><span data-i18n="what.h3.1"><span data-i18n="what.h3.1">Anti-Accumulation by Design</span></span></h3>
-      <p><span data-i18n="what.desc1">TH currency resets at midnight. No savings, no hoarding, no wealth concentration. Every citizen receives TH 1,000 daily regardless of age, role, or contribution.</span></p>
+      <h3><span data-i18n="what.h3.1"><span data-i18n="what.h3.1">Non-accumulative by Design</span></span></h3>
+      <p><span data-i18n="what.desc1">TH currency resets at midnight. Personal accumulation is replaced by daily guaranteed access — TH 1,000 per citizen, regardless of age, role, or contribution.</span></p>
     </div>
     <div class="card card-accent-blue">
       <span class="tag tag-blue" data-i18n="what.tag2">Architecture</span>
@@ -2708,6 +2729,7 @@
     <a href="#deployment" data-i18n="footer.deployment">Deployment</a>
     <a href="#principles" data-i18n="footer.principles">Principles</a>
     <a href="#books" data-i18n="footer.books">Books</a>
+    <a href="mailto:theplanetthootb@gmail.com" data-i18n="footer.contact">📬 Contact</a>
     <a href="https://github.com/ChinSookLing" target="_blank">GitHub: ChinSookLing</a>
   </div>
   <div class="footer-copy">
@@ -2743,6 +2765,7 @@ const ZH = {
   "nav.deployment":     "部署",
   "nav.principles":     "核心原则",
   "nav.books":          "书系",
+  "nav.contact":        "联系我们",
 
   // WHY cards
   "why.fair":       "设计即公平",
@@ -2767,10 +2790,10 @@ const ZH = {
   "what.h3.6": "六AI协作审计",
 
   // FOUR POOLS tags
-  "pools.tagD":  "D-Pool · 每日分发",
-  "pools.tagR":  "R-Pool · 资源池",
-  "pools.tagFG": "FG-Pool · 外部网关",
-  "pools.tagG":  "G-Pool · 保障池",
+  "pools.tagD":  "D-Pool · 每日流通",
+  "pools.tagR":  "R-Pool · 物資記錄",
+  "pools.tagFG": "FG-Pool · 金融氣密艙",
+  "pools.tagG":  "G-Pool · 戰略儲備",
 
   // GOVERNANCE priority
   "gov.survival":   "生存",
@@ -2804,8 +2827,9 @@ const ZH = {
   "footer.deployment":     "部署",
   "footer.principles":     "核心原则",
   "footer.books":          "书系",
+  "footer.contact":        "联系我们",
   // WHY card descriptions
-  "why.fair.desc":      "每位公民获得等额每日分发。无积累。无投机。",
+  "why.fair.desc":      "每位公民获得等额每日流通配给。无积累。无投机。",
   "why.circular.desc":  "资源在四个池中循环流动。没有回收利用，GDP 只是吞噬地球的计量器。",
   "why.auditable.desc": "价格变化即是审计。三个独立部门。没有人能隐藏数字。",
   "why.exit.desc":      "任何人可在任何时候无条件离开。无法退出的系统就是监狱。",
@@ -2825,14 +2849,14 @@ const ZH = {
   "what.desc4": "TRD（只记录）→ TAD（只分析）→ TIAD（只建议）。权力分离防止任何单一部门控制经济。",
   "what.desc5": "适用范围从 1,000 人社区到行星文明。CHI 阈值：地球最低 ≥ 0.70，火星殖民地建议 ≥ 0.80。",
   "what.desc6": "Claude、DeepSeek、Copilot、Gemini、Grok、ChatGPT 形成分层审计链：代码 → 公式 → 治理 → 行为 → 风险 → 人类理解。",
-  "pools.h3.d":"每日分发池",
-  "pools.h3.r":"物质资源追踪器",
-  "pools.h3.fg":"气闸机制",
-  "pools.h3.g":"战略储备与延续缓冲",
+  "pools.h3.d":"每日流通池",
+  "pools.h3.r":"物資記錄池",
+  "pools.h3.fg":"金融氣密艙",
+  "pools.h3.g":"戰略儲備池",
   "pools.desc.d":"每位公民在 00:00 获得 TH 1,000。未花余额在 23:59 归还。次日早晨重新发放。积累在架构上不可能实现。",
   "pools.desc.r":"追踪流经区域的所有物质资源。进口补充库存，出口减少库存。CHI 决定有多少消耗物质通过回收重新进入资源池。",
-  "pools.desc.fg":"将内部 TH 经济与外部美元冲击隔离。贸易顺差的 30% 流入此处；逆差专门从 FG-Pool 提取。被认定为系统中最脆弱的资源池。",
-  "pools.desc.g":"接收 70% 的贸易顺差。为政府运营、公共产品和危机响应提供资金。在 10 万人验证中：260+ 个月容量（21+ 年储备）。",
+  "pools.desc.fg":"将内部 TH 经济与外部美元冲击完全隔离——如气密舱。贸易顺差的 30% 流入此处；逆差专门从 FG-Pool 提取。被认定为系统中最脆弱的资源池。",
+  "pools.desc.g":"接收 70% 的贸易顺差，作为全球战略储备。为政府运营、公共产品和危机响应提供资金。在 10 万人验证中：260+ 个月容量（21+ 年储备）。",
   "gov.sur.sub":"没有生存，其他一切都无意义",
   "gov.dig.sub":"没有尊严，生存不过是奴役",
   "gov.fre.sub":"没有自由，文明失去纠错能力",
@@ -2881,10 +2905,10 @@ const ZH = {
   "pilot.safety":"三层减速器",
   "pilot.success":"成功不是你想的那样",
   "acc.arch":"四池账本架构",
-  "acc.d":"每日消费分配",
-  "acc.r":"资源池",
-  "acc.fg":"外部网关池",
-  "acc.g":"保障池",
+  "acc.d":"每日流通池",
+  "acc.r":"物資記錄池",
+  "acc.fg":"金融氣密艙",
+  "acc.g":"戰略儲備池",
   "acc.portal":"实体门户 vs 控制台",
   "acc.cycle":"周期成本吸收",
   "acc.voucher":"PV · RV · JV · SV",
@@ -3066,10 +3090,10 @@ const ZH = {
   "exp.p3.desc":"一个无法自我停止的文明不是强大——而是不成熟。当继续会腐蚀核心原则时，停止本身就是成功。",
   "exp.b6.desc":"Book 6 检验 Books 1–5 的原则在多区域、星际和多文明条件下是否仍然成立。它不重新定义治理——而是对其进行压力测试。",
   "exp.migration":"原则的迁移", "exp.projection":"权力的投射",
-  "pools.stats.d":"每日发放：TH 1,000/公民<br>重置：每日午夜<br>循环率：100%",
-  "pools.stats.r":"缓冲目标：3–6 个月<br>驱动因素：CHI + 产能<br>关键阈值：R &gt; 0",
-  "pools.stats.fg":"持有：美元（FC）<br>风险：最高脆弱性<br>警告：< 3 个月进口",
-  "pools.stats.g":"顺差分配：70%<br>Book 3 结果：+1.54% 增长<br>储备：260+ 个月",
+  "pools.stats.d":"每日发放：TH 1,000/公民 · 重置：每日午夜 · 循环率：100%",
+  "pools.stats.r":"缓冲目标：3–6 个月 · 驱动因素：CHI + 产能 · 关键阈值：R &gt; 0",
+  "pools.stats.fg":"持有：美元（FC） · 风险：系统最脆弱点 · 警告：< 3 个月进口",
+  "pools.stats.g":"顺差分配：70% · Book 3 结果：+1.54% 增长 · 储备：260+ 个月",
   "dash.badge.ex":"● 优秀",
   "dash.badge.he":"● 健康",
   "dash.badge.wa":"● 警告",
@@ -3225,12 +3249,12 @@ const ZH = {
   "sim.cta.tag":"互动式 · 无需安装",
   "sim.xthootb.note":"X-THOOTB 使用真实人类参与者，而非 AI。它回答「人类会接受这个吗？」——这是 Book 9 模拟器无法回答的问题。",
   "acc.phil1":"发生了什么？在谁负责之前。",
-  "acc.phil2":"器官不经营生意。资源池不积累。",
+  "acc.phil2":"各池如器官，各司其职，不积累。",
   "acc.phil3":"系统的存在是为了让没有人需要恐慌。",
-  "acc.tag.d":"D-Pool · 心脏",
-  "acc.tag.r":"R-Pool · 仓库",
+  "acc.tag.d":"D-Pool · 心臟",
+  "acc.tag.r":"R-Pool · 倉庫",
   "acc.tag.fg":"FG-Pool · 肺",
-  "acc.tag.g":"G-Pool · 肾脏",
+  "acc.tag.g":"G-Pool · 腎臟",
   "acc.d.desc":"在 00:00 向所有实体发放 TH，在 23:59 回收未花余额。每天都是新的心跳，新的账户 ID。",
   "acc.r.desc":"存储和转移资源。无加价，无利润。实体以诚实成本从 R-Pool 购买——实际成本，仅此而已。",
   "acc.fg.desc":"区域与外部世界的接口。处理进出口。双货币：TH（本地）+ FC（外币）。缓冲区，非盈利中心。",
@@ -3240,28 +3264,28 @@ const ZH = {
   "acc.r.stat":"仅转账——无收入",
   "acc.balance.desc":"如果左边 ≠ 右边，货币消失或凭空出现——两者都是系统漏洞。平衡方程是 THOOTB 的能量守恒定律。每日重置时自动验证。",
   "acc.portal.desc":"每个实体拥有自己的数据——其他人无法查看。控制台（区域创始人视图）只能看到资源池级别的汇总，而非个人交易。",
-  "acc.portal.note":"控制台 = 天文台，非控制面板。<br>「谁午餐吃了什么」不是系统的事。",
+  "acc.portal.note":"控制台 = 天文台，非控制面板。 · 「谁午餐吃了什么」不是系统的事。",
   "acc.cycle.desc":"没有利润。任何盈余或亏损都被吸收回库存成本——使商品在下一周期变便宜或变贵。价格就是审计报告。",
-  "acc.cycle.note":"超支 → 价格上涨 → 公民立即察觉。<br>每个公民都是审计员。",
+  "acc.cycle.note":"超支 → 价格上涨 → 公民立即察觉。 · 每个公民都是审计员。",
   "acc.voucher.desc":"每笔交易都会产生一张不可变凭证。一旦创建——不可删除，不可修改。更正需要新凭证。",
   "acc.3t.desc":"三个部门。三种不同权力。没有部门能做另一个部门的工作。",
-  "acc.hb.1":"D-Pool 向所有实体<br>发放 TH",
+  "acc.hb.1":"D-Pool 向所有实体 · 发放 TH",
   "acc.hb.day":"白天",
-  "acc.hb.2":"实体之间通过<br>PV/RV/JV 自由流通",
-  "acc.hb.3":"未花 TH 返还<br>至 D-Pool",
-  "acc.hb.4":"平衡方程<br>验证。新的一天。",
+  "acc.hb.2":"实体之间通过 · PV/RV/JV 自由流通",
+  "acc.hb.3":"未花 TH 返还 · 至 D-Pool",
+  "acc.hb.4":"平衡方程 · 验证。新的一天。",
   "acc.cta.desc":"完整四池账本、公民和企业门户、实时平衡方程验证——全在浏览器中。",
   "acc.cta.tag":"互动式 · 无需安装",
   "acc.arch.sub":"每个资源池是器官——不是行为者。器官不追求更多，只做好自己的工作。",
   "aud.intro":"自我 vs 外部 | SOP vs 职位——如何设计一个连坏人都无法破坏的系统？不是靠信任好人，而是让腐败在结构上不可能发生。",
   "aud.sop":"SOP 先于职位",
-  "aud.sop.sub":"流程驱动决策，<br>而非头衔",
+  "aud.sop.sub":"流程驱动决策， · 而非头衔",
   "aud.price":"价格即审计",
-  "aud.price.sub":"每个公民都是<br>审计员",
+  "aud.price.sub":"每个公民都是 · 审计员",
   "aud.exit":"退出高于一切",
-  "aud.exit.sub":"退出权 &gt; 审计权<br>&gt; 问责权",
+  "aud.exit.sub":"退出权 &gt; 审计权 · &gt; 问责权",
   "aud.self":"内置自毁机制",
-  "aud.self.sub":"系统必须能够<br>自我终止",
+  "aud.self.sub":"系统必须能够 · 自我终止",
   "aud.monster.desc":"共产主义、宗教、民主——都以崇高意图开始，都成为压迫工具。共同结构：善意 → 组织 → 组织腐化 → 压迫。",
   "aud.monster.answer":"Book 11 的答案：善意不是防御。唯一的防御是一种结构——即使腐化的行为者也无法积累足够权力来造成灾难性危害。这就是不可腐败性架构。",
   "aud.quote":"「真正的权力不是分辨对错的能力。真正的权力是让错误变得无害的能力。」— Book 11，最终章",
@@ -3296,13 +3320,13 @@ const ZH = {
   "aud.closing.attr":"— Grok，协作 AI · Book 11 v1.0 · 2026年1月",
   "dep.intro":"理论与地面实践的衔接——不是胜利宣言。是关于 THOOTB 从何而来、哪些被证明是错的，以及我们为后来者留下什么的忠实记录。",
   "dep.b1":"非线性",
-  "dep.b1.sub":"2019 年的 45 页。<br>沉寂。然后又是 11 本书。",
+  "dep.b1.sub":"2019 年的 45 页。 · 沉寂。然后又是 11 本书。",
   "dep.b2":"诚实的反思",
-  "dep.b2.sub":"我们记录<br>我们的错误。",
+  "dep.b2.sub":"我们记录 · 我们的错误。",
   "dep.b3":"优雅地失败",
-  "dep.b3.sub":"解散不是羞耻。<br>而是优雅的完成。",
+  "dep.b3.sub":"解散不是羞耻。 · 而是优雅的完成。",
   "dep.b4":"给未来的信",
-  "dep.b4.sub":"为 100 年后的读者<br>而写。",
+  "dep.b4.sub":"为 100 年后的读者 · 而写。",
   "dep.core.desc":"THOOTB 尚未被证明有效，甚至无法保证它会有效。Book 12 不是结果的记录——而是过程的记录：一个 45 页的想法如何演变成 12 本书，五个错误假设如何被发现和纠正，以及每一个妥协如何被记录，以便后来者可以验证我们。",
   "dep.core.quote":"「你不是在复制任何人。你是在为一个尚未到来的文明整理账本。」— ChatGPT，2026",
   "dep.five":"我们证明错误的五个假设",
@@ -3364,7 +3388,7 @@ const ZH = {
 const ZH_SECTIONS = [
   // HERO
   ['.hero-eyebrow', '开源 · CC BY 4.0 · 始于 2019'],
-  ['.hero-sub', '一套公平、循环、可审计的文明运作新模型。每日分发、资源流通、外汇管理与战略储备——作为一个透明整体协同运作。'],
+  ['.hero-sub', '一套公平、循环、可审计的文明运作新模型。每日流通池、物資記錄池、金融氣密艙、戰略儲備池——作为一个透明整体协同运作。'],
 
   // WHY
   ['#why .section-label', '为什么重要'],
@@ -3463,6 +3487,12 @@ const ZH_SECTIONS = [
 
   // FOOTER
   ['.footer-tagline', '跳出思维框架'],,
+
+  // THE QUESTION section
+  ['#the-question p:nth-child(1)', '当生产力增长，\n但人们停止赚钱，会发生什么？'],
+  ['#the-question p:nth-child(2)', '当企业完美优化——\n但没有人负担得起所生产的东西？'],
+  ['#the-question p:nth-child(3)', '这不是未来的问题。<br><strong style=\'color:var(--text)\'>它已经在发生。</strong>'],
+  ['#the-question p:nth-child(4)', 'THOOTB 是回答这个问题的一次尝试。'],
   // BOOK descriptions
   ['#book-desc-1', '种子。45 页，介绍 THOOTB 理念与后稀缺愿景。'],
   ['#book-desc-2', '技术规范。所有资源池、规则和治理逻辑的权威定义。'],
@@ -3559,7 +3589,7 @@ function toggleLang() {
 
 
   // ── Pool descriptions in hero ──
-  const ZH_POOLS = ['每日分发<br>反积累','资源池<br>循环追踪','外部网关<br>气闸机制','保障池<br>战略储备'];
+  const ZH_POOLS = ['每日流通池<br>反积累','物資記錄池<br>循環追踪','金融氣密艙<br>外匯緩衝','戰略儲備池<br>全球戰略儲備'];
   document.querySelectorAll('.pool-card .pool-desc').forEach((el, i) => {
     const k = 'pool_' + i;
     if (currentLang === 'zh') {
