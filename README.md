@@ -2,11 +2,12 @@
 
 > *A post-scarcity economic framework with four pools, one continuity equation, live simulation, and accounting infrastructure.*
 
-**Pronunciation:** /θuːb/ — "THooth"
-**Author:** Chin Sook Ling (Tuzi)
-**Collaboration:** Claude · ChatGPT · Copilot · DeepSeek · Gemini · Grok
-**License:** CC BY 4.0
-**Status:** Book Series ongoing · Simulation validated · Accounting system built
+**Pronunciation:** /θuːb/ — "THooth"  
+**Author:** Chin Sook Ling (Tuzi)  
+**Collaboration:** Claude · ChatGPT · Copilot · DeepSeek · Gemini · Grok  
+**License:** CC BY 4.0  
+**Status:** Book Series ongoing · Simulation validated · Accounting system built  
+**Contact:** theplanetthootb@gmail.com
 
 🌐 **Live Site:** [chinsookling.github.io/THOOTB](https://chinsookling.github.io/THOOTB/)
 
@@ -24,12 +25,12 @@ Designed since 2019. Stress-tested by six AI systems. Validated through 3,520 si
 
 ## The Four Pools
 
-| Pool | Full Name | Function |
-|------|-----------|----------|
-| **D-Pool** | Daily Distribution Pool | Equal daily allocation to every citizen. Clears to zero at 23:59. |
-| **R-Pool** | Resource Pool | Tracks physical resources, production, and recycling. |
-| **FG-Pool** | Foreign Gateway Pool | Isolates the internal economy from external currency shocks. |
-| **G-Pool** | Guarantee Pool | Strategic reserve. Funds public goods and crisis response. |
+| Pool | Full Name | Chinese | Function |
+|------|-----------|---------|----------|
+| **D-Pool** | Daily Distribution Pool | 每日流通池 | Equal daily allocation to every citizen. Clears to zero at 23:59. |
+| **R-Pool** | Resource Tracking Pool | 物資記錄池 | Tracks physical resources, production, and recycling. |
+| **FG-Pool** | Foreign Gateway Pool | 金融氣密艙 | Isolates the internal economy from external currency shocks. |
+| **G-Pool** | Global Strategic Reserve Pool | 戰略儲備池 | Strategic reserve. Funds public goods and crisis response. |
 
 **Balance Equation:** `D-Pool Net = R-Pool + FG-Pool (TH) + G-Pool`
 
@@ -46,7 +47,7 @@ Stock Margin = I + P + R − (C + Eg)
 FX Margin   = Es + Eg − I
 ```
 
-A civilization can sustain itself when both margins stay non-negative.
+A civilization can sustain itself when both margins stay non-negative.  
 Six AIs independently converged on the same equation. 3,520 simulations confirmed 100% accuracy.
 
 → See [`docs/one-equation.md`](docs/one-equation.md) for full derivation.
@@ -57,7 +58,8 @@ Six AIs independently converged on the same equation. 3,520 simulations confirme
 
 An interactive React simulator where you can set population size, export rate, recycling rate, and black swan events — and observe how the four pools respond in real time.
 
-→ See [`simulator/`](simulator/) for details and launch link.
+🚀 **[Launch Simulator](https://chinsookling.github.io/THOOTB/simulator.html)**  
+→ See [`simulator/`](simulator/) for details.
 
 ---
 
@@ -65,7 +67,8 @@ An interactive React simulator where you can set population size, export rate, r
 
 A complete double-entry accounting architecture for THOOTB zones. Four pools, four voucher types (PV/RV/JV/SV), two-database design, and self-audit mechanism.
 
-→ See [`accounting/`](accounting/) for details and launch link.
+📒 **[Launch Accounting System](https://chinsookling.github.io/THOOTB/accounting.html)**  
+→ See [`accounting/`](accounting/) for details.
 
 ---
 
@@ -101,7 +104,7 @@ A complete double-entry accounting architecture for THOOTB zones. Four pools, fo
 
 ## Terminology Reference
 
-All pool names frozen as of April 2026. See [`docs/terminology.md`](docs/terminology.md) for the complete freeze decision and historical variants.
+All pool names frozen as of May 2026. See [`docs/terminology.md`](docs/terminology.md) for the complete freeze decision and historical variants.
 
 ---
 

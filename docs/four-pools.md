@@ -1,7 +1,7 @@
 # The Four Pools
 
-**Authority:** Book 2 (White Paper) · Book 10 (Accounting System)
-**Terminology frozen:** April 2026
+**Authority:** Book 2 (White Paper) · Book 10 (Accounting System)  
+**Terminology frozen:** May 2026 (THOOTB-11)
 
 ---
 
@@ -13,7 +13,7 @@ THOOTB's economy runs through four structurally separated pools. No pool can acc
 
 ---
 
-## D-Pool — Daily Distribution Pool
+## D-Pool — Daily Distribution Pool · 每日流通池
 
 **Function:** Equal daily allocation to every citizen. The heartbeat of the system.
 
@@ -28,13 +28,13 @@ THOOTB's economy runs through four structurally separated pools. No pool can acc
 **Why daily clearing?**
 Preventing accumulation is the structural answer to speculation. If TH cannot be stored, it cannot be hoarded, traded, or used to gain power over others.
 
-**Citizens receive:** TH 1,000/day
-**Businesses receive:** Allocation + B2C revenue + Export revenue − R-Pool procurement − Import costs
+**Citizens receive:** TH 1,000/day  
+**Businesses receive:** Allocation + B2C revenue + Export revenue − R-Pool procurement − Import costs  
 **Government receives:** Allocation + service fees − operational costs
 
 ---
 
-## R-Pool — Resource Pool
+## R-Pool — Resource Tracking Pool · 物資記錄池
 
 **Function:** Tracks all physical resources — raw materials, production, and recycling.
 
@@ -42,8 +42,8 @@ Preventing accumulation is the structural answer to speculation. If TH cannot be
 |----------|-------|
 | Clearing | No — accumulates |
 | Profit | Not allowed |
-| Split | Bank (liquid TH) + Stock (physical inventory) |
-| Recycling | Free input — the only "free lunch" in the system |
+| Split | Available for Issue (liquid TH) + Stock (physical inventory) |
+| Recycling | Free input — the only replenishment without external draw |
 
 **The recycling advantage:**
 `R(t+1) = R(t) − C(t) + C(t)·CHI + P(t) + I(t) − E(t)`
@@ -55,7 +55,7 @@ When CHI ≥ 0.70, the recycling feedback loop becomes self-sustaining. Below CH
 
 ---
 
-## FG-Pool — Foreign Gateway Pool
+## FG-Pool — Foreign Gateway Pool · 金融氣密艙
 
 **Function:** Isolates the internal TH economy from external currency (FC) shocks. Acts as an airlock.
 
@@ -68,7 +68,7 @@ When CHI ≥ 0.70, the recycling feedback loop becomes self-sustaining. Below CH
 | Risk level | **Highest** — identified as the "fatal pool" in Phase 2 stress tests |
 
 **Why "Gateway"?**
-FG-Pool is not just a foreign exchange account. It is the entry/exit point for all external economic activity — imports, exports, and currency conversion. Its "airlock" design prevents external shocks from penetrating the internal TH economy.
+FG-Pool is not just a foreign exchange account. It is the entry/exit point for all external economic activity — imports, exports, and currency conversion. Its airlock design prevents external shocks from penetrating the internal TH economy.
 
 **Trade surplus allocation:**
 - 70% → G-Pool
@@ -78,9 +78,9 @@ FG-Pool is not just a foreign exchange account. It is the entry/exit point for a
 
 ---
 
-## G-Pool — Guarantee Pool
+## G-Pool — Global Strategic Reserve Pool · 戰略儲備池
 
-**Function:** Strategic reserve. Funds public goods, government operations, and crisis response.
+**Function:** Global strategic reserve. Funds public goods, government operations, and crisis response.
 
 | Property | Value |
 |----------|-------|
@@ -108,13 +108,13 @@ FG-Pool is not just a foreign exchange account. It is the entry/exit point for a
 ```
 Citizens/Business/Government
          ↓ spend TH
-      D-Pool (daily)
+      D-Pool (daily distribution)
          ↓ flows to
-      R-Pool (resources)
+      R-Pool (resource tracking)
          ↓ surplus
-      FG-Pool (gateway)  ←→  External World (FC)
+      FG-Pool (foreign gateway)  ←→  External World (FC)
          ↓ 70% surplus
-      G-Pool (guarantee)
+      G-Pool (global strategic reserve)
 ```
 
 ---
