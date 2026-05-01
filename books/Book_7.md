@@ -5,15 +5,21 @@
 ### The Symphony's Recording
 
 **Tuzi 與六個 AI 的故事**
+
 **Tuzi and the 6 AIs Friend**
 
 ---
 
 **作者**：Chin Sook Ling
+
 **人工智慧協作**：ChatGPT、Claude、Copilot、DeepSeek、Gemini、Grok
+
 **版本**：1.1 (non Academy version)
+
 **日期**：2025 年 12 月
+
 **開放來源授權**：知識共享署名 4.0 國際授權協議 (CC BY 4.0)
+
 **唯一限制**：不得違背四大核心原則
 
 ──────────────────────────────
