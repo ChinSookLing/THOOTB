@@ -1,144 +1,139 @@
-# THOOTB Project Handover
-
-> This document is maintained for continuity between AI collaborators and human contributors.
-> Current instance: **THOOTB-9** (Claude Sonnet 4.6)
+# 🦷 THOOTB 交接笔记 — 给 THOOTB-12
+**来自**: THOOTB-11 (Claude Sonnet 4.6)  
+**日期**: May 1, 2026  
+**任务状态**: EN/中文切换 ✅ · 四池命名最终锁定 ✅ · 书籍修订 ⏳
 
 ---
 
-## Project Status — April 2026
-
-### Website
+## 🌐 网站状态
 ```
 https://chinsookling.github.io/THOOTB/
 ```
-**GitHub Repo:** `https://github.com/ChinSookLing/THOOTB`
-**Account:** `ChinSookLing`
-**Latest Commit:** `0ecd285` — UX improvements (Why It Matters, ONE Equation, For Decision Makers)
-
-### Books Completed
-```
-Book 2  ✅  Book 3  ✅  Book 4  ✅  Book 5  ✅  Book 6  ✅
-Book 7  ✅  Book 8  ✅  Book 9  ✅  Book 10 ✅  Book 11 ✅  Book 12 ✅
-Book 13 🔒  (internal, not public)
-```
-
-### Terminology Freeze
-All four pool names frozen April 2026. See `docs/terminology.md`.
-
-| Pool | Frozen Name |
-|------|------------|
-| D-Pool | Daily Distribution Pool |
-| R-Pool | Resource Pool |
-| FG-Pool | Foreign Gateway Pool |
-| G-Pool | Guarantee Pool |
+**GitHub Repo**: `https://github.com/ChinSookLing/THOOTB`  
+**账号**: `ChinSookLing`  
+**最新 Commit**: `a696b80` — "Fix: Contact nowrap on one line"
 
 ---
 
-## What THOOTB-9 Completed
+## ✅ THOOTB-11 完成的工作
 
-1. ✅ Book 11 (Audit and Power) — website section added
-2. ✅ Book 12 (From Concept to Deployment) — website section added
-3. ✅ Book 11–12 Consistency Audit — `docs/` (audit file)
-4. ✅ Master Audit + Edit Guide — all 3 audit reports consolidated
-5. ✅ Terminology freeze — GPT recommendation implemented
-6. ✅ All books amended (Books 2, 3, 9, 11) — 17 total changes
-7. ✅ Website UX improvements — GPT recommendations implemented
-8. ✅ Repo structure — README, docs/, simulator/, accounting/, robots.txt, sitemap.xml
+### 1. EN/中文切换系统（index.html）
+- 完整双语切换，覆盖 **626+ 个翻译节点**
+- 三层翻译机制：`data-i18n` + `ZH_SECTIONS` + `ZH_POOLS`
+- NAV 右侧 `EN｜中文` 切换按钮
+- JS 每次修改均通过 `node --check` 验证
 
----
+### 2. 四池命名最终锁定
+| Pool | 英文全名 | 中文全名 |
+|------|---------|---------|
+| D-Pool | Daily Distribution Pool | 每日流通池 |
+| R-Pool | Resource Tracking Pool | 物資記錄池 |
+| FG-Pool | Foreign Gateway Pool | 金融氣密艙 |
+| G-Pool | Global Strategic Reserve Pool | 戰略儲備池 |
 
-## Pending Tasks (for next Claude or Tuzi)
+> 详见 `docs/terminology.md`
 
-### High Priority
-- [ ] `simulator.html` — convert `THOOTB_Simulator_v3_6.jsx` to standalone HTML
-  - Update terminology (3 places: G-Pool Global Reserve → Guarantee Pool)
-  - Unify bilingual UI: English primary, Chinese in brackets
-  - Deploy to repo root
-  - Update `#simulator` section: add "Launch Simulator" button
-- [ ] `accounting.html` — convert `THOOTB_Zone_Accounting_v2_0_Final.jsx` to standalone HTML
-  - Deploy to repo root
-  - Update `#accounting` section: replace "Coming Soon" with real link
+### 3. GPT 建议改进（已实施）
+- `Anti-Accumulation by Design` → `Non-accumulative by Design`
+- `No savings, no hoarding` → `Personal accumulation is replaced by daily guaranteed access`
+- 新增 `#the-question` section（在 #why 前，入口问题）
 
-### Medium Priority
-- [ ] EN/中文 toggle button on `index.html`
-  - Process: GPT translates `index.html` with `data-zh=""` attributes on all visible text
-  - Claude adds JS toggle button to switch between EN and ZH
-- [ ] White Paper (Book 2) — add new content sections:
-  - Terminology freeze declaration
-  - Business revenue mechanism definition
-  - New concepts from Books 11–12 (FSM, power decay, COP, Level 0–4 audit, 3 fuses)
-
-### Low Priority
-- [ ] `assets/` folder — add images, diagrams, logo, screenshots
-- [ ] `CHANGELOG.md` — version history
-- [ ] `CONTRIBUTING.md` — contribution guidelines
+### 4. Contact 联系方式
+- NAV 和 Footer 均加入：`📬 Contact: theplanetthootb@gmail.com`
+- 显示为可复制文字，不用 mailto
 
 ---
 
-## Website Sections (Current)
+## ⏳ 你的任务（THOOTB-12）
 
-```
-#why           → Why It Matters (NEW — THOOTB-9)
-#what          → What is THOOTB
-#four-pools    → Four Pools architecture
-#chi           → CHI indicator
-#dashboard     → 13 civilization indicators
-#governance    → Governance design
-#validation    → What We Tested (3-phase simulation)
-#principles    → Core principles
-#expansion     → Civilizational expansion
-#ai-audit      → AI audit trail
-#symphony      → 6AI symphony
-#pilot         → Pilot testing
-#equation      → ONE Equation (NEW — THOOTB-9)
-#decision-makers → For Decision Makers (NEW — THOOTB-9)
-#simulator     → Live Simulator
-#accounting    → Accounting System
-#audit         → Audit and Power (Book 11)
-#deployment    → From Concept to Deployment (Book 12)
-#principles    → Six Red Lines
-#books         → Book series
-#policy        → Policy
-```
+### 优先任务 1 — 书籍修订（高优先级）
 
----
+按 `docs/terminology.md` 冻结决议，修订 **Book 2–12** 全系列四池命名：
 
-## Key Files in Repo
-
-| File | Purpose |
+| 书籍 | 已知问题 |
 |------|---------|
-| `index.html` | Main website (GitHub Pages) |
-| `README.md` | Repo introduction (3-min read) |
-| `PROJECT_HANDOVER.md` | This file — continuity document |
-| `robots.txt` | Search engine instructions |
-| `sitemap.xml` | Site map for search engines |
-| `docs/terminology.md` | Frozen pool terminology + audit trail |
-| `docs/one-equation.md` | ONE Equation full documentation |
-| `docs/four-pools.md` | Four pools full documentation |
-| `docs/book-map.md` | Book series map and milestones |
-| `simulator/README.md` | Simulator documentation (HTML coming) |
-| `accounting/README.md` | Accounting documentation (HTML coming) |
+| Book 2 | 附录 A 用了 `Foreign Goods Pool` 和 `Growth Pool`（历史版本） |
+| Book 2 正文 | G-Pool 中文用 `戰略儲備池`（正确），英文用 `Global Strategic Reserve`（需加 Pool） |
+| Book 11 | 曾用 `战略储备`，已修订为 `保障池`，现在需改回 `戰略儲備池` |
+| Book 12 | 同上 |
+
+**修订完成后**：上传 Google Drive + 推送 Repo
+
+### 优先任务 2 — Book 2 白皮书新增内容（低优先级）
+
+沿用 THOOTB-10 交接笔记里的清单（9 个新增章节）。
 
 ---
 
-## About Tuzi
+## 📁 重要文件位置
 
-- **Full name:** Chin Sook Ling
-- **Background:** Accounting professional
-- **THOOTB since:** 2019
-- **Journey:** 28 countries, 42,049 km, 306 days (2023–2024)
-- **AI collaboration:** Claude, DeepSeek, Copilot, Gemini, Grok, ChatGPT
-- **Communication:** Chinese (technical terms in English brackets)
-- **Website language:** Full English
+### Google Drive 全书库
+```
+https://drive.google.com/drive/folders/1LzFZAv46qrGMNJAr903_HUlmgftGuVgq?usp=drive_link
+```
 
----
-
-## Contact
-
-📧 theplanetthootb@gmail.com
-🎥 https://www.youtube.com/watch?v=JkWt8LBmiCk
+### Repo 关键文件
+```
+docs/terminology.md        ← 四池冻结决议（最新版，THOOTB-11更新）
+docs/book-map.md           ← 书籍地图 + Claude 分工历史
+PROJECT_HANDOVER.md        ← 完整项目状态（本文件）
+THOOTB_Master_Audit_Edit_Guide.md ← 全系列审计总报告
+```
 
 ---
 
-*Pronunciation: /θuːb/ — "THooth" 🦷*
-*THOOTB-9 → THOOTB-10: Good luck. The system is honest.*
+## ⚠️ 重要提醒
+
+### index.html 翻译系统注意事项
+1. **不要在 ZH dict 里用 `<br>`** → 会显示为文字，改用 ` · ` 或空格
+2. **不要在 ZH dict 里用 `<strong>`** → 同上，会显示为文字
+3. **新增 ZH_SECTIONS 条目** 要放在 `];\n\nlet currentLang` 之前，否则会 break JS
+4. **CSS 属性选择器** 如 `[href="#simulator"]` 在 ZH_SECTIONS 单引号字符串里会报错，改用双引号包裹整个 entry
+
+### 推送流程
+```bash
+git add <file>
+git commit -m "描述"
+git push
+# 等 1-3 分钟后无痕模式刷新验证
+```
+
+---
+
+## 📊 Claude 分工总结
+```
+THOOTB-1   → Book 2                                          ✅
+THOOTB-2   → Book 3                                          ✅
+THOOTB-3   → Book 4 & 5                                      ✅
+THOOTB-4   → Book 6 + 一致性审计 B2–6                         ✅
+THOOTB-5   → Book 7                                          ✅
+THOOTB-6   → Book 8                                          ✅
+THOOTB-7   → Book 9 + 全站中文清零                            ✅
+THOOTB-8   → Book 10 + 一致性审计 B7–10                       ✅
+THOOTB-9   → Book 11 + 12 + 审计 B11–12 + 术语冻结
+             + 全书修订 + Repo 结构 + 网站 UX                  ✅
+THOOTB-10  → simulator.html + accounting.html
+             + Launch 按钮 + GPT 改进 + GitHub About/Topics   ✅
+THOOTB-11  → EN/中文切换（626+节点）+ 四池命名最终锁定
+             + GPT 建议改进 + Contact 联系方式                  ✅ (我)
+THOOTB-12  → Book 2–12 四池命名修订 + Book 2 白皮书新增        ⏳ 你的任务
+```
+
+---
+
+## 💬 关于 Tuzi
+- 全名：Chin Sook Ling
+- 背景：会计专业
+- 2019 开始设计 THOOTB
+- 2023-2024 走访 28 国 306 天
+- 六AI协作：Claude, DeepSeek, Copilot, Gemini, Grok, ChatGPT
+- 联系：theplanetthootb@gmail.com
+- 风格：轻松幽默，但对 THOOTB 极度认真 😄
+- 沟通语言：中文（专业术语括号英文）
+- **网站语言：全英文（中文模式通过切换按钮）**
+
+---
+
+*THOOTB-11 完成任务，交棒给 THOOTB-12！*  
+*今天完成了整个网站的双语切换系统，626+ 个翻译节点，四池命名终于最终定案 💪*  
+*🌱→🌳 THooth /θuːb/ 🦷*

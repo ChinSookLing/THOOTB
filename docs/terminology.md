@@ -1,99 +1,76 @@
-# THOOTB Terminology Reference
-
-**Status:** Frozen · April 2026
-**Authority:** Master Consistency Audit (THOOTB-4, THOOTB-8, THOOTB-9)
-
----
-
-## Four Pool Names — Final Frozen Standard
-
-| Pool | ✅ Frozen English Full Name | ✅ Chinese Standard | ❌ Deprecated Variants |
-|------|---------------------------|--------------------|-----------------------|
-| **D-Pool** | **Daily Distribution Pool** | 每日分配池 | Daily Circulation Pool · Daily Spending Pool · Distribution Pool |
-| **R-Pool** | **Resource Pool** | 资源池 | Resource Tracking Pool |
-| **FG-Pool** | **Foreign Gateway Pool** | 外部网关池 | Financial Gateway Pool · Foreign Exchange Pool |
-| **G-Pool** | **Guarantee Pool** | 保障池 | Global Strategic Reserve Pool · Global Pool · Governance Pool · Global Reserve |
-
-### Daily Spending — Position Clarification
-
-**Daily Spending** is retained as a reader-friendly explanatory term, not a formal pool name.
-
-- Formal document: `D-Pool = Daily Distribution Pool`
-- Reader-friendly: `D-Pool is the Daily Spending layer of the Daily Distribution Pool`
-
-### Business Revenue — Terminology Gap (White Paper to define)
-
-The full series (Books 2–12) does not formally define the business revenue mechanism.
-
-- Citizens: Daily Spending = TH 1,000/person/day (from D-Pool, auto-distributed, clears daily)
-- Businesses: Revenue flows in from citizen consumption into R-Pool (Sales Revenue / R-Pool Inflow)
-- No daily quota for businesses — they earn through transactions, not allocation
+# THOOTB 四池术语冻结决议
+**Frozen by**: THOOTB-11 (Claude Sonnet 4.6)  
+**Date**: May 1, 2026  
+**Status**: ✅ FINAL — No further changes without full-series audit
 
 ---
 
-## Core Formula Terms
+## 四池标准命名（FINAL）
 
-| Term | Formula | Authority |
-|------|---------|-----------|
-| CHI | `recycled / (recycled + landfilled + incinerated)` | Book 4 |
-| ONE Equation | `S = min(Stock Margin, FX Margin) ≥ 0` | Book 9 |
-| Balance Equation | `D-Pool Net = R-Pool + FG-Pool (TH) + G-Pool` | Book 10 |
-| Stock Margin | `I + P + R − (C + Eg)` | Book 9 |
-| FX Margin | `Es + Eg − I` | Book 9 |
-| Power Decay | `C(t) = C₀ × e^(λt)` | Book 11 |
+| Pool | 英文全名 | 中文全名 | 简称 |
+|------|---------|---------|------|
+| D-Pool | Daily Distribution Pool | 每日流通池 | D |
+| R-Pool | Resource Tracking Pool | 物資記錄池 | R |
+| FG-Pool | Foreign Gateway Pool | 金融氣密艙 | FG |
+| G-Pool | Global Strategic Reserve Pool | 戰略儲備池 | G |
 
 ---
 
-## CHI Thresholds
+## 命名说明
 
-| CHI Value | Status |
-|-----------|--------|
-| ≥ 0.80 | EXCELLENT — Mars standard |
-| 0.70–0.79 | HEALTHY — Earth minimum |
-| 0.60–0.69 | WARNING |
-| < 0.60 | CRISIS |
-| < 0.30 | CRITICAL — dissolution assessment triggered |
+### D-Pool · 每日流通池
+- 功能：每日 00:00 向所有公民发放 TH 1,000，23:59 回收未花余额
+- 前版本名称：Daily Pool / Daily Spending Pool（已废弃）
+- 中文前版本：每日分发池（已废弃）
 
----
+### R-Pool · 物資記錄池
+- 功能：追踪流经区域的所有物质资源
+- 前版本名称：Resource Pool（已废弃）
+- 中文前版本：资源池（已废弃）
 
-## Governance Terms
+### FG-Pool · 金融氣密艙
+- 功能：将内部 TH 经济与外部美元冲击完全隔离，如气密舱
+- 前版本名称：Foreign Gate Pool / FG Pool（已废弃）
+- 中文前版本：外部网关池 / 外汇缓冲池（已废弃）
 
-| Term | Definition | Authority |
-|------|-----------|-----------|
-| TRD | Transaction Record Department — Write Only, physically isolated | Book 2, expanded Book 11 |
-| TAD | Transaction Analysis Department — Read Aggregate Only | Book 2, expanded Book 11 |
-| TIAD | Transaction Investigation & Action Department — Auth Required | Book 2, expanded Book 11 |
-| COP | Citizen Oversight Panel — randomly selected, direct TRD access | Book 11 |
-| MVC | Minimum Viable Civilisation — 50 people minimum | Book 8 |
-| IR | Immutable Rules — 17 rules derived from Six Red Lines | Book 8 |
-| FSM | Finite State Machine — SOP modelled as deterministic state machine | Book 11 |
+### G-Pool · 戰略儲備池
+- 功能：接收 70% 贸易顺差，作为全球战略储备
+- 前版本名称：Global Reserve / Guarantee Pool（已废弃）
+- 中文前版本：保障池（已废弃）
 
 ---
 
-## Dissolution Triggers (Self-Destruct Switch)
+## 执行范围
 
-All triggers confirmed consistent across Book 11 and Book 12:
-
-| Trigger | Action |
-|---------|--------|
-| CHI × RBI < 2.1 for 3 consecutive years | Automatic dissolution |
-| CHI < 0.30 for 3 consecutive months | Dissolution assessment |
-| RBI < 1 month | Immediate dissolution procedure |
-| Exit rate > 30%/year | Mandatory dissolution vote |
-| Any Red Line breached | Immediate dissolution |
-| Citizen vote > 50% | Voluntary dissolution |
-
-Dissolution procedure: 30 days. No one is left behind.
+本冻结决议适用于：
+- ✅ 网站 `index.html`（已更新，THOOTB-11）
+- ⏳ Book 2–12 全系列（待 THOOTB-12 修订）
+- ✅ 所有未来新书（Book 13 起）
+- ✅ 白皮书正式定义章节
 
 ---
 
-## Audit Trail
+## 修订历史
 
-| Books | Auditor | Finding |
-|-------|---------|---------|
-| B2–6 | THOOTB-4 | Highly consistent. 3 terminology variants. |
-| B7–10 | THOOTB-8 | Highly consistent. 3 terminology variants. |
-| B11–12 | THOOTB-9 | Highly consistent. 2 minor differences. |
-| **B2–12 total** | **THOOTB-9 (consolidated)** | **Highly consistent. 17 amendments made.** |
+| 版本 | 日期 | G-Pool 英文 | G-Pool 中文 | 执行者 |
+|------|------|------------|------------|--------|
+| v1.0 | 2025 | Global Reserve | 戰略儲備池 | 早期版本 |
+| v2.0 | 2026-04 | Guarantee Pool | 保障池 | THOOTB-9 审计 |
+| v3.0 FINAL | 2026-05-01 | Global Strategic Reserve Pool | 戰略儲備池 | THOOTB-11 ✅ |
 
-*Last updated: April 2026*
+---
+
+## THOOTB-12 任务清单
+
+修订 Book 2–12 时，请按以下标准执行：
+
+1. **D-Pool** → 英文全名统一用 `Daily Distribution Pool`，中文 `每日流通池`
+2. **R-Pool** → 英文全名统一用 `Resource Tracking Pool`，中文 `物資記錄池`
+3. **FG-Pool** → 英文全名统一用 `Foreign Gateway Pool`，中文 `金融氣密艙`
+4. **G-Pool** → 英文全名统一用 `Global Strategic Reserve Pool`，中文 `戰略儲備池`
+
+> ⚠️ 注意：Book 2 附录 A 曾使用 `Foreign Goods Pool` 和 `Growth Pool`，均为历史版本，修订时一并更正。
+
+---
+
+*本文件由 THOOTB-11 生成，作为 THOOTB-12 书籍修订的权威参考。*
