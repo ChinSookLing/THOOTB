@@ -1,8 +1,8 @@
 # THOOTB Zone Accounting System
 
-**Version:** v2.0
-**Authority:** Book 10 — THOOTB Accounting System v1.1
-**Status:** Coming soon as standalone HTML page
+**Version:** v2.0 Reference Prototype  
+**Authority:** Book 10 — THOOTB Accounting System v1.1  
+**Status:** ✅ Live at [chinsookling.github.io/THOOTB/accounting.html](https://chinsookling.github.io/THOOTB/accounting.html)
 
 ---
 
@@ -15,6 +15,17 @@ A complete double-entry accounting system for THOOTB zones. Built in React.
 - **Two-database design** — Entity Portal (citizen-facing) + Console (pool-level only)
 - **Self-audit mechanism** — price changes surface anomalies automatically
 - **Daily heartbeat** — 12:00am distribution → daytime transactions → 23:59pm clearing → reset
+
+---
+
+## Four Pools
+
+| Pool | Full Name | Chinese | Function |
+|------|-----------|---------|----------|
+| D-Pool | Daily Distribution Pool | 每日流通池 | Issues TH 1,000/citizen daily, resets at midnight |
+| R-Pool | Resource Tracking Pool | 物資記錄池 | Tracks all physical resources, no markup |
+| FG-Pool | Foreign Gateway Pool | 金融氣密艙 | Isolates internal TH from external USD shocks |
+| G-Pool | Global Strategic Reserve Pool | 戰略儲備池 | Receives 70% trade surplus, strategic reserve |
 
 ---
 
@@ -95,16 +106,8 @@ Reset    →  Next day begins
 
 ---
 
-## Launch
-
-> 🚧 Standalone `accounting.html` coming soon.
-> Will be hosted at: `chinsookling.github.io/THOOTB/accounting.html`
-
-For now, see the accounting section on the [main site](https://chinsookling.github.io/THOOTB/#accounting).
-
----
-
 ## File
 
-Source: `THOOTB_Zone_Accounting_v2_0_Final.jsx`
-Technology: React (via Babel Standalone — no build tools required)
+Source: `THOOTB_Zone_Accounting_v2_0_Final.jsx`  
+Technology: React (Babel pre-compiled — no build tools required)  
+Live: [accounting.html](https://chinsookling.github.io/THOOTB/accounting.html)

@@ -1,8 +1,8 @@
 # THOOTB Live Simulator
 
-**Version:** v3.6
-**Authority:** Book 9 — Live Simulator & ONE Equation v1.2
-**Status:** Coming soon as standalone HTML page
+**Version:** v3.6  
+**Authority:** Book 9 — Live Simulator & ONE Equation v1.2  
+**Status:** ✅ Live at [chinsookling.github.io/THOOTB/simulator.html](https://chinsookling.github.io/THOOTB/simulator.html)
 
 ---
 
@@ -20,12 +20,28 @@ An interactive React-based simulator where you can:
 
 ---
 
+## Four Pools
+
+| Pool | Full Name | Chinese | Function |
+|------|-----------|---------|----------|
+| D-Pool | Daily Distribution Pool | 每日流通池 | Issues TH 1,000/citizen daily, resets at midnight |
+| R-Pool | Resource Tracking Pool | 物資記錄池 | Tracks all physical resources, no markup |
+| FG-Pool | Foreign Gateway Pool | 金融氣密艙 | Isolates internal TH from external USD shocks |
+| G-Pool | Global Strategic Reserve Pool | 戰略儲備池 | Receives 70% trade surplus, strategic reserve |
+
+---
+
 ## The ONE Equation (Live)
 
 The simulator runs the ONE Equation continuously:
 
 ```
 S = min(Stock Margin, FX Margin) ≥ 0
+```
+
+```
+Stock Margin = I + P + R - (C + Eg)
+FX Margin    = Es + Eg - I
 ```
 
 Green = zone survives · Red = collapse imminent
@@ -69,16 +85,18 @@ The simulator shows all three audit departments in real time:
 
 ---
 
-## Launch
+## Validation Results
 
-> 🚧 Standalone `simulator.html` coming soon.
-> Will be hosted at: `chinsookling.github.io/THOOTB/simulator.html`
-
-For now, see the simulator section on the [main site](https://chinsookling.github.io/THOOTB/#simulator).
+- **Phase 1 collapse rate**: 68% — exit as fast as possible
+- **Phase 4 collapse rate**: 7% — system matures significantly
+- **Recycling ≥ 70%**: collapse rate drops to 4%
+- **ONE Equation accuracy**: 100% across 3,520 simulation runs
+- **Six-AI consensus**: all six AIs independently converged on S = min(Stock Margin, FX Margin) ≥ 0
 
 ---
 
 ## File
 
-Source: `THOOTB_Simulator_v3_6.jsx`
-Technology: React + Tailwind CSS (via Babel Standalone — no build tools required)
+Source: `THOOTB_Simulator_v3_6.jsx`  
+Technology: React (Babel pre-compiled — no build tools required)  
+Live: [simulator.html](https://chinsookling.github.io/THOOTB/simulator.html)
