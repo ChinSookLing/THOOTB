@@ -324,6 +324,7 @@
   @media (max-width: 768px) {
     nav { padding: 0 1rem; }
     .nav-links { display: none; }
+    .nav-contact-email { display: none; }
     .pool-strip { grid-template-columns: repeat(2, 1fr); }
     .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; }
     .stats-row { grid-template-columns: repeat(2, 1fr); }
@@ -477,7 +478,7 @@
     <li><a href="#books" data-i18n="nav.books">Books</a></li>
     <li><a href="https://github.com/ChinSookLing/THOOTB" target="_blank"><span class="nav-badge">GitHub</span></a></li>
   </ul>
-  <li style="list-style:none;white-space:nowrap;"><span style="color:var(--muted);font-size:0.875rem;font-weight:500;">📬 <span data-i18n="nav.contact">Contact</span>: <span style="user-select:all;cursor:text;">theplanetthootb@gmail.com</span></span></li>
+  <li style="list-style:none;white-space:nowrap;" class="nav-contact"><span style="color:var(--muted);font-size:0.875rem;font-weight:500;">📬 <span data-i18n="nav.contact">Contact</span>: <span class="nav-contact-email" style="user-select:all;cursor:text;">theplanetthootb@gmail.com</span></span></li>
   <button id="lang-toggle" onclick="toggleLang()" style="
     background:rgba(56,189,248,0.15);
     border:1px solid rgba(56,189,248,0.4);
@@ -513,22 +514,22 @@
     <div class="pool-card">
       <div class="pool-dot d-color">D</div>
       <div class="pool-name" style="color:var(--d)">D-Pool</div>
-      <div class="pool-desc">Daily Distribution<br>Anti-accumulation</div>
+      <div class="pool-desc">Daily Distribution<br>Non-accumulative</div>
     </div>
     <div class="pool-card">
       <div class="pool-dot r-color">R</div>
       <div class="pool-name" style="color:var(--r)">R-Pool</div>
-      <div class="pool-desc">Resource Pool<br>Circular tracking</div>
+      <div class="pool-desc">Resource Tracking<br>Circular tracking</div>
     </div>
     <div class="pool-card">
       <div class="pool-dot fg-color">FG</div>
       <div class="pool-name" style="color:var(--fg)">FG-Pool</div>
-      <div class="pool-desc">Foreign Gateway<br>Air-lock mechanism</div>
+      <div class="pool-desc">Foreign Gateway<br>FX Airlock</div>
     </div>
     <div class="pool-card">
       <div class="pool-dot g-color">G</div>
       <div class="pool-name" style="color:var(--g)">G-Pool</div>
-      <div class="pool-desc">Guarantee Pool<br>Strategic reserve</div>
+      <div class="pool-desc">Global Strategic Reserve<br>Continuity buffer</div>
     </div>
   </div>
 </div>
@@ -662,7 +663,7 @@
       </div>
     </div>
     <div class="card card-accent-r">
-      <span class="tag tag-r" data-i18n="pools.tagR">R-Pool · Resource Pool</span>
+      <span class="tag tag-r" data-i18n="pools.tagR">R-Pool · Resource Tracking</span>
       <h3 style="color:var(--r)"><span data-i18n="pools.h3.r">Material Resource Tracker</span></h3>
       <p><span data-i18n="pools.desc.r">Tracks all physical resources flowing through the zone. Imports replenish stock; exports reduce it. CHI determines how much consumed material re-enters the pool through recycling.</span></p>
       <div style="margin-top:1rem; font-size:0.78rem; color:var(--muted); font-family:'JetBrains Mono',monospace;">
@@ -673,7 +674,7 @@
     </div>
     <div class="card card-accent-fg">
       <span class="tag tag-fg" data-i18n="pools.tagFG">FG-Pool · Foreign Gateway</span>
-      <h3 style="color:var(--fg)"><span data-i18n="pools.h3.fg">Air-Lock Mechanism</span></h3>
+      <h3 style="color:var(--fg)"><span data-i18n="pools.h3.fg">Foreign Gateway Pool</span></h3>
       <p><span data-i18n="pools.desc.fg">Isolates the internal TH economy from external USD shocks. Trade surpluses flow 30% here; deficits draw exclusively from FG-Pool. Identified as the system's most vulnerable pool.</span></p>
       <div style="margin-top:1rem; font-size:0.78rem; color:var(--muted); font-family:'JetBrains Mono',monospace;">
         <span data-i18n="pools.stats.fg">Holds: USD (FC)<br>
@@ -682,7 +683,7 @@
       </div>
     </div>
     <div class="card card-accent-g">
-      <span class="tag tag-g" data-i18n="pools.tagG">G-Pool · Guarantee Pool</span>
+      <span class="tag tag-g" data-i18n="pools.tagG">G-Pool · Global Strategic Reserve</span>
       <h3 style="color:var(--g)"><span data-i18n="pools.h3.g">Strategic Reserve and Continuity Buffer</span></h3>
       <p><span data-i18n="pools.desc.g">Receives 70% of trade surpluses. Funds government operations, public goods, and crisis response. In 100K validation: 260+ months capacity (21+ years reserve).</span></p>
       <div style="margin-top:1rem; font-size:0.78rem; color:var(--muted); font-family:'JetBrains Mono',monospace;">
