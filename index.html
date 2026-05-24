@@ -659,7 +659,7 @@
     <!-- RIGHT: Video -->
     <div class="hero-right">
       <div class="hero-video-wrap">
-        <video controls autoplay muted loop playsinline
+        <video controls muted loop playsinline
           style="width:100%;height:100%;position:absolute;top:0;left:0;object-fit:cover;border-radius:12px;">
           <source src="assets/videos/thootb-intro.mp4" type="video/mp4">
         </video>
@@ -726,7 +726,7 @@
   <!-- GDP Video -->
   <div style="max-width:720px;margin:0 auto 2rem;">
     <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,0.3);">
-      <video controls playsinline style="width:100%;display:block;border-radius:12px;">
+      <video controls muted playsinline style="width:100%;display:block;border-radius:12px;">
         <source src="assets/videos/thootb-gdp.mp4" type="video/mp4">
       </video>
     </div>
@@ -3944,6 +3944,65 @@ function toggleLang() {
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     el.setAttribute('data-en', el.textContent.trim());
+  });
+});
+</script>
+
+<script>
+// ── TikTok-style video play/pause on scroll ──
+document.addEventListener('DOMContentLoaded', function() {
+  const videos = document.querySelectorAll('video');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        // Pause all other videos first
+        videos.forEach(v => {
+          if (v !== video && !v.paused) {
+            v.pause();
+          }
+        });
+        // Play this video
+        video.play().catch(() => {});
+      } else {
+        // Pause when scrolled away
+        if (!video.paused) {
+          video.pause();
+        }
+      }
+    });
+  }, {
+    threshold: 0.5  // 50% visible = play
+  });
+
+  videos.forEach(video => {
+    observer.observe(video);
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var videos = document.querySelectorAll('video');
+  if (!videos.length) return;
+  
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var video = entry.target;
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        videos.forEach(function(v) {
+          if (v !== video && !v.paused) v.pause();
+        });
+        video.play().catch(function(){});
+      } else {
+        if (!video.paused) video.pause();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  videos.forEach(function(video) {
+    observer.observe(video);
   });
 });
 </script>
