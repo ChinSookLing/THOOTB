@@ -798,7 +798,7 @@
 <hr class="divider">
 
 <!-- PACING QUOTE -->
-<section style="padding:5rem 1rem;text-align:center;">
+<section id="pacing-quote" style="padding:5rem 1rem;text-align:center;">
   <p style="font-size:1.15rem;color:var(--muted);line-height:2;letter-spacing:0.01em;max-width:560px;margin:0 auto;">
     A civilization is not sustained by perfect answers.<br>
     It is sustained by better questions.
@@ -850,7 +850,7 @@
 <hr class="divider">
 
 <!-- PACING BRIDGE: what → four-pools -->
-<section style="padding:5rem 1rem;text-align:center;">
+<section id="pacing-bridge" style="padding:5rem 1rem;text-align:center;">
   <p style="font-size:1.1rem;color:var(--muted);line-height:2.2;letter-spacing:0.02em;max-width:480px;margin:0 auto;">
     Before THOOTB becomes a system,<br>
     it begins as a separation.<br>
@@ -3770,10 +3770,15 @@ const ZH_SECTIONS = [
   ['#why h2', '当货币流动速度超过信任，系统需要更好的记忆。'],
   ['#why .section-header p', 'THOOTB 是一个让资源流动可见、公平、持续可审计的开放框架——不是完美世界的承诺，而是检验更好世界能否运作的透明方式。'],
 
+  // PACING QUOTE
+  ['#pacing-quote p', '文明的延续，不依赖完美的答案。<br>它依赖更好的问题。'],
+  // PACING BRIDGE
+  ['#pacing-bridge p:first-of-type', '在 THOOTB 成为一个系统之前，<br>它始于一种分离。<br><br><span style="color:var(--text);">每日流通。</span><br><span style="color:var(--text);">资源记忆。</span><br><span style="color:var(--text);">对外通道。</span><br><span style="color:var(--text);">战略储备。</span>'],
+  ['#pacing-bridge p:last-of-type', '不同的流动，需要不同的记忆。<br><span style="color:var(--text);">这种分离，成为了四池系统。</span>'],
   // WHAT
   ['#what .section-label', 'THOOTB 是什么'],
   ['#what h2', '跳出思维框架'],
-  ['#what .section-header p', '一套后稀缺经济系统，以流通取代积累，以贡献取代竞争，以丰盛取代稀缺——经数学与计算验证。'],
+  ['#what .section-header p', '一套文明延续框架，探索流通、贡献与资源记忆如何取代积累驱动的稀缺——经数学与计算验证。'],
 
   // FOUR POOLS
   ['#four-pools .section-label', '架构'],
