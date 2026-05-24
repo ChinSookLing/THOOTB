@@ -386,8 +386,8 @@
     height: 0;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid var(--border);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    border: 1px solid rgba(96,165,250,0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(96,165,250,0.15);
   }
   .hero-video-wrap iframe {
     position: absolute;
@@ -649,7 +649,14 @@
         When AI replaces jobs,<br>
         <strong style="color:var(--text);">what replaces purchasing power?</strong>
       </div>
-      <div style="font-family:'JetBrains Mono',monospace; font-size:1.2rem; color:var(--accent); font-weight:700; margin-bottom:1.5rem;">S ≥ 0</div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:1.2rem; color:var(--accent); font-weight:700; margin-bottom:0.25rem; cursor:default;" 
+  title="A civilization survives when replenishment exceeds depletion."
+  onmouseover="document.getElementById('s-tooltip').style.opacity='1'"
+  onmouseout="document.getElementById('s-tooltip').style.opacity='0'">S ≥ 0</div>
+<div style="font-size:0.7rem;color:var(--muted);margin-bottom:0.5rem;letter-spacing:0.08em;text-transform:uppercase;">Civilization Continuity Condition</div>
+<div id="s-tooltip" style="opacity:0;transition:opacity 0.3s;font-size:0.8rem;color:var(--muted);font-style:italic;margin-bottom:1rem;max-width:320px;">
+  A civilization survives when replenishment exceeds depletion.
+</div>
       <div class="hero-buttons">
         <a class="btn-primary" href="#simulator">Open Live Simulator</a>
         <a class="btn-secondary" href="#equation">See the ONE Equation →</a>
@@ -664,7 +671,7 @@
           <source src="assets/videos/thootb-intro.mp4" type="video/mp4">
         </video>
       </div>
-      <p class="hero-punch">"A brand new monetary system that will blow your mind." — 2019</p>
+      <p class="hero-punch">Early THOOTB visual archive, 2019 · "A brand new monetary system that will blow your mind."</p>
     </div>
 
   </div>
@@ -678,7 +685,7 @@
     <div class="pool-card">
       <div class="pool-dot r-color">R</div>
       <div class="pool-name" style="color:var(--r)">R-Pool</div>
-      <div class="pool-desc">Resource Tracking<br>Circular tracking</div>
+      <div class="pool-desc">Resource Tracking<br>Stock &amp; Flow Memory</div>
     </div>
     <div class="pool-card">
       <div class="pool-dot fg-color">FG</div>
@@ -720,7 +727,7 @@
   <div class="section-header">
     <span class="section-label">Why It Matters</span>
     <h2>When money moves faster than trust, systems need better memory.</h2>
-    <p>THOOTB is an open framework for making resource flows visible, fair, and continuously auditable — not a promise of a perfect world, but a transparent way to test whether a better one can operate.</p>
+    <p>Civilizations rarely collapse from lack of intelligence.<br><br>They collapse from invisible flows.</p>
   </div>
 
   <!-- GDP Video -->
@@ -731,7 +738,7 @@
       </video>
     </div>
     <p style="text-align:center;color:var(--muted);font-size:0.8rem;margin-top:0.75rem;font-style:italic;">
-      "Without a proper recycling system, GDP is merely an indicator of devouring Earth's resources." — Planet THOOTB, 2020
+      🌍 The Planet THOOTB Archive · 2020<br><span style="color:#64748b;">One of the earliest THOOTB visual experiments on resource depletion and civilization continuity.</span>
     </p>
   </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem;">
@@ -950,6 +957,9 @@
   <div class="section-header">
     <span class="section-label">Book 4 · Civilization Health</span>
     <h2>The 13-Indicator Dashboard</h2>
+    <p style="font-size:0.85rem;color:var(--accent);margin-bottom:0.75rem;font-style:italic;">
+      You do not need to understand all 13 indicators at once. Start with CHI, RBI, and M.I.
+    </p>
     <p>GDP measures speed, not direction. These 13 indicators are THOOTB's immune system — not KPIs for control, but a language for understanding civilization health.</p>
   </div>
 
