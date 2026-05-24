@@ -78,7 +78,39 @@
     height: 60px;
   }
   .nav-logo { font-size: 1.2rem; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; text-decoration: none; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+  /* ── DROPDOWN NAV ── */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown-toggle::after { content: " ▾"; font-size: 0.7rem; opacity: 0.6; }
+  .nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    min-width: 180px;
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    list-style: none;
+  }
+  .nav-dropdown-menu li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-dropdown-menu li a:hover {
+    color: var(--text);
+    background: rgba(255,255,255,0.05);
+  }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
   .nav-badge { background: var(--accent); color: #000; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
@@ -325,6 +357,7 @@
     nav { padding: 0 1rem; }
     .nav-links { display: none; }
     .nav-contact-email { display: none; }
+    .nav-dropdown-menu { display: none !important; }
     .pool-strip { grid-template-columns: repeat(2, 1fr); }
     .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; }
     .stats-row { grid-template-columns: repeat(2, 1fr); }
@@ -458,43 +491,72 @@
 <nav>
   <a class="nav-logo" href="#">THOOTB</a>
   <ul class="nav-links">
-    <li><a href="#why" data-i18n="nav.why">Why</a></li>
-    <li><a href="#what" data-i18n="nav.what">What is THOOTB</a></li>
-    <li><a href="#four-pools" data-i18n="nav.fourPools">Four Pools</a></li>
-    <li><a href="#chi" data-i18n="nav.chi">CHI</a></li>
-    <li><a href="#dashboard" data-i18n="nav.dashboard">Dashboard</a></li>
-    <li><a href="#validation" data-i18n="nav.validation">What We Tested</a></li>
-    <li><a href="#governance" data-i18n="nav.governance">Governance</a></li>
-    <li><a href="#expansion" data-i18n="nav.expansion">Expansion</a></li>
-    <li><a href="#symphony" data-i18n="nav.symphony">Symphony</a></li>
-    <li><a href="#pilot" data-i18n="nav.pilot">Pilot</a></li>
-    <li><a href="#equation" data-i18n="nav.equation">ONE Equation</a></li>
-    <li><a href="#decision-makers" data-i18n="nav.decisionMakers">For Decision Makers</a></li>
-    <li><a href="#simulator" data-i18n="nav.simulator">Simulator</a></li>
-    <li><a href="#accounting" data-i18n="nav.accounting">Accounting</a></li>
-    <li><a href="#audit" data-i18n="nav.audit">Audit</a></li>
-    <li><a href="#deployment" data-i18n="nav.deployment">Deployment</a></li>
-    <li><a href="#principles" data-i18n="nav.principles">Principles</a></li>
-    <li><a href="#books" data-i18n="nav.books">Books</a></li>
-    <li><a href="https://github.com/ChinSookLing/THOOTB" target="_blank"><span class="nav-badge">GitHub</span></a></li>
+
+    <!-- Why -->
+    <li class="nav-dropdown">
+      <a href="#why" class="nav-dropdown-toggle" data-i18n="nav.why">Why</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="#why" data-i18n="nav.why">Why It Matters</a></li>
+        <li><a href="#what" data-i18n="nav.what">What is THOOTB</a></li>
+      </ul>
+    </li>
+
+    <!-- System -->
+    <li class="nav-dropdown">
+      <a href="#four-pools" class="nav-dropdown-toggle" data-i18n="nav.system">System</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="#four-pools" data-i18n="nav.fourPools">Four Pools</a></li>
+        <li><a href="#chi" data-i18n="nav.chi">CHI</a></li>
+        <li><a href="#dashboard" data-i18n="nav.dashboard">Dashboard</a></li>
+        <li><a href="#equation" data-i18n="nav.equation">ONE Equation</a></li>
+      </ul>
+    </li>
+
+    <!-- Governance -->
+    <li class="nav-dropdown">
+      <a href="#governance" class="nav-dropdown-toggle" data-i18n="nav.governance">Governance</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="#governance" data-i18n="nav.governance">Governance</a></li>
+        <li><a href="#principles" data-i18n="nav.principles">Principles</a></li>
+        <li><a href="#pilot" data-i18n="nav.pilot">Pilot</a></li>
+        <li><a href="#expansion" data-i18n="nav.expansion">Expansion</a></li>
+      </ul>
+    </li>
+
+    <!-- Proof -->
+    <li class="nav-dropdown">
+      <a href="#validation" class="nav-dropdown-toggle" data-i18n="nav.proof">Proof</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="#validation" data-i18n="nav.validation">What We Tested</a></li>
+        <li><a href="#simulator" data-i18n="nav.simulator">Simulator</a></li>
+        <li><a href="#accounting" data-i18n="nav.accounting">Accounting</a></li>
+        <li><a href="#audit" data-i18n="nav.audit">Audit</a></li>
+      </ul>
+    </li>
+
+    <!-- Books & Story -->
+    <li class="nav-dropdown">
+      <a href="#books" class="nav-dropdown-toggle" data-i18n="nav.books">Books &amp; Story</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="#books" data-i18n="nav.books">Books</a></li>
+        <li><a href="#symphony" data-i18n="nav.symphony">Symphony</a></li>
+        <li><a href="#deployment" data-i18n="nav.deployment">Deployment</a></li>
+      </ul>
+    </li>
+
+    <!-- For Decision Makers - standalone -->
+    <li><a href="#decision-makers" data-i18n="nav.decisionMakers" style="color:var(--accent);font-weight:600;">For Decision Makers</a></li>
+
   </ul>
-  <li style="list-style:none;white-space:nowrap;" class="nav-contact"><span style="color:var(--muted);font-size:0.875rem;font-weight:500;">📬 <span data-i18n="nav.contact">Contact</span><span class="nav-contact-email" style="user-select:all;cursor:text;">: theplanetthootb@gmail.com</span></span></li>
-  <button id="lang-toggle" onclick="toggleLang()" style="
-    background:rgba(56,189,248,0.15);
-    border:1px solid rgba(56,189,248,0.4);
-    color:var(--accent);
-    font-size:0.75rem;
-    font-weight:700;
-    padding:4px 16px;
-    border-radius:20px;
-    cursor:pointer;
-    letter-spacing:0.05em;
-    margin-left:1.5rem;
-    font-family:'Space Grotesk',sans-serif;
-    transition:all 0.2s;
-    white-space:nowrap;
-    flex-shrink:0;
-  ">EN｜中文</button>
+
+  <!-- Right side -->
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <li style="list-style:none;white-space:nowrap;" class="nav-contact">
+      <span style="color:var(--muted);font-size:0.875rem;font-weight:500;">📬 <span data-i18n="nav.contact">Contact</span><span class="nav-contact-email" style="user-select:all;cursor:text;">: theplanetthootb@gmail.com</span></span>
+    </li>
+    <a href="https://github.com/ChinSookLing/THOOTB" target="_blank" class="nav-github" style="background:#238636;color:#fff;padding:0.3rem 0.75rem;border-radius:6px;font-size:0.8rem;font-weight:600;text-decoration:none;">GitHub</a>
+    <button id="lang-toggle" onclick="toggleLang()" style="background:var(--accent);color:#000;border:none;padding:0.35rem 0.9rem;border-radius:20px;font-size:0.8rem;font-weight:700;cursor:pointer;">EN | 中文</button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -2886,7 +2948,7 @@
 
 const ZH = {
   // NAV
-  "nav.why":            "为何",
+  "nav.system":"系统", "nav.proof":"验证", "nav.booksStory":"书系 & 故事", "nav.why":            "为何",
   "nav.what":           "THOOTB 简介",
   "nav.fourPools":      "四池架构",
   "nav.chi":            "CHI",
