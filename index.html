@@ -4041,9 +4041,10 @@ if (booksOpening && booksVideo) {
         booksOpening.style.opacity = '1';
         booksVideo.play();
         booksPlayed = true;
+        booksObserver.disconnect();
         booksVideo.addEventListener('ended', () => {
-          booksVideo.style.transition = 'opacity 1.5s ease';
-          booksVideo.style.opacity = '0.3';
+          booksVideo.style.transition = 'opacity 2s ease';
+          booksVideo.style.opacity = '0.75';
         });
       }
     });
