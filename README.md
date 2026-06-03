@@ -2,7 +2,7 @@
 
 > *A post-scarcity economic framework with four pools, one continuity equation, live simulation, and accounting infrastructure.*
 
-**Pronunciation:** /θuːb/ — "THooth"  
+**Pronunciation:** /θuːb/ — "THootb"  
 **Author:** Chin Sook Ling (Tuzi)  
 **Collaboration:** Claude · ChatGPT · Copilot · DeepSeek · Gemini · Grok  
 **License:** CC BY 4.0  
