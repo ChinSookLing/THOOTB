@@ -2941,6 +2941,18 @@
 
 <hr class="divider">
 
+<!-- BOOKS OPENING VIDEO -->
+<div id="books-opening" style="width:100%;max-width:900px;margin:0 auto;padding:3rem 1rem 0;opacity:0;transition:opacity 1.5s ease;">
+  <video id="books-video"
+    src="assets/videos/thootb-books.mp4"
+    muted playsinline
+    style="width:100%;border-radius:12px;display:block;opacity:0.85;">
+  </video>
+  <p style="text-align:center;font-size:0.75rem;letter-spacing:0.12em;color:var(--muted);opacity:0.6;margin-top:0.75rem;text-transform:uppercase;">
+    THOOTB Book Series · Civilization Continuity Archive · 2019 — Ongoing
+  </p>
+</div>
+
 <!-- BOOKS -->
 <section id="books">
   <div class="section-header">
@@ -4009,6 +4021,27 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
+// ── Books opening video — fade in + play once ──
+const booksOpening = document.getElementById('books-opening');
+const booksVideo = document.getElementById('books-video');
+let booksPlayed = false;
+if (booksOpening && booksVideo) {
+  const booksObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !booksPlayed) {
+        booksOpening.style.opacity = '1';
+        booksVideo.play();
+        booksPlayed = true;
+        booksVideo.addEventListener('ended', () => {
+          booksVideo.style.transition = 'opacity 1.5s ease';
+          booksVideo.style.opacity = '0.3';
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  booksObserver.observe(booksOpening);
+}
+
 // ── TikTok-style video play/pause on scroll ──
 document.addEventListener('DOMContentLoaded', function() {
   const videos = document.querySelectorAll('video');
