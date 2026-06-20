@@ -4191,6 +4191,31 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 #seed-orb:hover #seed-tooltip { opacity: 1; }
 
+
+#seed-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0 1rem 0.75rem;
+}
+.seed-chip {
+  background: rgba(56,189,248,0.06);
+  border: 1px solid rgba(56,189,248,0.2);
+  border-radius: 20px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.68rem;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.seed-chip:hover {
+  background: rgba(56,189,248,0.15);
+  border-color: rgba(56,189,248,0.4);
+  color: var(--accent);
+}
+
 #seed-float-label {
   position: absolute;
   bottom: 62px;
@@ -4371,6 +4396,13 @@ document.addEventListener('DOMContentLoaded', function() {
       <span class="seed-ai-tag">Grok</span>
       <span class="seed-ai-tag">ChatGPT</span>
     </div>
+    <div id="seed-chips">
+      <span class="seed-chip" onclick="seedChip(this)">What is S ≥ 0?</span>
+      <span class="seed-chip" onclick="seedChip(this)">AI takes jobs. Who pays?</span>
+      <span class="seed-chip" onclick="seedChip(this)">How is THOOTB different from UBI?</span>
+      <span class="seed-chip" onclick="seedChip(this)">What are the Four Pools?</span>
+      <span class="seed-chip" onclick="seedChip(this)">Could this work on Mars?</span>
+    </div>
     <div id="seed-messages">
       <div class="seed-msg archive">The archive is open. What would you like to understand about THOOTB?</div>
     </div>
@@ -4466,6 +4498,17 @@ async function seedSend() {
   setTimeout(pulse, 3500);
   setInterval(pulse, 8000);
 })();
+
+
+function seedChip(el) {
+  const q = el.textContent;
+  // Hide all chips
+  const chips = document.getElementById('seed-chips');
+  if (chips) chips.style.display = 'none';
+  // Send the question
+  document.getElementById('seed-input').value = q;
+  seedSend();
+}
 
 </script>
 
