@@ -4141,8 +4141,8 @@ document.addEventListener('DOMContentLoaded', function() {
   gap: 0.75rem;
 }
 #seed-orb {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, rgba(56,189,248,0.9), rgba(16,185,129,0.4));
   border: 1px solid rgba(56,189,248,0.4);
@@ -4152,7 +4152,7 @@ document.addEventListener('DOMContentLoaded', function() {
   align-items: center;
   justify-content: center;
   animation: seed-breathe 4s ease-in-out infinite;
-  opacity: 0.45;
+  opacity: 0.72;
   transition: opacity 0.3s, transform 0.3s;
   box-shadow: 0 0 12px rgba(56,189,248,0.25), 0 0 24px rgba(56,189,248,0.1);
 }
@@ -4162,8 +4162,8 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 #seed-orb::after {
   content: '';
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgba(56,189,248,0.9);
   box-shadow: 0 0 6px rgba(56,189,248,0.8);
@@ -4190,6 +4190,27 @@ document.addEventListener('DOMContentLoaded', function() {
   letter-spacing: 0.03em;
 }
 #seed-orb:hover #seed-tooltip { opacity: 1; }
+
+#seed-float-label {
+  position: absolute;
+  bottom: 62px;
+  right: 0;
+  background: rgba(15,23,42,0.92);
+  border: 1px solid rgba(56,189,248,0.3);
+  border-radius: 20px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.06em;
+  transition: opacity 0.8s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
 #seed-panel {
   display: none;
   flex-direction: column;
@@ -4338,7 +4359,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div id="seed-panel-header">
       <div>
         <div class="seed-title">Continuity Guidance</div>
-        <div class="seed-sub">Archive · THOOTB Framework</div>
+        <div class="seed-sub">Framework Guide · Not General AI</div>
       </div>
       <button id="seed-close" onclick="seedClose()">&#x2715;</button>
     </div>
@@ -4354,13 +4375,14 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="seed-msg archive">The archive is open. What would you like to understand about THOOTB?</div>
     </div>
     <div id="seed-input-area">
-      <input id="seed-input" type="text" placeholder="Ask the archive..." maxlength="300"
+      <input id="seed-input" type="text" placeholder="What would you like to understand?" maxlength="300"
         onkeydown="if(event.key==='Enter'){event.preventDefault();seedSend();}">
       <button id="seed-send" onclick="seedSend()">&#x2192;</button>
     </div>
   </div>
   <div id="seed-orb" onclick="seedToggle()">
     <div id="seed-tooltip">The archive is open.</div>
+    <div id="seed-float-label">Ask the Archive</div>
   </div>
 </div>
 
@@ -4428,6 +4450,20 @@ async function seedSend() {
   document.getElementById('seed-send').disabled = false;
   document.getElementById('seed-input').focus();
 }
+
+// Floating label pulses every 8s when panel is closed
+(function initFloatLabel() {
+  function pulse() {
+    if (seedOpen) return;
+    var label = document.getElementById('seed-float-label');
+    if (!label) return;
+    label.style.opacity = '1';
+    setTimeout(function() { label.style.opacity = '0'; }, 2500);
+  }
+  setTimeout(pulse, 3500);
+  setInterval(pulse, 8000);
+})();
+
 </script>
 
 </body>
