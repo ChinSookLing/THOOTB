@@ -4426,21 +4426,15 @@ document.addEventListener('DOMContentLoaded', function() {
       <span class="seed-ai-tag">Grok</span>
       <span class="seed-ai-tag">ChatGPT</span>
     </div>
-    <div id="seed-chips">
-      <span class="seed-chip" onclick="seedChip(this)">What is S ≥ 0?</span>
-      <span class="seed-chip" onclick="seedChip(this)">AI takes jobs. Who pays?</span>
-      <span class="seed-chip" onclick="seedChip(this)">How is THOOTB different from UBI?</span>
-      <span class="seed-chip" onclick="seedChip(this)">What are the Four Pools?</span>
-      <span class="seed-chip" onclick="seedChip(this)">Could this work on Mars?</span>
-    </div>
+    <div id="seed-chips"></div>
     <div id="seed-messages">
       <div id="seed-welcome-box">
-        The archive is open.<br>
-        <span style="opacity:0.7;">What would you like to understand?</span>
+        Start with a question.<br>
+        <span style="opacity:0.7;">Or type anything below.</span>
       </div>
     </div>
     <div id="seed-input-area">
-      <input id="seed-input" type="text" placeholder="What would you like to understand?" maxlength="300"
+      <input id="seed-input" type="text" placeholder="Ask anything about THOOTB..." maxlength="300"
         onkeydown="if(event.key==='Enter'){event.preventDefault();seedSend();}">
       <button id="seed-send" onclick="seedSend()">&#x2192;</button>
     </div>
@@ -4463,6 +4457,7 @@ function seedToggle() {
   if (seedOpen) {
     document.getElementById('seed-orb').style.opacity = '1';
     document.getElementById('seed-input').focus();
+    seedLoadChips();
   } else {
     document.getElementById('seed-orb').style.opacity = '0.45';
   }
@@ -4472,6 +4467,9 @@ function seedClose() {
   seedOpen = false;
   document.getElementById('seed-panel').style.display = 'none';
   document.getElementById('seed-orb').style.opacity = '0.45';
+  // Reset welcome box for next open
+  var wb = document.getElementById('seed-welcome-box');
+  if (wb) wb.style.display = '';
 }
 
 function seedAddMsg(text, type) {
@@ -4533,12 +4531,62 @@ async function seedSend() {
 })();
 
 
+// ── Question Database (30 questions, random 5 each open) ──
+const SEED_QUESTIONS = [
+  "What is S ≥ 0?",
+  "Why does S matter?",
+  "AI takes jobs. Who pays?",
+  "How is this different from UBI?",
+  "What are the Four Pools?",
+  "What is the Daily Pool?",
+  "What is the FG Pool?",
+  "What is the R Pool?",
+  "What is the G Pool?",
+  "Why does currency reset at midnight?",
+  "What happens to unused money?",
+  "Can people save money?",
+  "Can anyone become rich?",
+  "Can anyone own property?",
+  "Who owns the houses?",
+  "What is CHI?",
+  "Why separate use-right and ownership?",
+  "Who audits the system?",
+  "What if someone cheats?",
+  "What if the government cheats?",
+  "What happens if the system fails?",
+  "Can people leave THOOTB?",
+  "Can businesses still exist?",
+  "Can people still choose their work?",
+  "How are food and energy paid for?",
+  "How does THOOTB handle illness?",
+  "Could this work in one city first?",
+  "Could this work on Mars?",
+  "Why is housing not for speculation?",
+  "What is the simplest way to understand THOOTB?"
+];
+
+function seedLoadChips() {
+  const chips = document.getElementById('seed-chips');
+  if (!chips) return;
+  chips.innerHTML = '';
+  // Pick 5 random unique questions
+  const shuffled = [...SEED_QUESTIONS].sort(() => Math.random() - 0.5);
+  shuffled.slice(0, 5).forEach(function(q) {
+    const span = document.createElement('span');
+    span.className = 'seed-chip';
+    span.textContent = q;
+    span.onclick = function() { seedChip(span); };
+    chips.appendChild(span);
+  });
+  chips.style.display = 'flex';
+}
+
 function seedChip(el) {
   const q = el.textContent;
-  // Hide all chips
   const chips = document.getElementById('seed-chips');
   if (chips) chips.style.display = 'none';
-  // Send the question
+  const welcome = document.getElementById('seed-welcome-box');
+  if (welcome) welcome.style.display = 'none';
   document.getElementById('seed-input').value = q;
   seedSend();
 }
