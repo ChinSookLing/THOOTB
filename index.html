@@ -4413,7 +4413,10 @@ function seedAddMsg(text, type) {
   const msgs = document.getElementById('seed-messages');
   const div = document.createElement('div');
   div.className = 'seed-msg ' + type;
-  div.textContent = text;
+  // Simple markdown: bold, newlines
+  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/\n/g, '<br>');
+  div.innerHTML = text;
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
   return div;
